@@ -1,0 +1,49 @@
+{% include "./html-header.stencil.html" %}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico"/>
+
+<head>
+<body>
+    {% include "./uk-navbar.stencil.html" %}
+    <div class="uk-section">
+        <div class="uk-container uk-text-center uk-margin-bottom">
+            <h3>You Have Been Logged Out</h3>
+        </div>
+        <div class="uk-container uk-text-center">
+            <iframe class="uk-width-1-2@m uk-width-1-1@s" height="315" src="https://www.youtube-nocookie.com/embed/JSUIQgEVDM4?autoplay=1&rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="uk-flex uk-flex-center uk-padding">
+            <div class="uk-container">
+                    <p>
+                    This is the end, beautiful friend<br/>
+                    This is the end, my only friend, the end<br/>
+                    Of our elaborate plans, the end<br/>
+                    Of everything that stands, the end<br/>
+                    No safety or surprise, the end<br/>
+                    I'll never look into your eyes, again<br/>
+                    </p>                        
+            </div>            
+        </div>
+        <div class="uk-flex uk-flex-center">
+            <a class="uk-button uk-button-default" href="/signin">
+                sign in
+            </a>
+        </div>
+    </div>
+
+    {% include "./footer-navbar.stencil.html" %}    
+    {% include "./google-analytics.stencil.html" %}
+</body>
+
+
+{% include "./html-footer.stencil.html" %}

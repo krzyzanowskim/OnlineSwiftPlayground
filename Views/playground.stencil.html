@@ -1,0 +1,209 @@
+<!-- Copyright Marcin Krzyżanowski marcin@krzyzanowskim.com -->
+
+{% include "./html-header.stencil.html" %}
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
+
+    <link href="/static/css/css.css" rel="stylesheet" type="text/css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
+    <script src="/static/lib/bundle/bundle.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico"/>
+    
+  </head>
+
+    <body>
+        <div uk-sticky>
+            <nav class="uk-navbar-container uk-margin {% if not embed %}uk-padding-small{% endif %}" uk-navbar="mode: click">
+                <div class="uk-navbar-left">
+                  <button id="run-button" class="uk-button uk-button-primary {% if embed %} uk-button-small {% endif %}"><span class="uk-margin-small-right" uk-icon="icon: play"></span>run</button>
+                </div>
+                {% if not embed %}
+                <div class="uk-navbar-right">
+                    <a href="#" id="download-button" class="uk-button uk-button-default" download="swiftplayground.swift"><span class="uk-margin-small-right" uk-icon="icon: download"></span>get</button></a>
+                    {% if not embed %}
+                    <button id="share-button" class="uk-button uk-button-default" uk-toggle="target: #modal-share"><span class="uk-margin-small-right" uk-icon="icon: social"></span>embed</button>
+                    {% endif %}                  
+                </div>
+                <div class="uk-navbar-right">
+                    <button id="logout-button" class="uk-button uk-button-default">Logout <img class="uk-margin-small-left" style="height: 30px;" src="/static/assets/logo.png" alt=""></a></button>
+                </div>
+                {% endif %}
+                </nav>
+        </div>
+
+      <div uk-grid>
+        <div class="uk-width-1-2 uk-height-large">
+            <pre id="editor" class="uk-height-1-1">{% if not embed %}{% include "./playground-snippet.stencil" %}{% endif %}</pre>
+        </div>
+        <div class="uk-width-1-2 uk-height-large">
+            <pre id="results-editor" class="uk-height-1-1"></pre>
+        </div>
+      </div>
+
+      {% if not embed %}
+      <div id="modal-share" uk-modal>
+          <div class="uk-modal-dialog uk-modal-body">
+              <h2 class="uk-modal-title">Embed</h2>
+              <pre id="share-pre"></pre>
+              <p class="uk-text-right">
+                  <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
+                  <button class="uk-button uk-button-primary" type="button" data-clipboard-target="#share-pre">Copy</button>
+              </p>
+          </div>
+      </div>
+      {% endif %}
+
+      {% if not embed %}
+      {% include "./footer-navbar.stencil.html" %}
+      {% endif %}
+
+  <script>
+    new Clipboard('.uk-button');
+    document.getElementById('editor').style.fontSize='13px';
+
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/xcode");
+    editor.setShowPrintMargin(false);
+    editor.session.setMode("ace/mode/swift");
+    editor.session.setUseSoftTabs(true);
+    {% if embed %}
+    editor.setReadOnly(true);
+    {% endif %}
+    editor.setAutoScrollEditorIntoView(true);
+    editor.$blockScrolling = Infinity
+    editor.commands.addCommand({
+      name: 'build',
+      bindKey: {win: 'Ctrl-B',  mac: 'Command-B'},
+      exec: function(editor) {
+        run($("#run-button"), editor)
+      },
+      readOnly: false
+    });
+
+
+    var resultsEditor = ace.edit("results-editor");
+    resultsEditor.setTheme("ace/theme/terminal");
+    resultsEditor.setShowPrintMargin(editor.showPrintMargin);
+    resultsEditor.session.setMode("ace/mode/text");
+    resultsEditor.setReadOnly(true);
+    resultsEditor.renderer.setShowGutter(false);
+    resultsEditor.renderer.hideCursor();
+    resultsEditor.setAutoScrollEditorIntoView(true);
+    resultsEditor.$blockScrolling = Infinity
+
+    {% if not embed %}
+    loadLocalCode(editor)
+    {% endif %}
+
+    editor.focus();
+
+    $("#run-button").click(function (e) {
+      e.preventDefault();
+      run($(this), editor)
+    });
+
+    {% if not embed %}
+    $("#logout-button").click(function (e) {
+      e.preventDefault();
+      window.location.href = "/logout";
+    });
+
+    $("#download-button").click(function (e) {
+      let text = editor.getValue()
+      this.href = "data:application/octet-stream;charset=UTF-8," + encodeURIComponent(text);
+    });
+
+    $("#share-button").click(function (e) {
+      e.preventDefault();
+      let randomIframeId = "swiftplayground.run-" + uuidv4();
+      let locationSrc = "http://" + location.host;
+      let code = editor.getValue()
+      let txt = "<iframe src=\"" + locationSrc + "/embed\" id=\"" + randomIframeId + "\" frameborder=\"0\" height=\"400px\" width=\"600px\" scrolling=\"yes\" \ndata-code=\"" + encodeURIComponent(code) + "\">\n</iframe>"
+      txt += "<script> \
+        if (window.addEventListener) { \
+          window.addEventListener('load', function(e) { \
+            var frame = document.getElementById(\"" + randomIframeId + "\"); \
+            var message = { code: frame.getAttribute(\"data-code\") }; \
+            frame.contentWindow.postMessage(message, '" + locationSrc + "'); \
+          }, false); \
+        }  \
+      <\/script>";
+
+      $("#share-pre").text(txt);
+    });
+    {% endif %}
+    {% if embed %}
+      window.addEventListener('message', function(e) {
+        if (~event.origin.indexOf(location.host)) {
+          return;
+        }
+        var message = e.data;
+        if (message.code !== undefined) {
+          editor.setValue(decodeURIComponent(message.code))
+          console.log(message)
+        }
+      });
+    {% endif %}
+
+
+    function loadLocalCode(editor) {
+      let storage = window.sessionStorage;
+      let loadedCode = storage.getItem("editor-text");
+      if (loadedCode !== null) {
+          editor.setValue(loadedCode)
+      }
+    }
+    
+    function storeLocalCode(editor) {
+      let storage = window.sessionStorage;
+      storage.setItem('editor-text', editor.getValue());
+    }
+
+    function run(sender, editor) {
+      sender.prop("disabled", true);
+      resultsEditor.setValue("");
+
+      playground.runSwiftCode(editor.getValue(), function(output, annotations) {
+        resultsEditor.setValue(output);
+        editor.session.setAnnotations(annotations.map(function(a) {
+            return  { row: a.location.row,
+                      column: a.location.column,
+                      text: a.description,
+                      type: "error" }
+        }))
+        {% if not embed %}
+        storeLocalCode(editor)
+        {% endif %}
+        sender.prop("disabled", false);
+        editor.focus();
+      });
+    }
+
+    function uuidv4() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+}
+  </script>
+
+  {% include "./google-analytics.stencil.html" %}
+
+  </body>
+
+{% include "./html-footer.stencil.html" %}
+

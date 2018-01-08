@@ -1,0 +1,50 @@
+{% include "./html-header.stencil.html" %}
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico"/>
+<head>
+
+<body>
+
+    {% include "./uk-navbar.stencil.html" %}
+
+    <div class="uk-flex uk-flex-column uk-margin-top">
+        <div class="uk-flex uk-flex-center" uk-grid>
+            <div class="uk-flex uk-flex-center uk-width-6-7@s uk-width-2-5@l">
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h1 class="uk-heading-primary">Welcome!</h1>
+                    <p class="uk-text-justify">I'm so excited to share this preview with you. To access, please authenticate with your <a href="https://github.com">GitHub</a> account.</p>
+                </div>
+            </div>
+            <div class="uk-flex uk-flex-center uk-width-1-1">
+                <form action="/login/github" method="GET">
+                    <button type="submit" class="uk-button uk-button-primary uk-width-medium"><span uk-icon="icon: github"></span> Login with GitHub</button>
+                </form>
+            </div>
+            <div class="uk-flex uk-flex-center uk-width-6-7@s uk-width-2-5@l">
+                    <div>
+                        <p class="uk-text-muted">Please bear in mind that you get access to hosted Swift Playground with limitations. If you spot any serious issue, please let me know.</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    {% include "./footer-navbar.stencil.html" %}
+    {% include "./google-analytics.stencil.html" %}
+
+</body>
+
+{% include "./html-footer.stencil.html" %}

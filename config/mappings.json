@@ -1,0 +1,7 @@
+{
+  "github": {
+    "searchPatterns": [
+      "file:config/github.json",
+    ]
+  }
+}

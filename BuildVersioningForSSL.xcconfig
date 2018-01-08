@@ -1,0 +1,6 @@
+# Workaround for SSL https://github.com/IBM-Swift/Kitura/issues/1203
+
+INFOPLIST_FILE = PlaygroundServer.xcodeproj/PlaygroundServer_Info.plist
+CREATE_INFOPLIST_SECTION_IN_BINARY = YES
+CURRENT_PROJECT_VERSION = 1
+VERSIONING_SYSTEM = apple-generic
