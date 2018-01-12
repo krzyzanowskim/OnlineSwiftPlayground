@@ -1,7 +1,8 @@
 .build
 .git
 .gitignore
+config/
 *.xcodeproj
+DerivedData
 Dockerfile
-Package.resolved
 docker-compose.yml
