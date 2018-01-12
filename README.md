@@ -1,5 +1,8 @@
 # SwiftPlayground.run
 
+[![Platform](https://img.shields.io/badge/Platforms-macOS%20%7C%20Linux-4E4E4E.svg?colorA=28a745)](#installation)
+[![Twitter](https://img.shields.io/badge/twitter-@krzyzanowskim-blue.svg?style=flat&colorB=64A5DE&label=Twitter)](http://twitter.com/krzyzanowskim)
+
 Online Swift Playground. Implemented in Swift.
 
 TBA. Checkout http://SwiftPlayground.run
