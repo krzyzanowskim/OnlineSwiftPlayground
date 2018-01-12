@@ -11,13 +11,7 @@ import CryptoSwift
  */
 
 class SwiftcOutputParser {
-    lazy var adjustRow: Int = {
-        var enumCount = 0
-        toInjectLimitsCode.enumerateLines { (str, _) in
-            enumCount += 1
-        }
-        return -enumCount
-    }()
+    let adjustRow = -injectCodeText.components(separatedBy: .newlines).count
 
     func parse(input: String) throws -> [Annotation] {
         var items = [Annotation]()

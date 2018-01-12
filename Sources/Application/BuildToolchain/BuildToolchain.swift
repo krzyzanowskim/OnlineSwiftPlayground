@@ -17,7 +17,7 @@ class BuildToolchain {
 
         let tempCodeFile = try TemporaryFile(suffix: ".swift")
         let tempOutputPath = AbsolutePath(tempCodeFile.path.asString.appending(".o"))
-        try fileSystem.writeFileContents(tempCodeFile.path, bytes: ByteString(encodingAsUTF8: toInjectLimitsCode + code))
+        try fileSystem.writeFileContents(tempCodeFile.path, bytes: ByteString(encodingAsUTF8: injectCodeText + code))
 
         var cmd = [String]()
         cmd += ["swift"]
@@ -115,7 +115,7 @@ private func sandboxProfile() -> String {
 
 }
 
-let toInjectLimitsCode = """
+let injectCodeText = """
     #if os(Linux)
         import Glibc
     #else
