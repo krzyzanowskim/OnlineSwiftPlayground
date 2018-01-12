@@ -28,7 +28,9 @@ class BuildToolchain {
         cmd += ["-gnone"]
         cmd += ["-suppress-warnings"]
         cmd += ["-module-name","SwiftPlayground"]
-        cmd += ["-sanitize=address"]
+        #if os(macOS)
+            cmd += ["-sanitize=address"]
+        #endif
         cmd += ["-enforce-exclusivity=checked"]
         cmd += ["-swift-version","4"]
         if let sdkRoot = sdkRoot() {
