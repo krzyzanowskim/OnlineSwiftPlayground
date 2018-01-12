@@ -1,2 +1,8 @@
+.build
+.git
+.gitignore
+*.xcodeproj
 Dockerfile
-Dockerfile-tools
+Package.resolved
+docker-compose.yml
+Tests
