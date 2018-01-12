@@ -15,6 +15,12 @@ $ npm install
 $ swift run -c release
 ```
 
+## Xcode development
+
+```
+$ swift package generate-xcodeproj
+```
+
 ## Config
 
 Third party frameworks should be copied to `Frameworks` directory.
