@@ -14,14 +14,20 @@ let dependencies:[Package.Dependency] = [
 ]
 
 var targets:[Target] = [
-    .target(name: "PlaygroundServer", dependencies: [ .target(name: "Application"), "Kitura" , "HeliumLogger"]),
+    .target(name: "PlaygroundServer", dependencies: [ .target(name: "Application"), .target(name: "OnlinePlayground"), "Kitura" , "HeliumLogger"]),
     .target(name: "Application", dependencies: [ "Kitura", "Kitura-WebSocket", "Configuration", "CloudEnvironment", "Utility", "CredentialsGitHub", "KituraStencil", "CSV"], exclude: ["DerivedData","public","node_modules"]),
+    .target(name: "OnlinePlayground"),
+    .testTarget(name: "ApplicationTests" , dependencies: [.target(name: "Application"), "Kitura","HeliumLogger" ])
 ]
 
-targets += [.testTarget(name: "ApplicationTests" , dependencies: [.target(name: "Application"), "Kitura","HeliumLogger" ])]
+var products: [Product] = [
+    .executable(name: "PlaygroundServer", targets: ["PlaygroundServer"]),
+    .library(name: "OnlinePlayground", targets: ["OnlinePlayground"])
+]
 
 let package = Package(
     name: "PlaygroundServer",
+    products: products,
     dependencies: dependencies,
     targets: targets
 )

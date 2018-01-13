@@ -5,6 +5,13 @@ import Utility
 import FileKit
 import Foundation
 
+#if os(Linux)
+    import Glibc
+#else
+    import Darwin
+#endif
+
+
 class BuildToolchain {
     enum Error: Swift.Error {
         case failed(String)
@@ -57,7 +64,7 @@ class BuildToolchain {
     func run(binaryPath: AbsolutePath) throws -> Result<String, Error> {
         var cmd = [String]()
         #if os(macOS)
-            // If enabled, use sandbox-exec on macOS. This provides some safety against arbitrary code execution.
+            // Use sandbox-exec on macOS. This provides some safety against arbitrary code execution.
             cmd += ["sandbox-exec", "-p", sandboxProfile()]
         #endif
         cmd += [binaryPath.asString]
@@ -112,37 +119,9 @@ private func sandboxProfile() -> String {
     }
     output += ")\n"
     return output
-
 }
 
 let injectCodeText = """
-    #if os(Linux)
-        import Glibc
-    #else
-        import Darwin
-    #endif
-
-    private let __install_playground_limits = {
-        var rcpu = rlimit(rlim_cur: 7, rlim_max: 15) // 7s
-        setrlimit(RLIMIT_CPU, &rcpu)
-        var rcore = rlimit(rlim_cur: 0, rlim_max: 0)
-        setrlimit(RLIMIT_CORE, &rcore)
-        var rfsize = rlimit(rlim_cur: 1048576, rlim_max: 1048576) // 1 MB
-        setrlimit(RLIMIT_FSIZE, &rfsize)
-        var rnofile = rlimit(rlim_cur: 1, rlim_max: 1)
-        setrlimit(RLIMIT_NOFILE, &rnofile)
-        var rnproc = rlimit(rlim_cur: 1, rlim_max: 1)
-        setrlimit(RLIMIT_NPROC, &rnproc)
-
-        setiopolicy_np(IOPOL_TYPE_DISK, IOPOL_SCOPE_PROCESS, IOPOL_UTILITY)
-    }
-
-    __install_playground_limits()
-
-    @available(*, unavailable, message: "Please don't change limits!")
-    public func setrlimit(_: Int32, _: UnsafePointer<rlimit>!) -> Int32 {
-        fatalError("unavailable function can't be called")
-    }
-
+    import OnlinePlayground; OnlinePlayground.Playground.setup;
     """
 
