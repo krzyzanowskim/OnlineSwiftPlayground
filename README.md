@@ -26,7 +26,15 @@ $ swift package generate-xcodeproj
 
 ## Docker
 
-Build docker image:
+[krzyzanowskim/onlineswiftplayground](https://store.docker.com/community/images/krzyzanowskim/onlineswiftplayground)
+
+Download the latest image:
+
+```
+$ docker pull krzyzanowskim/onlineswiftplayground
+```
+
+or build docker image by yourself:
 
 ```
 $ git clone https://github.com/krzyzanowskim/OnlineSwiftPlayground.git
@@ -51,7 +59,7 @@ $ open http://$(docker-machine ip):8080
 
 ## Config
 
-Third party frameworks should be copied to `Frameworks` directory.
+Third party frameworks should be copied to `Frameworks` directory (Frameworks are for **macOS** host only)
 
 See `config/` for GitHub auth. sample config.
 
