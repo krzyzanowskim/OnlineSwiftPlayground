@@ -3,7 +3,9 @@
 import Basic
 import Utility
 import FileKit
+import LoggerAPI
 import Foundation
+import Dispatch
 
 #if os(Linux)
     import Glibc
@@ -21,21 +23,29 @@ class BuildToolchain {
 
     func build(code: String) throws -> Result<AbsolutePath, Error> {
         let fileSystem = Basic.localFileSystem
+        let projectDirectoryPath = AbsolutePath(FileKit.projectFolder)
 
-        let tempCodeFile = try TemporaryFile(suffix: ".swift")
-        let tempOutputPath = AbsolutePath(tempCodeFile.path.asString.appending(".o"))
-        try fileSystem.writeFileContents(tempCodeFile.path, bytes: ByteString(encodingAsUTF8: injectCodeText + code))
+        let temporaryBuildDirectory = try TemporaryDirectory(prefix: ProcessInfo.processInfo.globallyUniqueString)
+        let mainFilePath = temporaryBuildDirectory.path.appending(RelativePath("main.swift"))
+        let helpersFilePath = temporaryBuildDirectory.path.appending(RelativePath("Helpers.swift"))
+        let binaryFilePath = temporaryBuildDirectory.path.appending(component: "main")
+        let frameworksDirectory = projectDirectoryPath.appending(component: "Frameworks")
+
+        // OnlinePlayground.swift
+        try fileSystem.writeFileContents(mainFilePath, bytes: ByteString(encodingAsUTF8: injectCodeText + code))
+        let helperFilePath = projectDirectoryPath.appending(components: "Sources", "OnlinePlayground", "OnlinePlayground.swift")
+        try fileSystem.writeFileContents(helpersFilePath, bytes: try fileSystem.readFileContents(helperFilePath))
 
         var cmd = [String]()
         cmd += ["swift"]
         cmd += ["--driver-mode=swiftc"]
-        // cmd += ["-O"]
-        cmd += ["-F",FileKit.projectFolder.appending("/Frameworks")]
-        cmd += ["-Xlinker","-rpath","-Xlinker",FileKit.projectFolder.appending("/Frameworks")]
         cmd += ["-gnone"]
         cmd += ["-suppress-warnings"]
         cmd += ["-module-name","SwiftPlayground"]
+        // cmd += ["-O"]
         #if os(macOS)
+            cmd += ["-F",frameworksDirectory.asString]
+            cmd += ["-Xlinker","-rpath","-Xlinker",frameworksDirectory.asString]
             cmd += ["-sanitize=address"]
         #endif
         // Enable JSON-based output at some point.
@@ -45,8 +55,8 @@ class BuildToolchain {
         if let sdkRoot = sdkRoot() {
             cmd += ["-sdk", sdkRoot.asString]
         }
-        cmd += ["-o",tempOutputPath.asString]
-        cmd += [tempCodeFile.path.asString]
+        cmd += ["-o",binaryFilePath.asString]
+        cmd += [mainFilePath.asString, helpersFilePath.asString]
 
         let process = Basic.Process(arguments: cmd, environment: [:], redirectOutput: true, verbose: false)
         try processSet.add(process)
@@ -55,7 +65,7 @@ class BuildToolchain {
 
         switch result.exitStatus {
         case .terminated(let exitCode) where exitCode == 0:
-            return Result.success(tempOutputPath)
+            return Result.success(binaryFilePath)
         case .signalled(let signal):
             return Result.failure(Error.failed("Terminated by signal \(signal)"))
         default:
@@ -75,6 +85,10 @@ class BuildToolchain {
         try processSet.add(process)
         try process.launch()
         let result = try process.waitUntilExit()
+
+        // Remove container directory. Cleanup after run.
+        try FileManager.default.removeItem(atPath: binaryPath.parentDirectory.asString)
+
         switch result.exitStatus {
         case .terminated(let exitCode) where exitCode == 0:
             return Result.success(try result.utf8Output().chuzzle() ?? "Done.")
@@ -124,6 +138,7 @@ private func sandboxProfile() -> String {
 }
 
 let injectCodeText = """
-    import OnlinePlayground; OnlinePlayground.Playground.setup;
+    OnlinePlayground.setup;
+
     """
 

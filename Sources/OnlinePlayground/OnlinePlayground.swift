@@ -6,9 +6,9 @@ import Foundation
     import Glibc
 #endif
 
-public class Playground {
+public final class OnlinePlayground {
     public static let setup:() = {
-        Playground().setLimits()
+        OnlinePlayground().setLimits()
     }()
 
     // Limit once set for the process, can't be changed later

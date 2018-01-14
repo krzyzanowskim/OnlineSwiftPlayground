@@ -29,6 +29,7 @@ struct Connection {
 }
 
 class TerminalService: WebSocketService {
+    let buildToolchain = BuildToolchain()
 
     enum Error: Swift.Error {
         case unknown
@@ -73,11 +74,6 @@ class TerminalService: WebSocketService {
         switch command {
         case .run(let codeText):
             if let result = run(codeText: codeText) {
-//                result.items?.forEach({ (item) in
-//                    let command = "\(item.type):\(item.location.line):\(item.location.column):\(item.description)"
-//                    connection.send(message: "[ERROR] \(command)")
-//                })
-
                 if let responseJSON = try? JSONEncoder().encode(Command.output(result.text, result.annotations ?? [])),
                    let responseString = String(data: responseJSON, encoding: .utf8)
                 {
@@ -100,9 +96,8 @@ private struct RunResult {
 private extension TerminalService {
     private func run(codeText: String) -> RunResult? {
         do {
-            let toolchain = BuildToolchain()
-            let buildResult = try toolchain.build(code: codeText)
-            let runResult = try toolchain.run(binaryPath: buildResult.dematerialize())
+            let buildResult = try buildToolchain.build(code: codeText)
+            let runResult = try buildToolchain.run(binaryPath: buildResult.dematerialize())
             return RunResult(text: try runResult.dematerialize(), annotations: nil)
         } catch BuildToolchain.Error.failed(let output) {
             let items = try? SwiftcOutputParser().parse(input: output)
