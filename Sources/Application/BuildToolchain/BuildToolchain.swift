@@ -38,6 +38,8 @@ class BuildToolchain {
         #if os(macOS)
             cmd += ["-sanitize=address"]
         #endif
+        // Enable JSON-based output at some point.
+        // cmd += ["-parseable-output"]
         cmd += ["-enforce-exclusivity=checked"]
         cmd += ["-swift-version","4"]
         if let sdkRoot = sdkRoot() {

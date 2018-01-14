@@ -1,5 +1,4 @@
 import Foundation
-import Dispatch
 
 #if os(macOS)
     import Darwin
@@ -17,8 +16,8 @@ public class Playground {
         var rcpu = rlimit(rlim_cur: 7, rlim_max: 15) // 7s
         var rfsize = rlimit(rlim_cur: 1048576, rlim_max: 1048576) // 1 MB
         var rcore = rlimit(rlim_cur: 0, rlim_max: 0)
-        var rnofile = rlimit(rlim_cur: 1, rlim_max: 1)
         var rnproc = rlimit(rlim_cur: 1, rlim_max: 1)
+        var rnofile = rlimit(rlim_cur: 1, rlim_max: 1)
 
         #if os(macOS)
             setrlimit(RLIMIT_CPU, &rcpu)
@@ -32,8 +31,8 @@ public class Playground {
             setrlimit(__rlimit_resource_t(0), &rcpu) // RLIMIT_CPU = 0
             setrlimit(__rlimit_resource_t(1), &rfsize) // RLIMIT_FSIZE = 1
             setrlimit(__rlimit_resource_t(4), &rcore) // RLIMIT_CORE = 4
-            setrlimit(__rlimit_resource_t(7), &rnofile) // RLIMIT_NOFILE = 7
             setrlimit(__rlimit_resource_t(6), &rnproc) // __RLIMIT_NPROC = 6
+            setrlimit(__rlimit_resource_t(7), &rnofile) // RLIMIT_NOFILE = 7
 
             // var rnice = rlimit(rlim_cur: 1, rlim_max: 1)
             // setrlimit(__rlimit_resource_t(13), &rnice) // __RLIMIT_NICE = 13
