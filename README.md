@@ -24,6 +24,22 @@ $ swift run -c release
 $ swift package generate-xcodeproj
 ```
 
+## Docker
+
+```
+$ git clone https://github.com/krzyzanowskim/OnlineSwiftPlayground.git
+$ cd swiftplayground
+$ docker build -t onlineswiftplayground .
+$ docker run --rm -it -p 8080:8080 --name onlineswiftplayground -t onlineswiftplayground
+```
+
+Playground is available at http://localhost:8080
+If the docker setup uses VirtualBox, the you can get the IP from `docker-machine ip` command.
+
+```
+$ open http://$(docker-machine ip):8080
+```
+
 ## Config
 
 Third party frameworks should be copied to `Frameworks` directory.
