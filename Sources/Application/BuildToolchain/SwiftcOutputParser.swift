@@ -18,7 +18,7 @@ class SwiftcOutputParser {
         let results = try RegEx(pattern: ".*.swift:((\\d+?)\\:(\\d+?))\\: (error)\\: (.*)").matchGroups(in: input)
         for result in results {
             guard let row = Int(result[1]), let column = Int(result[2]) else { continue }
-            items += [Annotation(type: .error, location: AnnotationLocation(row: row + adjustRow - 1, column: column), description: result[4])]
+            items += [Annotation(type: .error, location: AnnotationLocation(row: row + adjustRow, column: column), description: result[4])]
         }
         return items
     }
