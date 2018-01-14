@@ -26,15 +26,24 @@ $ swift package generate-xcodeproj
 
 ## Docker
 
+Build docker image:
+
 ```
 $ git clone https://github.com/krzyzanowskim/OnlineSwiftPlayground.git
 $ cd swiftplayground
-$ docker build -t onlineswiftplayground .
-$ docker run --rm -it -p 8080:8080 --name onlineswiftplayground -t onlineswiftplayground
+$ docker build -t krzyzanowskim/onlineswiftplayground .
 ```
 
-Playground is available at http://localhost:8080
-If the docker setup uses VirtualBox, the you can get the IP from `docker-machine ip` command.
+then run container:
+
+```
+$ docker run -d -p 8080:8080 --name onlineswiftplayground -t onlineswiftplayground
+```
+
+and wait until docker container is up (usually several seconds).
+
+Playground is available at [http://localhost:8080](http://localhost:8080).
+If the docker setup uses VirtualBox, the you can get the IP address from `docker-machine ip` command.
 
 ```
 $ open http://$(docker-machine ip):8080
