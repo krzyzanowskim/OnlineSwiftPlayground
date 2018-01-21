@@ -18,10 +18,22 @@ $ npm install
 $ swift run -c release
 ```
 
-## Xcode development
+## Development
+
+### Xcode
+
+Generate Xcode project
 
 ```
 $ swift package generate-xcodeproj
+```
+
+### React
+
+Web user interface is build with [React](https://reactjs.org/) and [webpack](https://webpack.js.org/).
+
+```
+$ npm run build
 ```
 
 ## Docker

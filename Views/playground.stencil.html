@@ -18,8 +18,6 @@
     <link href="/static/css/css.css" rel="stylesheet" type="text/css" />
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
-    <script src="/static/lib/bundle/bundle.js"></script>
 
     <link rel="shortcut icon" type="image/x-icon" href="/static/assets/favicon.ico"/>
     
@@ -47,7 +45,7 @@
 
       <div uk-grid>
         <div class="uk-width-1-2 uk-height-large">
-            <pre id="editor" class="uk-height-1-1">{% if not embed %}{% include "./playground-snippet.stencil" %}{% endif %}</pre>
+            <div id="editor" class="uk-height-1-1"></div>
         </div>
         <div class="uk-width-1-2 uk-height-large">
             <pre id="results-editor" class="uk-height-1-1"></pre>
@@ -71,8 +69,7 @@
       {% include "./footer-navbar.stencil.html" %}
       {% endif %}
 
-  <script>
-    new Clipboard('.uk-button');
+  <!-- <script>
     document.getElementById('editor').style.fontSize='13px';
 
     var editor = ace.edit("editor");
@@ -199,9 +196,14 @@
       return v.toString(16);
     });
 }
-  </script>
+  </script> -->
 
   {% include "./google-analytics.stencil.html" %}
+
+  <script>
+      new Clipboard('.uk-button');
+  </script>
+  <script src="/static/lib/bundle/bundle.js"></script>
 
   </body>
 
