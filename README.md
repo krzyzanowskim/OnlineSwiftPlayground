@@ -71,4 +71,4 @@ You can follow me on Twitter at [@krzyzanowskim](http://twitter.com/krzyzanowski
 
 ## License
 
-See LICENSE file.
+Creative Commons Attribution Non Commercial 4.0. See [LICENSE](LICENSE.txt) file.
