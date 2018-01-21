@@ -1,6 +1,7 @@
 {
     "name": "swiftplayground.run",
     "version": "0.0.1",
+    "license": "CC-BY-NC-4.0",
     "author": "marcin@krzyzanowskim.com",
     "repository": {
         "type": "git",
@@ -8,13 +9,12 @@
     },
     "homepage": "http://krzyzanowskim.com",
     "dependencies": {
-        "js-base64": "^2.4.0",
         "websocket": "^1.0.25"
     },
-    "scripts": {
-        "bundle": "browserify public/lib/main.js --standalone main -o public/lib/bundle/bundle.js"
-    },
     "devDependencies": {
-        "browserify": "^14.5.0"
+        "webpack": "^3.10.0"
+    },
+    "scripts": {
+        "build": "webpack"
     }
 }

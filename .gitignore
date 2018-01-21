@@ -1,13 +1,9 @@
 .DS_Store
-/.build
-/.build-ubuntu
-/Packages
-/config.json
-/spec.json
-/ssl
-./config/github.json
+.build/*
+.build-ubuntu/*
+Packages
 config/github.json
-/PlaygroundServer.xcodeproj
+PlaygroundServer.xcodeproj
 
 ## Build generated
 build/
@@ -26,5 +22,3 @@ xcuserdata/*
 xcuserdata
 
 node_modules
-package-lock.json
-Package.resolved
