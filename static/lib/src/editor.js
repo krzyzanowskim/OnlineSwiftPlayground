@@ -5,11 +5,10 @@ import MonacoEditor from "react-monaco-editor";
 class Editor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { code: props.code };
+    this.state = { code: props.code, readOnly: props.readOnly };
   }
 
   editorDidMount(editor, monaco) {
-    editor.focus();
     this.editor = editor;
   }
 
@@ -18,7 +17,7 @@ class Editor extends React.Component {
   }
 
   setValue(value) {
-    this.editor.getMode().setValue(value);
+    this.editor.getModel().setValue(value);
   }
 
   onChange(newValue, e) {
@@ -36,7 +35,7 @@ class Editor extends React.Component {
       fontSize: 15,
       formatOnPaste: false,
       formatOnType: false,
-      readOnly: false,
+      readOnly: this.props.readOnly,
       renderIndentGuides: true,
       scrollbar: {
         verticalHasArrows: true,

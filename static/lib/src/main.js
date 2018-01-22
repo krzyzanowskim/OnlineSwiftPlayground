@@ -16,6 +16,14 @@ var editorComponent = ReactDOM.render(
   document.getElementById("editor")
 );
 
+var terminalComponent = ReactDOM.render(
+  <Editor
+    readOnly="true"
+    code={document.getElementById("terminal").textContent}
+  />,
+  document.getElementById("terminal")
+);
+
 let protocol = Protocol.start();
 let playground = new Playground(protocol, editorComponent.editor);
 
@@ -26,6 +34,7 @@ $("#run-button").click(function(e) {
 
   playground.run(editorComponent.getValue(), function(value, annotations) {
     console.log(value);
+    terminalComponent.setValue(value);
     sender.prop("disabled", false);
     editorComponent.editor.focus();
   });

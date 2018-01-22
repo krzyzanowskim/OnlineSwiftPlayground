@@ -1058,6 +1058,11 @@ let startValue = __WEBPACK_IMPORTED_MODULE_4__playground_js__["a" /* default */]
 
 var editorComponent = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__editor_js__["a" /* default */], { code: startValue }), document.getElementById("editor"));
 
+var terminalComponent = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__editor_js__["a" /* default */], {
+  readOnly: "true",
+  code: document.getElementById("terminal").textContent
+}), document.getElementById("terminal"));
+
 let protocol = __WEBPACK_IMPORTED_MODULE_2__protocol_js__["a" /* default */].start();
 let playground = new __WEBPACK_IMPORTED_MODULE_4__playground_js__["a" /* default */](protocol, editorComponent.editor);
 
@@ -1068,6 +1073,7 @@ $("#run-button").click(function (e) {
 
   playground.run(editorComponent.getValue(), function (value, annotations) {
     console.log(value);
+    terminalComponent.setValue(value);
     sender.prop("disabled", false);
     editorComponent.editor.focus();
   });
@@ -18475,11 +18481,10 @@ module.exports = {"_args":[["websocket@1.0.25","/Users/marcinkrzyzanowski/Devel/
 class Editor extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   constructor(props) {
     super(props);
-    this.state = { code: props.code };
+    this.state = { code: props.code, readOnly: props.readOnly };
   }
 
   editorDidMount(editor, monaco) {
-    editor.focus();
     this.editor = editor;
   }
 
@@ -18488,7 +18493,7 @@ class Editor extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   }
 
   setValue(value) {
-    this.editor.getMode().setValue(value);
+    this.editor.getModel().setValue(value);
   }
 
   onChange(newValue, e) {
@@ -18506,7 +18511,7 @@ class Editor extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       fontSize: 15,
       formatOnPaste: false,
       formatOnType: false,
-      readOnly: false,
+      readOnly: this.props.readOnly,
       renderIndentGuides: true,
       scrollbar: {
         verticalHasArrows: true,
