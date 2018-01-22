@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="swift, swift playground, swift on server">
+    <meta name="description" content="Swift Playground - online, hosted swift playgrounds.">
+    <meta name="author" content="Marcin Krzyzanowski">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@krzyzanowskim" />
+    <meta name="twitter:creator" content="@krzyzanowskim" />
+    <meta property="og:url" content="https://swiftplayground.run" />
+    <meta property="og:title" content="Online Swift Playground" />
+    <meta property="og:description" content="Self hosted and embeddable Swift Playground solution with a third-party module support baked in." />
+    <meta property="og:image" content="https://swiftplayground.run/assets/og.png" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+
+    <title>Swift Playground</title>
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/css/uikit.min.css" />
+
+    <!-- UIkit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
+    <link href="css/css.css" rel="stylesheet">
+  </head>
+
+  <body>
+      <div uk-sticky>
+          <nav class="uk-navbar-container uk-margin uk-padding-small" uk-navbar="mode: click">
+            <div class="corner-ribbon top-right sticky red shadow">Beta</div>
+            <div class="uk-navbar-left">
+              <a href="https://twitter.com/krzyzanowskim" class="uk-icon-button uk-margin-small-right" uk-icon="icon: twitter"></a>
+              <a href="https://krzyzanowskim.com" class="uk-button uk-button-text uk-button-small">author</a>
+            </div>
+          </nav>
+      </div>
+
+      <div class="uk-card uk-card-default uk-container">
+
+        <div class="uk-child-width-1@m" uk-grid>
+            <div class="uk-margin-top">
+                <h3 class="uk-heading-line">
+                  SwiftPlayground.run
+                </h3>
+                <p>
+                    Online <a href="https://swift.org/">Swift</a> Playground. <b>Build with Swift, for Swift</b> <span class="uk-margin-small-right" uk-icon="icon: heart"></span>
+                  </p>
+                  <p>
+                  Finally! Self hosted and embeddable solution with a third-party modules support baked in.
+                </p>
+            </div>
+            <div class="uk-card">
+              <iframe src="vendor/pay-with-a-tweet/iframe.html" class="br-right-md uk-align-center" name="paytweet_button" scrolling="no" frameborder="no" id="button_iframe_d0e5c517-5a49-4ff9-ac42-7df4b06eedca" style="height: 36px; width: 163px;"></iframe>
+            </div>
+            <div>
+              <img src="assets/screenshot.png"></img>
+            </div>  
+            <div>            
+              <h3>Features</h3>
+              <ul class="uk-list">
+                  <li><b>Simplicity</b> - Build and run with <a href="https://swift.org/package-manager/">Swift Package Manager</a>.</li>
+                  <li><b>macOS & Linux</b> - Run on macOS or/and Linux.</li>
+                  <li><b>Custom module</b> - Import custom frameworks, that makes is perfect tool to play with your code.</li>
+                  <li><b>Swift stack</b> - Swift on Server stack.</li>
+                  <li><b>Hosted</b> - Easy to deploy own instance with <a href="https://www.docker.com/">Docker</a>.</li>
+                  <li><b>Open Source</b><sup><a href="https://en.oxforddictionaries.com/definition/undecided">1</a></sup> - The open source code, nothing to hide. (available soon)</li>
+              </ul>
+            </div>    
+          </div>    
+      </div>
+
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111671831-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-111671831-1');
+        gtag('set', {'user_id': 'USER_ID'});
+      </script>
+  </body>
+</html>
