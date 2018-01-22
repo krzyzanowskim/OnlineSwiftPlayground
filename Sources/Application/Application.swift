@@ -42,23 +42,23 @@ public class App {
 
         router.get("/signin") { request, response, next in
             response.headers["Content-Type"] = "text/html"
-            try response.render("signin.stencil.html", context: App.defaultContext).end()
+            try response.render("signin.html", context: App.defaultContext).end()
         }
 
         router.get("/logout") { request, response, next in
             self.credentials?.logOut(request: request)
-            try response.render("logout.stencil.html", context: App.defaultContext).end()
+            try response.render("logout.html", context: App.defaultContext).end()
         }
 
         router.get("/") { request, response, next in
-            try response.render("playground.stencil.html", context: App.defaultContext)
+            try response.render("playground.html", context: App.defaultContext)
             next()
         }
 
         router.get("/embed") { request, response, next in
             var context = App.defaultContext
             context["embed"] = "1"
-            try response.render("playground.stencil.html", context: context)
+            try response.render("playground.html", context: context)
             next()
         }
 
