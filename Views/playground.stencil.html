@@ -6,8 +6,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/css/uikit.min.css" />
 
@@ -43,13 +41,12 @@
                 </nav>
         </div>
 
-      <div uk-grid>
-        <div class="uk-width-1-2 uk-height-large">
-            <div id="editor" class="uk-height-1-1"></div>
-        </div>
-        <div class="uk-width-1-2 uk-height-large">
-            <pre id="results-editor" class="uk-height-1-1"></pre>
-        </div>
+      <div uk-grid class="uk-margin-remove">
+        <pre id="editor" class="uk-width-1-2 uk-height-large uk-padding-remove">
+import Foundation
+
+print("Hello World")</pre>
+        <div id="results-editor" class="uk-width-1-2 uk-height-large"></div>
       </div>
 
       {% if not embed %}
@@ -114,15 +111,6 @@
     });
 
     {% if not embed %}
-    $("#logout-button").click(function (e) {
-      e.preventDefault();
-      window.location.href = "/logout";
-    });
-
-    $("#download-button").click(function (e) {
-      let text = editor.getValue()
-      this.href = "data:application/octet-stream;charset=UTF-8," + encodeURIComponent(text);
-    });
 
     $("#share-button").click(function (e) {
       e.preventDefault();

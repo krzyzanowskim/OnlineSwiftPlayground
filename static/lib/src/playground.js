@@ -1,25 +1,40 @@
 // Copyright Marcin Krzyzanowski marcin@krzyzanowskim.com
+import $ from "jquery";
 
-function Playground(ws) {
-  this.ws = ws;
-  this.outputCallback = function(text, annotations) {};
+class Playground {
+  constructor(protocol, editor) {
+    this.protocol = protocol;
+    this.editor = editor;
+  }
 
-  this.runSwiftCode = function(codeString, callback) {
+  static restoreCode() {
+    let storage = window.sessionStorage;
+    let loadedCode = storage.getItem("editor-text");
+    if (loadedCode !== null) {
+      return loadedCode;
+    }
+    return null;
+  }
+
+  static storeCode(code) {
+    let storage = window.sessionStorage;
+    storage.setItem("editor-text", code);
+  }
+
+  run(code, onFinish) {
     var msg = {
       run: {
-        value: codeString
+        value: code
       }
     };
-    this.ws.send(JSON.stringify(msg));
-    this.outputCallback = callback;
-  };
 
-  this.processOutput = function(outputText, annotations) {
-    let resultsEditor = $("#results-editor");
-    this.outputCallback(outputText, annotations) || function() {};
-    this.outputCallback = null;
-    return outputText;
-  };
+    Playground.storeCode(code);
+
+    this.protocol.ws.send(JSON.stringify(msg));
+    this.protocol.processMessage = function(value, annotations) {
+      onFinish(value, annotations);
+    };
+  }
 }
 
-module.exports = Playground;
+export default Playground;

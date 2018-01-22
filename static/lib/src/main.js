@@ -1,84 +1,54 @@
 // Copyright Marcin Krzyzanowski marcin@krzyzanowskim.com
 import React from "react";
 import ReactDOM from "react-dom";
-import MonacoEditor from "react-monaco-editor";
-import { w3cwebsocket as W3CWebSocket } from "websocket";
+
+import Protocol from "./protocol.js";
+import Editor from "./editor.js";
 import Playground from "./playground.js";
 
-function connect() {
-  var ws = new W3CWebSocket("ws://" + location.host + "/terminal", "terminal");
-  global.playground = new Playground(ws);
+let startValue =
+  Playground.restoreCode() !== null
+    ? Playground.restoreCode()
+    : document.getElementById("editor").textContent;
 
-  ws.onopen = function() {
-    console.log("WebSocket Client Connected");
-    if (ws.readyState === ws.OPEN) {
-      //
-    }
-  };
+var editorComponent = ReactDOM.render(
+  <Editor code={startValue} />,
+  document.getElementById("editor")
+);
 
-  ws.onmessage = function(e) {
-    if (typeof e.data === "string") {
-      let command = JSON.parse(e.data);
-      if (command.output.value !== undefined) {
-        playground.processOutput(
-          command.output.value,
-          command.output.annotations
-        );
-      }
-    }
-  };
+let protocol = Protocol.start();
+let playground = new Playground(protocol, editorComponent.editor);
 
-  ws.onclose = function(e) {
-    console.log(
-      "Socket is closed. Reconnect will be attempted in 20 second.",
-      e.reason
-    );
-    setTimeout(function() {
-      connect();
-    }, 20000);
-  };
+$("#run-button").click(function(e) {
+  e.preventDefault();
+  let sender = $(this);
+  sender.prop("disabled", true);
 
-  ws.onerror = function(err) {
-    console.error("Socket encountered error: Closing socket");
-    ws.close();
-  };
-}
+  playground.run(editorComponent.getValue(), function(value, annotations) {
+    console.log(value);
+    sender.prop("disabled", false);
+    editorComponent.editor.focus();
+  });
+});
 
-connect();
+$("#logout-button").click(function(e) {
+  e.preventDefault();
+  window.location.href = "/logout";
+});
 
-class Editor extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      code: "// type your code..."
-    };
-  }
-  editorDidMount(editor, monaco) {
-    console.log("editorDidMount", editor);
-    editor.focus();
-  }
-  onChange(newValue, e) {
-    console.log("onChange", newValue, e);
-  }
-  render() {
-    const code = this.state.code;
-    const options = {
-      selectOnLineNumbers: true
-    };
-    const requireConfig = {
-      paths: { vs: "/static/lib/bundle/vs" },
-      url: "/static/lib/bundle/vs/loader.js"
-    };
-    return (
-      <MonacoEditor
-        language="javascript"
-        theme="vs-dark"
-        value={code}
-        options={options}
-        requireConfig={requireConfig}
-      />
-    );
-  }
-}
+$("#download-button").click(function(e) {
+  let text = editor.getValue();
+  this.href =
+    "data:application/octet-stream;charset=UTF-8," + encodeURIComponent(text);
+});
 
-ReactDOM.render(<Editor />, document.getElementById("editor"));
+// editor.session.setAnnotations(
+//   annotations.map(function(a) {
+//     return {
+//       row: a.location.row,
+//       column: a.location.column,
+//       text: a.description,
+//       type: "error"
+//     };
+//   })
+// );

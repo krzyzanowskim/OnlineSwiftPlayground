@@ -9,6 +9,8 @@
     },
     "homepage": "http://krzyzanowskim.com",
     "dependencies": {
+        "jq-console": "^2.13.2",
+        "jquery": "^3.3.1",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "react-monaco-editor": "^0.13.0",

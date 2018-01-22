@@ -29,6 +29,10 @@ module.exports = {
     // new webpack.DefinePlugin({
     //   "process.env.NODE_ENV": JSON.stringify("production")
     // }),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
     new CopyWebpackPlugin([
       {
         from: "node_modules/monaco-editor/min/vs",
