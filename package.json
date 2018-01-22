@@ -5,9 +5,9 @@
     "author": "marcin@krzyzanowskim.com",
     "repository": {
         "type": "git",
-        "url": ""
+        "url": "https://github.com/krzyzanowskim/OnlineSwiftPlayground.git"
     },
-    "homepage": "http://krzyzanowskim.com",
+    "homepage": "http://swiftplayground.run",
     "dependencies": {
         "jquery": "^3.3.1",
         "react": "^16.2.0",

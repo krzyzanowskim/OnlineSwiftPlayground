@@ -5,11 +5,11 @@ let UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   target: "web",
-  entry: "./static/lib/src/main.js",
+  entry: "./frontend/main.js",
   devtool: "source-map",
   output: {
-    path: path.resolve(__dirname, "static/lib/bundle"),
-    filename: "bundle.js"
+    path: path.resolve(__dirname, "static"),
+    filename: "app.js"
   },
   module: {
     rules: [

@@ -52,8 +52,8 @@ class Editor extends React.Component {
       //   glyphMargin: false
     };
     let requireConfig = {
-      paths: { vs: "/static/lib/bundle/vs" },
-      url: "/static/lib/bundle/vs/loader.js"
+      paths: { vs: "/static/vs" },
+      url: "/static/vs/loader.js"
     };
     return (
       <MonacoEditor
