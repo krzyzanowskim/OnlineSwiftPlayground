@@ -9,6 +9,7 @@
     },
     "homepage": "http://swiftplayground.run",
     "dependencies": {
+        "clipboard": "^1.7.1",
         "jquery": "^3.3.1",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
