@@ -12,7 +12,7 @@ import Playground from "./playground.js";
 let startValue =
   Playground.restoreCode() !== null
     ? Playground.restoreCode()
-    : document.getElementById("editor").textContent;
+    : document.getElementById("editor").innerText;
 
 var editorComponent = ReactDOM.render(
   <Editor code={startValue} />,
@@ -57,14 +57,3 @@ $("#download-link").click(function(e) {
   $(this).href =
     "data:application/octet-stream;charset=UTF-8," + encodeURIComponent(text);
 });
-
-// editor.session.setAnnotations(
-//   annotations.map(function(a) {
-//     return {
-//       row: a.location.row,
-//       column: a.location.column,
-//       text: a.description,
-//       type: "error"
-//     };
-//   })
-// );

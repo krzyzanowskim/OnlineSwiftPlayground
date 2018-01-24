@@ -33,6 +33,16 @@ class Playground {
     this.protocol.ws.send(JSON.stringify(msg));
     this.protocol.processMessage = function(value, annotations) {
       onFinish(value, annotations);
+      // editor.session.setAnnotations(
+      //   annotations.map(function(a) {
+      //     return {
+      //       row: a.location.row,
+      //       column: a.location.column,
+      //       text: a.description,
+      //       type: "error"
+      //     };
+      //   })
+      // );
     };
   }
 }

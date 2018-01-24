@@ -11430,7 +11430,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // Render components
 
-let startValue = __WEBPACK_IMPORTED_MODULE_5__playground_js__["a" /* default */].restoreCode() !== null ? __WEBPACK_IMPORTED_MODULE_5__playground_js__["a" /* default */].restoreCode() : document.getElementById("editor").textContent;
+let startValue = __WEBPACK_IMPORTED_MODULE_5__playground_js__["a" /* default */].restoreCode() !== null ? __WEBPACK_IMPORTED_MODULE_5__playground_js__["a" /* default */].restoreCode() : document.getElementById("editor").innerText;
 
 var editorComponent = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__editor_js__["a" /* default */], { code: startValue }), document.getElementById("editor"));
 
@@ -11468,17 +11468,6 @@ $("#download-link").click(function (e) {
   let text = editorComponent.getValue();
   $(this).href = "data:application/octet-stream;charset=UTF-8," + encodeURIComponent(text);
 });
-
-// editor.session.setAnnotations(
-//   annotations.map(function(a) {
-//     return {
-//       row: a.location.row,
-//       column: a.location.column,
-//       text: a.description,
-//       type: "error"
-//     };
-//   })
-// );
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(9)))
 
 /***/ }),
@@ -29757,7 +29746,7 @@ class Editor extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       folding: true,
       showFoldingControls: "mouseover",
       fontSize: 14,
-      formatOnPaste: false,
+      formatOnPaste: true,
       formatOnType: false,
       readOnly: this.state.readOnly,
       renderIndentGuides: true,
@@ -29771,11 +29760,12 @@ class Editor extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       selectOnLineNumbers: true,
       selectionClipboard: false,
       selectionHighlight: false,
-      snippetSuggestions: false,
+      snippetSuggestions: "inline",
       wordBasedSuggestions: false,
       matchBrackets: false,
       autoClosingBrackets: false,
       automaticLayout: false,
+      autoIndent: true,
       lineNumbers: this.state.showLines,
       contextmenu: false,
       dragAndDrop: this.state.showLines
@@ -31023,6 +31013,16 @@ class Playground {
     this.protocol.ws.send(JSON.stringify(msg));
     this.protocol.processMessage = function (value, annotations) {
       onFinish(value, annotations);
+      // editor.session.setAnnotations(
+      //   annotations.map(function(a) {
+      //     return {
+      //       row: a.location.row,
+      //       column: a.location.column,
+      //       text: a.description,
+      //       type: "error"
+      //     };
+      //   })
+      // );
     };
   }
 }

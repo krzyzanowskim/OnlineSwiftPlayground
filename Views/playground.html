@@ -38,217 +38,80 @@
 
   <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-light bg-light static-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">Online Swift Playground</a>
-        <a class="btn btn-primary" href="/logout">Sign out</a>
-      </div>
-    </nav>
+    <header>
+      <nav class="navbar navbar-light bg-light static-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">Online Swift Playground</a>
+          <div>{need logo}</div>
+          <a class="btn btn-primary" href="/logout">Sign out</a>
+        </div>
+      </nav>
+    </header>
 
-    <div class="container h-75">
-      <div class="row">
-        <div class="col">
-          <nav class="navbar navbar-dark bg-dark justify-content-between pl-2 pr-2">
-            <button id="run-button" type="button" class="btn btn-primary btn-sm rounded-0">
-              <i class="fa fa-play" aria-hidden="true"></i>
-              <span>Run</span>
-            </button>
-            <a id="download-link" href="#" download="swiftplayground.swift" class="btn btn-primary btn-sm rounded-0">
-              <i class="fa fa-download" aria-hidden="true"></i>
-              <span>Download</span>
-            </a>
-          </nav>
+    <section class="h-75">
+      <div class="container h-100">
+        <div class="row">
+          <div class="col">
+            <nav class="navbar navbar-dark bg-dark justify-content-between pl-2 pr-2">
+              <button id="run-button" type="button" class="btn btn-primary btn-sm rounded-0">
+                <i class="fa fa-play" aria-hidden="true"></i>
+                <span>Run</span>
+              </button>
+              <a id="download-link" href="#" download="swiftplayground.swift" class="btn btn-primary btn-sm rounded-0">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <span>Download</span>
+              </a>
+            </nav>
+          </div>
         </div>
-      </div>
-      <div class="row h-75">
-        <div class="col">
-          <div id="editor" class="fill">import Foundation print("Hello World")</div>
+        <div class="row h-75">
+          <div class="col">
+            <div id="editor" class="fill">import Foundation<br/>// import CryptoSwift<br/><br/>print("Hello World")</div>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="bg-dark" style="height: 6px;">
+        <div class="row">
+          <div class="col">
+            <div class="bg-dark" style="height: 6px;">
+            </div>
+          </div>
+        </div>
+        <div class="row h-25">
+          <div class="col">
+            <div id="terminal" class="fill"></div>
           </div>
         </div>
       </div>
-      <div class="row h-25">
-        <div class="col">
-          <div id="terminal" class="fill"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+            <ul class="list-inline mb-2">
+              <li class="list-inline-item">
+                <a href="https://krzyzanowskim.com">Contact</a>
+              </li>
+              <!-- <li class="list-inline-item">&sdot;</li> -->
+            </ul>
+            <p class="text-muted small mb-4 mb-lg-0">&copy; Marcin Krzyzanowski. All Rights Reserved.</p>
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/krzyzanowskim">
+                  <i class="fa fa-twitter fa-2x fa-fw"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- <div uk-sticky>
-      <nav class="uk-navbar-container uk-margin {% if not embed %}uk-padding-small{% endif %}" uk-navbar="mode: click">
-        <div class="uk-navbar-left">
-          <button id="run-button" class="uk-button uk-button-primary {% if embed %} uk-button-small {% endif %}">
-            <span class="uk-margin-small-right" uk-icon="icon: play"></span>run</button>
-        </div>
-        {% if not embed %}
-        <div class="uk-navbar-right">
-          <a href="#" id="download-button" class="uk-button uk-button-default" download="swiftplayground.swift">
-            <span class="uk-margin-small-right" uk-icon="icon: download"></span>get</button>
-          </a>
-          {% if not embed %}
-          <button id="share-button" class="uk-button uk-button-default" uk-toggle="target: #modal-share">
-            <span class="uk-margin-small-right" uk-icon="icon: social"></span>embed</button>
-          {% endif %}
-        </div>
-        <div class="uk-navbar-right">
-          <button id="logout-button" class="uk-button uk-button-default">Logout
-            <img class="uk-margin-small-left" style="height: 30px;" src="/static/assets/logo.png" alt="">
-            </a>
-          </button>
-        </div>
-        {% endif %}
-      </nav>
-    </div>
-
-    <div uk-grid class="uk-margin-remove">
-      <pre id="editor" class="uk-width-2-3 uk-height-large uk-padding-remove">
-import Foundation
-
-print("Hello World")</pre>
-      <div id="terminal" class="uk-width-1-3 uk-height-large uk-padding-remove"></div>
-    </div>
-
-    {% if not embed %}
-    <div id="modal-share" uk-modal>
-      <div class="uk-modal-dialog uk-modal-body">
-        <h2 class="uk-modal-title">Embed</h2>
-        <pre id="share-pre"></pre>
-        <p class="uk-text-right">
-          <button class="uk-button uk-button-default uk-modal-close" type="button">Close</button>
-          <button class="uk-button uk-button-primary" type="button" data-clipboard-target="#share-pre">Copy</button>
-        </p>
-      </div>
-    </div>
-    {% endif %} {% if not embed %} {% include "./footer-navbar.html" %} {% endif %} -->
-
-    <!-- <script>
-    document.getElementById('editor').style.fontSize='13px';
-
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/xcode");
-    editor.setShowPrintMargin(false);
-    editor.session.setMode("ace/mode/swift");
-    editor.session.setUseSoftTabs(true);
-    {% if embed %}
-    editor.setReadOnly(true);
-    {% endif %}
-    editor.setAutoScrollEditorIntoView(true);
-    editor.$blockScrolling = Infinity
-    editor.commands.addCommand({
-      name: 'build',
-      bindKey: {win: 'Ctrl-B',  mac: 'Command-B'},
-      exec: function(editor) {
-        run($("#run-button"), editor)
-      },
-      readOnly: false
-    });
-
-
-    var resultsEditor = ace.edit("results-editor");
-    resultsEditor.setTheme("ace/theme/terminal");
-    resultsEditor.setShowPrintMargin(editor.showPrintMargin);
-    resultsEditor.session.setMode("ace/mode/text");
-    resultsEditor.setReadOnly(true);
-    resultsEditor.renderer.setShowGutter(false);
-    resultsEditor.renderer.hideCursor();
-    resultsEditor.setAutoScrollEditorIntoView(true);
-    resultsEditor.$blockScrolling = Infinity
-
-    {% if not embed %}
-    loadLocalCode(editor)
-    {% endif %}
-
-    editor.focus();
-
-    $("#run-button").click(function (e) {
-      e.preventDefault();
-      run($(this), editor)
-    });
-
-    {% if not embed %}
-
-    $("#share-button").click(function (e) {
-      e.preventDefault();
-      let randomIframeId = "swiftplayground.run-" + uuidv4();
-      let locationSrc = "http://" + location.host;
-      let code = editor.getValue()
-      let txt = "<iframe src=\"" + locationSrc + "/embed\" id=\"" + randomIframeId + "\" frameborder=\"0\" height=\"400px\" width=\"600px\" scrolling=\"yes\" \ndata-code=\"" + encodeURIComponent(code) + "\">\n</iframe>"
-      txt += "<script> \
-        if (window.addEventListener) { \
-          window.addEventListener('load', function(e) { \
-            var frame = document.getElementById(\"" + randomIframeId + "\"); \
-            var message = { code: frame.getAttribute(\"data-code\") }; \
-            frame.contentWindow.postMessage(message, '" + locationSrc + "'); \
-          }, false); \
-        }  \
-      <\/script>";
-
-      $("#share-pre").text(txt);
-    });
-    {% endif %}
-    {% if embed %}
-      window.addEventListener('message', function(e) {
-        if (~event.origin.indexOf(location.host)) {
-          return;
-        }
-        var message = e.data;
-        if (message.code !== undefined) {
-          editor.setValue(decodeURIComponent(message.code))
-          console.log(message)
-        }
-      });
-    {% endif %}
-
-
-    function loadLocalCode(editor) {
-      let storage = window.sessionStorage;
-      let loadedCode = storage.getItem("editor-text");
-      if (loadedCode !== null) {
-          editor.setValue(loadedCode)
-      }
-    }
-    
-    function storeLocalCode(editor) {
-      let storage = window.sessionStorage;
-      storage.setItem('editor-text', editor.getValue());
-    }
-
-    function run(sender, editor) {
-      sender.prop("disabled", true);
-      resultsEditor.setValue("");
-
-      playground.runSwiftCode(editor.getValue(), function(output, annotations) {
-        resultsEditor.setValue(output);
-        editor.session.setAnnotations(annotations.map(function(a) {
-            return  { row: a.location.row,
-                      column: a.location.column,
-                      text: a.description,
-                      type: "error" }
-        }))
-        {% if not embed %}
-        storeLocalCode(editor)
-        {% endif %}
-        sender.prop("disabled", false);
-        editor.focus();
-      });
-    }
-
-    function uuidv4() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-}
-  </script> -->
+    </footer>
 
     {% include "./google-analytics.html" %}
 
     <script src="/static/app.js"></script>
-
   </body>
 
 </html>
