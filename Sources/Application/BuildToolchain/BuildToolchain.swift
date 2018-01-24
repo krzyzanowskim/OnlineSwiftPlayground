@@ -35,6 +35,7 @@ class BuildToolchain {
         var cmd = [String]()
         cmd += ["swift"]
         cmd += ["--driver-mode=swiftc"]
+        cmd += ["-v"]
         cmd += ["-gnone"]
         cmd += ["-suppress-warnings"]
         cmd += ["-module-name","SwiftPlayground"]
@@ -47,6 +48,9 @@ class BuildToolchain {
             cmd += ["-F",frameworksDirectory.asString]
             cmd += ["-Xlinker","-rpath","-Xlinker",frameworksDirectory.asString]
             cmd += ["-sanitize=address"]
+        #endif
+        #if os(Linux)
+            cmd += ["-target", "x86_64-unknown-linux-gnu"]
         #endif
         // Enable JSON-based output at some point.
         // cmd += ["-parseable-output"]
