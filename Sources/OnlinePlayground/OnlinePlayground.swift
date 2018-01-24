@@ -1,4 +1,5 @@
 import Foundation
+@_exported import CryptoSwift
 
 #if os(macOS)
     import Darwin

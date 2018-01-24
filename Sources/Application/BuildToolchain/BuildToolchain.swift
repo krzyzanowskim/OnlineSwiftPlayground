@@ -27,14 +27,10 @@ class BuildToolchain {
 
         let temporaryBuildDirectory = try TemporaryDirectory(prefix: ProcessInfo.processInfo.globallyUniqueString)
         let mainFilePath = temporaryBuildDirectory.path.appending(RelativePath("main.swift"))
-        let helpersFilePath = temporaryBuildDirectory.path.appending(RelativePath("Helpers.swift"))
         let binaryFilePath = temporaryBuildDirectory.path.appending(component: "main")
         let frameworksDirectory = projectDirectoryPath.appending(component: "Frameworks")
 
-        // OnlinePlayground.swift
         try fileSystem.writeFileContents(mainFilePath, bytes: ByteString(encodingAsUTF8: injectCodeText + code))
-        let helperFilePath = projectDirectoryPath.appending(components: "Sources", "OnlinePlayground", "OnlinePlayground.swift")
-        try fileSystem.writeFileContents(helpersFilePath, bytes: try fileSystem.readFileContents(helperFilePath))
 
         var cmd = [String]()
         cmd += ["swift"]
@@ -43,7 +39,11 @@ class BuildToolchain {
         cmd += ["-suppress-warnings"]
         cmd += ["-module-name","SwiftPlayground"]
         // cmd += ["-O"]
+        cmd += ["-I",projectDirectoryPath.appending(components: ".build","release").asString]
+        cmd += ["-L",projectDirectoryPath.appending(components: ".build","release").asString]
+        cmd += ["-lOnlinePlayground"]
         #if os(macOS)
+            cmd += ["-target", "x86_64-apple-macosx10.10"]
             cmd += ["-F",frameworksDirectory.asString]
             cmd += ["-Xlinker","-rpath","-Xlinker",frameworksDirectory.asString]
             cmd += ["-sanitize=address"]
@@ -56,7 +56,7 @@ class BuildToolchain {
             cmd += ["-sdk", sdkRoot.asString]
         }
         cmd += ["-o",binaryFilePath.asString]
-        cmd += [mainFilePath.asString, helpersFilePath.asString]
+        cmd += [mainFilePath.asString]
 
         let process = Basic.Process(arguments: cmd, environment: [:], redirectOutput: true, verbose: false)
         try processSet.add(process)
@@ -138,6 +138,7 @@ private func sandboxProfile() -> String {
 }
 
 let injectCodeText = """
+    import OnlinePlayground;
     OnlinePlayground.setup;
 
     """
