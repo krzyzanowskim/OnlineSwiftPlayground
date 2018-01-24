@@ -25,5 +25,6 @@ RUN if [ $bx_dev_user != "root" ]; then useradd -ms /bin/bash -u $bx_dev_userid 
 COPY . /swiftplayground
 
 # Command to start Swift application
+CMD ["swiftenv", "init", "-"]
 CMD ["swift", "build", "-c", "release", "--disable-prefetching"]
 CMD ["swift", "run", "-c", "release", "--disable-prefetching"]

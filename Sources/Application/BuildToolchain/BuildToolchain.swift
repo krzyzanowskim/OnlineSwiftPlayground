@@ -62,7 +62,7 @@ class BuildToolchain {
         cmd += ["-o",binaryFilePath.asString]
         cmd += [mainFilePath.asString]
 
-        let process = Basic.Process(arguments: cmd, environment: [:], redirectOutput: true, verbose: false)
+        let process = Basic.Process(arguments: cmd, redirectOutput: true, verbose: false)
         try processSet.add(process)
         try process.launch()
         let result = try process.waitUntilExit()
