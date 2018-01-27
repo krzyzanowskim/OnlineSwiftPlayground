@@ -20,54 +20,54 @@ enum Error: Swift.Error {
 public class App {
     let router: Router
     let server: Server
-    let credentials: Credentials?
     static let defaultContext:[String: Any] = [:]
 
     public init() throws {
-        router = Router()
+        router = Router(mergeParameters: true)
 
         server = Server(router: router)
 
         // UUID secret for the session. Session is not persistent
         router.all(middleware: Session(secret: UUID().uuidString))
-
-        credentials = try setupCredentials(router: router)
     }
 
     func postInit() throws {
+        try setupCredentials(router: router)
         router.add(templateEngine: StencilTemplateEngine(), forFileExtensions: ["html"])
 
         // Common endpoints
         router.all("/static", middleware: StaticFileServer(path: "./static", options: StaticFileServer.Options(serveIndexForDirectory: false)))
 
-        router.get("/signin") { request, response, next in
-            response.headers["Content-Type"] = "text/html"
-            try response.render("signin.html", context: App.defaultContext).end()
-        }
-
         router.get("/logout") { request, response, next in
-            self.credentials?.logOut(request: request)
             try response.render("logout.html", context: App.defaultContext).end()
         }
 
         router.get("/") { request, response, next in
-            try response.render("playground.html", context: App.defaultContext)
-            next()
-        }
+            if let userProfile = request.userProfile {
+                var context = App.defaultContext
+                context["userProfile"] = userProfile
+                try response.render("playground.html", context: context).end()
+            } else {
+                try response.render("index.html", context: App.defaultContext).end()
+            }
 
-        router.get("/embed") { request, response, next in
-            var context = App.defaultContext
-            context["embed"] = "1"
-            try response.render("playground.html", context: context)
-            next()
         }
 
         // WebSockets
         WebSocket.register(service: TerminalService(), onPath: "terminal")
+
+        // Defaults
+        router.all { (request, response, next) in
+            if response.statusCode == .unknown || response.statusCode == .notFound {
+                try response.redirect("/static/404.html").end()
+                return
+            }
+            next()
+        }
     }
 
     public func run() throws {
         try postInit()
-        Server.init(router: router).run()
+        Server(router: router).run()
     }
 }
