@@ -9,10 +9,10 @@ import Cryptor
 import SwiftyJSON
 import Foundation
 
-func setupCredentials(router: Router) throws {
+func setupCredentials(router: Router) throws -> Bool {
     guard let githubConfig = Config.shared["github"] else {
         Log.warning("Unable to load config/github.json setup. Authorisation disabled.")
-        return
+        return false
     }
 
     let githubCredentials = CredentialsGitHub(clientId: githubConfig["clientId"] as! String,
@@ -33,4 +33,6 @@ func setupCredentials(router: Router) throws {
         credentials.logOut(request: request)
         next()
     }
+
+    return true
 }

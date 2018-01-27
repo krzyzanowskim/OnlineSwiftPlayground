@@ -32,7 +32,31 @@ public class App {
     }
 
     func postInit() throws {
-        try setupCredentials(router: router)
+        let authEnabled = try setupCredentials(router: router)
+        if !authEnabled {
+            // No-auth flow provides a "fake" url's. Not Sign-in is performed.
+            router.get("/login/github", handler: { (request, response, next) in
+                try response.redirect("/playground")
+                next()
+            })
+            router.get("/playground") { request, response, next in
+                try response.render("playground.html", context: App.defaultContext).end()
+            }
+            router.get("/") { request, response, next in
+                try response.render("index.html", context: App.defaultContext).end()
+            }
+        } else {
+            router.get("/") { request, response, next in
+                if let userProfile = request.userProfile {
+                    var context = App.defaultContext
+                    context["userProfile"] = userProfile
+                    try response.render("playground.html", context: context).end()
+                } else {
+                    try response.render("index.html", context: App.defaultContext).end()
+                }
+            }
+        }
+
         router.add(templateEngine: StencilTemplateEngine(), forFileExtensions: ["html"])
 
         // Common endpoints
@@ -40,17 +64,6 @@ public class App {
 
         router.get("/logout") { request, response, next in
             try response.render("logout.html", context: App.defaultContext).end()
-        }
-
-        router.get("/") { request, response, next in
-            if let userProfile = request.userProfile {
-                var context = App.defaultContext
-                context["userProfile"] = userProfile
-                try response.render("playground.html", context: context).end()
-            } else {
-                try response.render("index.html", context: App.defaultContext).end()
-            }
-
         }
 
         // WebSockets
