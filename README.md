@@ -15,7 +15,8 @@ TBA. Checkout http://SwiftPlayground.run
 $ git clone https://github.com/krzyzanowskim/OnlineSwiftPlayground.git
 $ cd swiftplayground
 $ npm install
-$ swift build -c release && swift run -c release
+$ swift build --product OnlinePlayground -c release
+$ swift run -c release
 ```
 
 ## Development

@@ -1,51 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta name="keywords" content="swift, swift playground, swift on server">
+    <meta name="description" content="Swift Playground - online, hosted swift playgrounds.">
+    <meta name="author" content="Marcin Krzyzanowski">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@krzyzanowskim" />
+    <meta name="twitter:creator" content="@krzyzanowskim" />
+    <meta property="og:url" content="https://swiftplayground.run" />
+    <meta property="og:title" content="Online Swift Playground" />
+    <meta property="og:description" content="Self hosted and embeddable Swift Playground solution with a third-party module support baked in." />
+    <meta property="og:image" content="https://swiftplayground.run/assets/og.png" />
 
-    <!-- UIkit CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/css/uikit.min.css" />
+    <title>Online Swift Playground</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
-    <!-- UIkit JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="shortcut icon" type="image/x-icon" href="/static/assets/favicon.ico"/>
-<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<body>
+    <!-- Custom styles for this template -->
+    <link href="static/css/landing-page.css" rel="stylesheet">
+    <link href="static/css/rainbow.css" rel="stylesheet">
+  </head>
 
-    {% include "./uk-navbar.html" %}
+  <body>
+    <header class="masthead text-white text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <h1 class="mb-5 anim-text color-text-flow">Online Swift Playground</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 mx-auto">
+            <a class="btn btn-primary btn-block" href="login/github">Sign In</a>
+          </div>
+        </div>
+      </div>
+    </header>
 
-    <div class="uk-flex uk-flex-column uk-margin-top">
-        <div class="uk-flex uk-flex-center" uk-grid>
-            <div class="uk-flex uk-flex-center uk-width-6-7@s uk-width-2-5@l">
-                <div class="uk-card uk-card-default uk-card-body">
-                    <h1 class="uk-heading-primary">Welcome!</h1>
-                    <p class="uk-text-justify">I'm so excited to share this preview with you. To access, please authenticate with your <a href="https://github.com">GitHub</a> account.</p>
-                </div>
+    <!-- Icons Grid -->
+    <section class="features-icons bg-light text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-screen-desktop m-auto text-primary"></i>
+              </div>
+              <h3>Online</h3>
+              <p class="lead mb-0">Run hosted Swift or deploy own instance with
+                <a href="https://store.docker.com/community/images/krzyzanowskim/onlineswiftplayground" target="_blank">Docker</a>.</p>
             </div>
-            <div class="uk-flex uk-flex-center uk-width-1-1">
-                <form action="/login/github" method="GET">
-                    <button type="submit" class="uk-button uk-button-primary uk-width-medium"><span uk-icon="icon: github"></span> Login with GitHub</button>
-                </form>
+          </div>
+          <div class="col-lg-3">
+            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-layers m-auto text-primary"></i>
+              </div>
+              <h3>Packages</h3>
+              <p class="lead mb-0">Use 3-party frameworks.
+                <br/>Show your code.</p>
             </div>
-            <div class="uk-flex uk-flex-center uk-width-6-7@s uk-width-2-5@l">
-                    <div>
-                        <p class="uk-text-muted">Please bear in mind that you get access to hosted Swift Playground with limitations. If you spot any serious issue, please let me know.</p>
-                    </div>
-                </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-check m-auto text-primary"></i>
+              </div>
+              <h3>Easy to Use</h3>
+              <p class="lead mb-0">Ready to use with your own content, or customize the
+                <a href="https://github.com/krzyzanowskim/OnlineSwiftPlayground" target="_blank">sources</a>!</p>
             </div>
-    </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-rocket m-auto text-primary"></i>
+              </div>
+              <h3>Swift on Server</h3>
+              <p class="lead mb-0">Build with
+                <a href="https://swift.org/package-manager/" target="_blank">Swift Package Manager</a> and run with
+                <a href="http://www.kitura.io/" target="_blank">Kitura</a>!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    {% include "./footer-navbar.html" %}
-    {% include "./google-analytics.html" %}
+    <!-- Testimonials -->
+    <section class="testimonials text-center bg-light">
+      <div class="container">
+        <h2 class="mb-5">What people are saying...</h2>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="static/assets/testimonials-1.jpg" alt="">
+              <h5>Margaret E.</h5>
+              <p class="font-weight-light mb-0">"I think it's a perfectly good idea, well let people without a mac to have some fun with swift"</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="static/assets/testimonials-2.jpg" alt="">
+              <h5>Fred S.</h5>
+              <p class="font-weight-light mb-0">"This is great news, especially since IBM is shutting down their sandbox."</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="static/assets/testimonials-3.jpg" alt="">
+              <h5>Sarah W.</h5>
+              <p class="font-weight-light mb-0">"Wonderful, I really wanted to teach to the people who dont have an apple computer that would be nice to test their code online"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</body>
+    <!-- Footer -->
+    <footer class="footer bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+            <ul class="list-inline mb-2">
+              <li class="list-inline-item">
+                <a href="#">About</a>
+              </li>
+              <li class="list-inline-item">&sdot;</li>
+              <li class="list-inline-item">
+                <a href="https://krzyzanowskim.com">Contact</a>
+              </li>
+              <li class="list-inline-item">&sdot;</li>
+              <li class="list-inline-item">
+                <a href="privacy-policy.html">Privacy Policy</a>
+              </li>
+            </ul>
+            <p class="text-muted small mb-4 mb-lg-0">&copy; SwiftPlayground. All Rights Reserved.</p>
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/krzyzanowskim">
+                  <i class="fa fa-twitter fa-2x fa-fw"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+
+  <!-- Rainbow -->
+  <script>
+    $('.anim-text').html(function (i, html) {
+      var chars = $.trim(html).split("");
+      return '<span>' + chars.join('</span><span>') + '</span>';
+    });
+
+  </script>
+
+  <!-- Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111671831-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-111671831-1');
+    gtag('set', {
+      'user_id': 'USER_ID'
+    });
+
+  </script>
+
 </html>
