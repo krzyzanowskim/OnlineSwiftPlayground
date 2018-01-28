@@ -36,7 +36,7 @@
         <header>
             <div class="container p-2">
                 <div class="row mt-4 mb-4">
-                    <div class="col-6 mx-auto">
+                    <div class="col-12 text-center">
                         <a class="btn btn-primary" href="/">Let's Play again</a>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
         <section>
             <div class="container">
                 <div class="row pt-4">
-                    <div class="col-md-auto offset-md-4">
+                    <div class="col-12 text-center">
                         <p>
                             This is the end, beautiful friend
                             <br/> This is the end, my only friend, the end
@@ -67,34 +67,9 @@
         </section>
 
         <!-- Footer -->
-        <footer class="">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-                        <ul class="list-inline mb-2">
-                            <li class="list-inline-item">
-                                <a href="https://krzyzanowskim.com">Contact</a>
-                            </li>
-                            <li class="list-inline-item">&sdot;</li>
-                            <li class="list-inline-item">
-                                <a href="privacy-policy.html">Privacy Policy</a>
-                            </li>
-                        </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy; SwiftPlayground. All Rights Reserved.</p>
-                    </div>
-                    <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-                        <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                                <a href="https://twitter.com/krzyzanowskim">
-                                    <i class="fa fa-twitter fa-2x fa-fw"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <footer>
+            {% include "./footer-container.html" %}
         </footer>
-
     </body>
 
     {% include "./google-analytics.html" %}
