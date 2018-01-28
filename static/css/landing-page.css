@@ -109,7 +109,15 @@ header.masthead h1 {
   opacity: 0.3;
 }
 
-footer.footer {
+footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
+}
+
+footer.sticky {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
 }
