@@ -39,11 +39,9 @@
   <body>
     <!-- Navigation -->
     <header>
-      <nav class="navbar navbar-light bg-light static-top">
+      <nav class="navbar navbar-light static-top justify-content-between">
         <div class="container">
-          <a class="navbar-brand" href="/">Online Swift Playground</a>
-          <div>{need logo}</div>
-          <a class="btn btn-primary" href="/logout">Sign out</a>
+          <img class="img-fluid" src="static/assets/logo.png" style="max-height:auto">
         </div>
       </nav>
     </header>
@@ -53,14 +51,19 @@
         <div class="row">
           <div class="col">
             <nav class="navbar navbar-dark bg-dark justify-content-between pl-2 pr-2">
-              <button id="run-button" type="button" class="btn btn-primary btn-sm rounded-0">
-                <i class="fa fa-play" aria-hidden="true"></i>
-                <span>Run</span>
-              </button>
-              <a id="download-link" href="#" download="swiftplayground.swift" class="btn btn-primary btn-sm rounded-0">
-                <i class="fa fa-download" aria-hidden="true"></i>
-                <span>Download</span>
-              </a>
+              <div>
+                <button id="run-button" type="button" class="btn btn-primary btn-sm rounded-0">
+                  <i class="fa fa-play" aria-hidden="true"></i>
+                  <span>Run</span>
+                </button>
+              </div>
+              <div>
+                <a id="download-link" href="#" download="swiftplayground.swift" class="btn btn-primary btn-sm rounded-0">
+                  <i class="fa fa-download" aria-hidden="true"></i>
+                  <span>Download</span>
+                </a>
+                <a class="btn btn-primary btn-sm rounded-0" href="/logout">Sign out</a>
+              </div>
             </nav>
           </div>
         </div>
@@ -84,7 +87,7 @@
           </div>
         </div>
         <div class="row my-3">
-            {% include "./footer-container.html" %}
+          {% include "./footer-container.html" %}
         </div>
       </div>
     </section>
