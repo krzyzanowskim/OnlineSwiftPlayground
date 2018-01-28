@@ -47,11 +47,6 @@ $("#run-button").click(function(e) {
   });
 });
 
-$("#logout-button").click(function(e) {
-  e.preventDefault();
-  window.location.href = "/logout";
-});
-
 $("#download-link").click(function(e) {
   let text = editorComponent.getValue();
   $(this).href =
