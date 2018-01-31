@@ -5,6 +5,7 @@ import Clipboard from "clipboard";
 
 import Protocol from "./protocol.js";
 import Editor from "./editor.js";
+import Output from "./output.js";
 import Playground from "./playground.js";
 
 // Render components
@@ -20,7 +21,7 @@ var editorComponent = ReactDOM.render(
 );
 
 var terminalComponent = ReactDOM.render(
-  <Editor
+  <Output
     readOnly={true}
     code={document.getElementById("terminal").textContent}
   />,
