@@ -7,7 +7,7 @@ Online Swift Playground. Implemented in Swift.
 
 TBA. Checkout http://SwiftPlayground.run
 
-![SwiftPlayground.run](https://swiftplayground.run/assets/screenshot.png)
+![SwiftPlayground.run](https://user-images.githubusercontent.com/758033/35674872-55a53386-0746-11e8-8bc1-ae5aee13fcfd.gif)
 
 ## Installation
 
