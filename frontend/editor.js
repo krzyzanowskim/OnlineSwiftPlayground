@@ -24,10 +24,6 @@ class Editor extends React.Component {
 
     $.getJSON("/static/assets/json/snippets.json", function(snippets) {
       monaco.languages.registerCompletionItemProvider("swift", {
-        // triggerCharacters: ["."],
-        // resolveCompletionItem: function(item, token) {
-        //   return { label: "guard" };
-        // },
         provideCompletionItems: function(model, position) {
           var textUntilPosition = model.getValueInRange({
             startLineNumber: 1,
