@@ -6,7 +6,6 @@ import KituraStencil
 import Credentials
 import CredentialsGitHub
 import Cryptor
-import SwiftyJSON
 import Foundation
 
 func setupCredentials(router: Router) throws -> Bool {

@@ -33,7 +33,7 @@ public class App {
 
     func postInit() throws {
         router.get("/") { request, response, next in
-            if let session = request.session, session["playground"] == true {
+            if let session = request.session, session["playground"] as? Bool == true {
                 try response.render("playground.html", context: App.defaultContext).end()
             } else {
                 try response.render("index.html", context: App.defaultContext).end()

@@ -7,10 +7,10 @@ let dependencies:[Package.Dependency] = [
     .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", from: "1.7.1"),
     .package(url: "https://github.com/IBM-Swift/CloudEnvironment.git", from: "6.0.0"),
     .package(url: "https://github.com/IBM-Swift/Configuration.git", from: "3.0.0"),
-    .package(url: "https://github.com/apple/swift-package-manager.git", from: "0.1.0"),
     .package(url: "https://github.com/IBM-Swift/Kitura-StencilTemplateEngine.git", from: "1.8.4"),
+    .package(url: "https://github.com/apple/swift-package-manager.git", from: "0.1.0"),
     .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "0.8.0"),
-    .package(url: "https://github.com/krzyzanowskim/Kitura-CredentialsGitHub.git", .branch("master")) // Fix dependency chain
+    .package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGitHub.git", from: "2.1.0")
 ]
 
 var targets:[Target] = [
