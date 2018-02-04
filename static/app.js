@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 18);
+/******/ 	return __webpack_require__(__webpack_require__.s = 19);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -303,9 +303,9 @@ module.exports = emptyFunction;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(19);
-} else {
   module.exports = __webpack_require__(20);
+} else {
+  module.exports = __webpack_require__(21);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -562,92 +562,6 @@ module.exports = warning;
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(4);
-  var warning = __webpack_require__(6);
-  var ReactPropTypesSecret = __webpack_require__(8);
-  var loggedTypeFailures = {};
-}
-
-/**
- * Assert that the values match with the type specs.
- * Error messages are memorized and will only be shown once.
- *
- * @param {object} typeSpecs Map of name to a ReactPropType
- * @param {object} values Runtime values that need to be type-checked
- * @param {string} location e.g. "prop", "context", "child context"
- * @param {string} componentName Name of the component for error messages.
- * @param {?Function} getStack Returns the component stack.
- * @private
- */
-function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-  if (process.env.NODE_ENV !== 'production') {
-    for (var typeSpecName in typeSpecs) {
-      if (typeSpecs.hasOwnProperty(typeSpecName)) {
-        var error;
-        // Prop type validation may throw. In case they do, we don't want to
-        // fail the render phase where it didn't fail before. So we log it.
-        // After these have been cleaned up, we'll let them throw.
-        try {
-          // This is intentionally an invariant that gets caught. It's the same
-          // behavior as without this statement except with a better message.
-          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
-          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
-        } catch (ex) {
-          error = ex;
-        }
-        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
-        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-          // Only monitor this failure once because there tends to be a lot of the
-          // same error.
-          loggedTypeFailures[error.message] = true;
-
-          var stack = getStack ? getStack() : '';
-
-          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
-        }
-      }
-    }
-  }
-}
-
-module.exports = checkPropTypes;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-
-module.exports = ReactPropTypesSecret;
-
-
-/***/ }),
-/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11018,6 +10932,92 @@ return jQuery;
 
 
 /***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+if (process.env.NODE_ENV !== 'production') {
+  var invariant = __webpack_require__(4);
+  var warning = __webpack_require__(6);
+  var ReactPropTypesSecret = __webpack_require__(9);
+  var loggedTypeFailures = {};
+}
+
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
+function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+  if (process.env.NODE_ENV !== 'production') {
+    for (var typeSpecName in typeSpecs) {
+      if (typeSpecs.hasOwnProperty(typeSpecName)) {
+        var error;
+        // Prop type validation may throw. In case they do, we don't want to
+        // fail the render phase where it didn't fail before. So we log it.
+        // After these have been cleaned up, we'll let them throw.
+        try {
+          // This is intentionally an invariant that gets caught. It's the same
+          // behavior as without this statement except with a better message.
+          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
+          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+        } catch (ex) {
+          error = ex;
+        }
+        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+          // Only monitor this failure once because there tends to be a lot of the
+          // same error.
+          loggedTypeFailures[error.message] = true;
+
+          var stack = getStack ? getStack() : '';
+
+          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+        }
+      }
+    }
+  }
+}
+
+module.exports = checkPropTypes;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+module.exports = ReactPropTypesSecret;
+
+
+/***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11056,9 +11056,9 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(21);
+  module.exports = __webpack_require__(22);
 } else {
-  module.exports = __webpack_require__(24);
+  module.exports = __webpack_require__(25);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -11312,7 +11312,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(22);
+var isTextNode = __webpack_require__(23);
 
 /*eslint-disable no-bitwise */
 
@@ -11373,6 +11373,31 @@ module.exports = focusNode;
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MonacoDiffEditor = exports.default = undefined;
+
+var _editor = __webpack_require__(43);
+
+var _editor2 = _interopRequireDefault(_editor);
+
+var _diff = __webpack_require__(46);
+
+var _diff2 = _interopRequireDefault(_diff);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _editor2.default;
+exports.MonacoDiffEditor = _diff2.default;
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -11405,7 +11430,7 @@ if (process.env.NODE_ENV !== 'production') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11414,12 +11439,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_clipboard__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_clipboard__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_clipboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_clipboard__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__protocol_js__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__editor_js__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__output_js__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__playground_js__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__protocol_js__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__editor_js__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__output_js__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__playground_js__ = __webpack_require__(48);
 // Copyright Marcin Krzyzanowski marcin@krzyzanowskim.com
 
 
@@ -11465,10 +11490,10 @@ $("#download-link").click(function (e) {
   let text = editorComponent.getValue();
   $(this).href = "data:application/octet-stream;charset=UTF-8," + encodeURIComponent(text);
 });
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(9)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(7)))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11496,7 +11521,7 @@ isValidElement:K,version:"16.2.0",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_F
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11522,7 +11547,7 @@ var emptyObject = __webpack_require__(5);
 var invariant = __webpack_require__(4);
 var warning = __webpack_require__(6);
 var emptyFunction = __webpack_require__(1);
-var checkPropTypes = __webpack_require__(7);
+var checkPropTypes = __webpack_require__(8);
 
 // TODO: this is special because it gets imported during build.
 
@@ -12861,7 +12886,7 @@ module.exports = react;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13097,7 +13122,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13112,7 +13137,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
  * @typechecks
  */
 
-var isNode = __webpack_require__(23);
+var isNode = __webpack_require__(24);
 
 /**
  * @param {*} object The object to check.
@@ -13125,7 +13150,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13153,7 +13178,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13186,9 +13211,9 @@ var shallowEqual = __webpack_require__(14);
 var containsNode = __webpack_require__(15);
 var focusNode = __webpack_require__(16);
 var emptyObject = __webpack_require__(5);
-var checkPropTypes = __webpack_require__(7);
-var hyphenateStyleName = __webpack_require__(25);
-var camelizeStyleName = __webpack_require__(27);
+var checkPropTypes = __webpack_require__(8);
+var hyphenateStyleName = __webpack_require__(26);
+var camelizeStyleName = __webpack_require__(28);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -28555,7 +28580,7 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28570,7 +28595,7 @@ module.exports = reactDom;
 
 
 
-var hyphenate = __webpack_require__(26);
+var hyphenate = __webpack_require__(27);
 
 var msPattern = /^ms-/;
 
@@ -28597,7 +28622,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28633,7 +28658,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28648,7 +28673,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(28);
+var camelize = __webpack_require__(29);
 
 var msPattern = /^-ms-/;
 
@@ -28676,7 +28701,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28711,12 +28736,12 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
     if (true) {
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(30), __webpack_require__(32), __webpack_require__(33)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(31), __webpack_require__(33), __webpack_require__(34)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -28926,12 +28951,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
     if (true) {
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(31)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(32)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -29163,7 +29188,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports) {
 
 function select(element) {
@@ -29212,7 +29237,7 @@ module.exports = select;
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 function E () {
@@ -29284,11 +29309,11 @@ module.exports = E;
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var is = __webpack_require__(34);
-var delegate = __webpack_require__(35);
+var is = __webpack_require__(35);
+var delegate = __webpack_require__(36);
 
 /**
  * Validates all params and calls the right
@@ -29385,7 +29410,7 @@ module.exports = listen;
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 /**
@@ -29440,10 +29465,10 @@ exports.fn = function(value) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var closest = __webpack_require__(36);
+var closest = __webpack_require__(37);
 
 /**
  * Delegates event to a selector.
@@ -29524,7 +29549,7 @@ module.exports = delegate;
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports) {
 
 var DOCUMENT_NODE_TYPE = 9;
@@ -29563,11 +29588,11 @@ module.exports = closest;
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_websocket__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_websocket__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_websocket___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_websocket__);
 
 
@@ -29621,12 +29646,12 @@ class Protocol {
 /* harmony default export */ __webpack_exports__["a"] = (Protocol);
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _global = (function() { return this; })();
 var NativeWebSocket = _global.WebSocket || _global.MozWebSocket;
-var websocket_version = __webpack_require__(39);
+var websocket_version = __webpack_require__(40);
 
 
 /**
@@ -29669,20 +29694,20 @@ module.exports = {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(40).version;
+module.exports = __webpack_require__(41).version;
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports) {
 
 module.exports = {"_args":[["websocket@1.0.25","/Users/marcinkrzyzanowski/Devel/onlineswiftplayground/onlineswiftplayground"]],"_from":"websocket@1.0.25","_id":"websocket@1.0.25","_inBundle":false,"_integrity":"sha512-M58njvi6ZxVb5k7kpnHh2BvNKuBWiwIYvsToErBzWhvBZYwlEiLcyLrG41T1jRcrY9ettqPYEqduLI7ul54CVQ==","_location":"/websocket","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"websocket@1.0.25","name":"websocket","escapedName":"websocket","rawSpec":"1.0.25","saveSpec":null,"fetchSpec":"1.0.25"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/websocket/-/websocket-1.0.25.tgz","_spec":"1.0.25","_where":"/Users/marcinkrzyzanowski/Devel/onlineswiftplayground/onlineswiftplayground","author":{"name":"Brian McKelvey","email":"brian@worlize.com","url":"https://www.worlize.com/"},"browser":"lib/browser.js","bugs":{"url":"https://github.com/theturtle32/WebSocket-Node/issues"},"config":{"verbose":false},"contributors":[{"name":"Iñaki Baz Castillo","email":"ibc@aliax.net","url":"http://dev.sipdoc.net"}],"dependencies":{"debug":"^2.2.0","nan":"^2.3.3","typedarray-to-buffer":"^3.1.2","yaeti":"^0.0.6"},"description":"Websocket Client & Server Library implementing the WebSocket protocol as specified in RFC 6455.","devDependencies":{"buffer-equal":"^1.0.0","faucet":"^0.0.1","gulp":"git+https://github.com/gulpjs/gulp.git#4.0","gulp-jshint":"^2.0.4","jshint":"^2.0.0","jshint-stylish":"^2.2.1","tape":"^4.0.1"},"directories":{"lib":"./lib"},"engines":{"node":">=0.10.0"},"homepage":"https://github.com/theturtle32/WebSocket-Node","keywords":["websocket","websockets","socket","networking","comet","push","RFC-6455","realtime","server","client"],"license":"Apache-2.0","main":"index","name":"websocket","repository":{"type":"git","url":"git+https://github.com/theturtle32/WebSocket-Node.git"},"scripts":{"gulp":"gulp","install":"(node-gyp rebuild 2> builderror.log) || (exit 0)","test":"faucet test/unit"},"version":"1.0.25"}
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -29690,8 +29715,11 @@ module.exports = {"_args":[["websocket@1.0.25","/Users/marcinkrzyzanowski/Devel/
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_monaco_editor__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_monaco_editor__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_monaco_editor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_monaco_editor__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
+
 
 
 
@@ -29714,153 +29742,23 @@ class Editor extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   editorDidMount(editor, monaco) {
     this.editor = editor;
-    monaco.languages.registerCompletionItemProvider("swift", {
-      // triggerCharacters: ["."],
-      // resolveCompletionItem: function(item, token) {
-      //   return { label: "guard" };
-      // },
-      provideCompletionItems: function (model, position) {
-        var textUntilPosition = model.getValueInRange({
-          startLineNumber: 1,
-          startColumn: 1,
-          endLineNumber: position.lineNumber,
-          endColumn: position.column
-        });
-        return [{
-          label: "for-in",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift For Statement",
-          insertText: {
-            value: ["for ${1:item} in ${2:items} {", "\t$0", "}"].join("\n")
-          }
-        }, {
-          label: "switch",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Switch Statement",
-          insertText: {
-            value: ["switch ${1:value} {", "case ${2:pattern}:", "\t${3:// code}", "default:", '\tfatalError("Unsupported")', "}"].join("\n")
-          }
-        }, {
-          label: "if",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift If Statement",
-          insertText: {
-            value: ["if ${1:condition} {", "\t${2:// code}", "}"].join("\n")
-          }
-        }, {
-          label: "guard",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Guard Statement",
-          insertText: {
-            value: ["guard ${1:condition} else {", "\treturn ${2:value}", "}"].join("\n")
-          }
-        }, {
-          label: "guard-let",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Guard Statement",
-          insertText: {
-            value: ["guard let ${1:constant} = ${2:expression} else {", "\treturn ${3:value}", "}"].join("\n")
-          }
-        }, {
-          label: "closure",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Closure Expression",
-          insertText: {
-            value: ["{ (${1:parameters}) -> ${2:return_type} in", "\t${3:statements}", "}"].join("\n")
-          }
-        }, {
-          label: "init",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Initializer Declaration",
-          insertText: {
-            value: ["init(${1:parameters}) {", "\t${2:// statements}", "}"].join("\n")
-          }
-        }, {
-          label: "deinit",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Deinitializer Declaration",
-          insertText: {
-            value: ["deinit(${1:parameters}) {", "\t${2:// statements}", "}"].join("\n")
-          }
-        }, {
-          label: "convenience",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Convenience Initializer Declaration",
-          insertText: {
-            value: ["convenience init(${1:parameters}) {", "\t// ${2:statements}", "}"].join("\n")
-          }
-        }, {
-          label: "required",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Required Initializer Declaration",
-          insertText: {
-            value: ["required init(${1:parameters}) {", "\t// ${2:statements}", "}"].join("\n")
-          }
-        }, {
-          label: "defer",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Defer Statement",
-          insertText: {
-            value: ["defer {", "\t${3:deferred statements}", "}"].join("\n")
-          }
-        }, {
-          label: "do",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Do-Catch Statement",
-          insertText: {
-            value: ["do {", "\ttry ${1:throwing_expression}", "} catch ${2:pattern} {", "\t${3:// statements}", "}"].join("\n")
-          }
-        }, {
-          label: "while",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift While Statement",
-          insertText: {
-            value: ["while ${1:condition} {", "\t${3:// statements}", "}"].join("\n")
-          }
-        }, {
-          label: "func",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Function Statement",
-          insertText: {
-            value: ["func ${1:name}(${2:parameters}) -> ${3:T} {", "\t${4:// body}", "}"].join("\n")
-          }
-        }, {
-          label: "lazy",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Lazy Computed Property Declaration",
-          insertText: {
-            value: ["lazy var ${1:name}: ${2:T} = {", "\t// ${3:statements}", "\treturn ${4:value}", "}()"].join("\n")
-          }
-        }, {
-          label: "let",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Let Declaration",
-          insertText: {
-            value: ["let ${1:name} = ${2:value}"].join("\n")
-          }
-        }, {
-          label: "var",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Var Declaration",
-          insertText: {
-            value: ["var ${1:name} = ${2:value}"].join("\n")
-          }
-        }, {
-          label: "var-computed",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Computed Variable Get and Set Declaration",
-          insertText: {
-            value: ["var ${1:name}: ${2:T} {", "\tget {", "\t\t${3:// statement}", "\t}", "\tset {", "\t\t${4:// statement}", "\t}", "}"].join("\n")
-          }
-        }, {
-          label: "typealias",
-          kind: monaco.languages.CompletionItemKind.Snippet,
-          documentation: "Swift Let Declaration",
-          insertText: {
-            value: ["typealias ${1:type name} = ${2:expression}"].join("\n")
-          }
-        }];
-      }
+
+    __WEBPACK_IMPORTED_MODULE_3_jquery___default.a.getJSON("/static/assets/json/snippets.json", function (snippets) {
+      monaco.languages.registerCompletionItemProvider("swift", {
+        // triggerCharacters: ["."],
+        // resolveCompletionItem: function(item, token) {
+        //   return { label: "guard" };
+        // },
+        provideCompletionItems: function (model, position) {
+          var textUntilPosition = model.getValueInRange({
+            startLineNumber: 1,
+            startColumn: 1,
+            endLineNumber: position.lineNumber,
+            endColumn: position.column
+          });
+          return snippets;
+        }
+      });
     });
 
     window.addEventListener("resize", this.updateDimensions.bind(this));
@@ -29945,31 +29843,6 @@ class Editor extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 /* harmony default export */ __webpack_exports__["a"] = (Editor);
 
 /***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.MonacoDiffEditor = exports.default = undefined;
-
-var _editor = __webpack_require__(43);
-
-var _editor2 = _interopRequireDefault(_editor);
-
-var _diff = __webpack_require__(46);
-
-var _diff2 = _interopRequireDefault(_diff);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _editor2.default;
-exports.MonacoDiffEditor = _diff2.default;
-
-/***/ }),
 /* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29988,7 +29861,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(17);
+var _propTypes = __webpack_require__(18);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -30271,8 +30144,8 @@ var invariant = __webpack_require__(4);
 var warning = __webpack_require__(6);
 var assign = __webpack_require__(3);
 
-var ReactPropTypesSecret = __webpack_require__(8);
-var checkPropTypes = __webpack_require__(7);
+var ReactPropTypesSecret = __webpack_require__(9);
+var checkPropTypes = __webpack_require__(8);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -30818,7 +30691,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 var emptyFunction = __webpack_require__(1);
 var invariant = __webpack_require__(4);
-var ReactPropTypesSecret = __webpack_require__(8);
+var ReactPropTypesSecret = __webpack_require__(9);
 
 module.exports = function() {
   function shim(props, propName, componentName, location, propFullName, secret) {
@@ -30884,7 +30757,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(17);
+var _propTypes = __webpack_require__(18);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -31132,69 +31005,11 @@ exports.default = MonacoDiffEditor;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-// Copyright Marcin Krzyzanowski marcin@krzyzanowskim.com
-
-
-class Playground {
-  constructor(protocol, editor) {
-    this.protocol = protocol;
-    this.editor = editor;
-  }
-
-  static restoreCode() {
-    let storage = window.sessionStorage;
-    let loadedCode = storage.getItem("editor-text");
-    if (loadedCode !== null) {
-      return loadedCode;
-    }
-    return null;
-  }
-
-  static storeCode(code) {
-    let storage = window.sessionStorage;
-    storage.setItem("editor-text", code);
-  }
-
-  run(code, onFinish) {
-    var msg = {
-      run: {
-        value: code
-      }
-    };
-
-    Playground.storeCode(code);
-
-    this.protocol.ws.send(JSON.stringify(msg));
-    this.protocol.processMessage = function (value, annotations) {
-      onFinish(value, annotations);
-      // editor.session.setAnnotations(
-      //   annotations.map(function(a) {
-      //     return {
-      //       row: a.location.row,
-      //       column: a.location.column,
-      //       text: a.description,
-      //       type: "error"
-      //     };
-      //   })
-      // );
-    };
-  }
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (Playground);
-
-/***/ }),
-/* 48 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_monaco_editor__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_monaco_editor__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_monaco_editor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_monaco_editor__);
 
 
@@ -31287,6 +31102,64 @@ class Output extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (Output);
+
+/***/ }),
+/* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+// Copyright Marcin Krzyzanowski marcin@krzyzanowskim.com
+
+
+class Playground {
+  constructor(protocol, editor) {
+    this.protocol = protocol;
+    this.editor = editor;
+  }
+
+  static restoreCode() {
+    let storage = window.sessionStorage;
+    let loadedCode = storage.getItem("editor-text");
+    if (loadedCode !== null) {
+      return loadedCode;
+    }
+    return null;
+  }
+
+  static storeCode(code) {
+    let storage = window.sessionStorage;
+    storage.setItem("editor-text", code);
+  }
+
+  run(code, onFinish) {
+    var msg = {
+      run: {
+        value: code
+      }
+    };
+
+    Playground.storeCode(code);
+
+    this.protocol.ws.send(JSON.stringify(msg));
+    this.protocol.processMessage = function (value, annotations) {
+      onFinish(value, annotations);
+      // editor.session.setAnnotations(
+      //   annotations.map(function(a) {
+      //     return {
+      //       row: a.location.row,
+      //       column: a.location.column,
+      //       text: a.description,
+      //       type: "error"
+      //     };
+      //   })
+      // );
+    };
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Playground);
 
 /***/ })
 /******/ ]);

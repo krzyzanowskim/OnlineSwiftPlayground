@@ -1,0 +1,154 @@
+[
+    {
+        "label": "for-in",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift For Statement",
+        "insertText": {
+            "value": "for ${1:item} in ${2:items} {\n\t$0\n}\n"
+        }
+    },
+    {
+        "label": "switch",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Switch Statement",
+        "insertText": {
+            "value": "switch ${1:value} {\ncase ${2:pattern}:\n\t$0\ndefault:\n\tfatalError(\"Unsupported\")\n}\n"
+        }
+    },
+    {
+        "label": "if",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift If Statement",
+        "insertText": {
+            "value": "if ${1:condition} {\n\t$0\n}"
+        }
+    },
+    {
+        "label": "guard",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Guard Statement",
+        "insertText": {
+            "value": "guard ${1:condition} else {\n\treturn $0\n}\n"
+        }
+    },
+    {
+        "label": "guard-let",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Guard Statement",
+        "insertText": {
+            "value": "guard let ${1:constant} = ${2:expression} else {\n\treturn $0\n}\n"
+        }
+    },
+    {
+        "label": "closure",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Closure Expression",
+        "insertText": {
+            "value": "{ (${1:parameters}) -> ${2:return_type} in\n\t$0\n}\n"
+        }
+    },
+    {
+        "label": "init",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Initializer Declaration",
+        "insertText": {
+            "value": "init(${1:parameters}) {\n\t$0\n}\n"
+        }
+    },
+    {
+        "label": "deinit",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Deinitializer Declaration",
+        "insertText": {
+            "value": "deinit(${1:parameters}) {\n\t$0\n}\n"
+        }
+    },
+    {
+        "label": "convenience",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Convenience Initializer Declaration",
+        "insertText": {
+            "value": "convenience init(${1:parameters}) {\n\t$0\n}\n"
+        }
+    },
+    {
+        "label": "required",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Required Initializer Declaration",
+        "insertText": {
+            "value": "required init(${1:parameters}) {\n\t$0\n}\n"
+        }
+    },
+    {
+        "label": "defer",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Defer Statement",
+        "insertText": {
+            "value": "defer {\n\t$0\n}\n"
+        }
+    },
+    {
+        "label": "do",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Do-Catch Statement",
+        "insertText": {
+            "value": "do {\n\ttry ${1:throwing_expression}\n} catch ${2:pattern} {\n\t$0\n}"
+        }
+    },
+    {
+        "label": "while",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift While Statement",
+        "insertText": {
+            "value": "while ${1:condition} {\n\t$0\n}"
+        }
+    },
+    {
+        "label": "func",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Function Statement",
+        "insertText": {
+            "value": "func ${1:name}(${2:parameters}) -> ${3:T} {\n\t$0\n}"
+        }
+    },
+    {
+        "label": "lazy",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Lazy Computed Property Declaration",
+        "insertText": {
+            "value": "lazy var ${1:name}: ${2:T} = {\n\t// ${3:statements}\n\treturn ${4:value}\n}()"
+        }
+    },
+    {
+        "label": "let",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Let Declaration",
+        "insertText": {
+            "value": "let ${1:name} = ${2:value}"
+        }
+    },
+    {
+        "label": "var",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Var Declaration",
+        "insertText": {
+            "value": "var ${1:name} = ${2:value}"
+        }
+    },
+    {
+        "label": "var-computed",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Computed Variable Get and Set Declaration",
+        "insertText": {
+            "value": "var ${1:name}: ${2:T} {\n\tget {\n\t\t${3:// statement}\n\t}\n\tset {\n\t\t${4:// statement}\n\t}\n}"
+        }
+    },
+    {
+        "label": "typealias",
+        "kind": "monaco.languages.CompletionItemKind.Snippet",
+        "documentation": "Swift Let Declaration",
+        "insertText": {
+            "value": "typealias ${1:type name} = $0"
+        }
+    }
+]
