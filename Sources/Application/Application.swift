@@ -32,6 +32,8 @@ public class App {
     }
 
     func postInit() throws {
+        router.all("/*", middleware: BodyParser())
+
         router.get("/") { request, response, next in
             if let session = request.session, session["playground"] as? Bool == true {
                 try response.render("playground.html", context: App.defaultContext).end()
@@ -57,6 +59,17 @@ public class App {
                 }
             }
             try response.render("logout.html", context: App.defaultContext).end()
+        }
+
+        router.post("/download") { request, response, next in
+            guard let code = request.body?.asURLEncoded?["code"], code.count > 0 else {
+                next()
+                return
+            }
+
+            let playgroundPath = try generataPlayground(code: code)
+            try response.send(download: playgroundPath.asString)
+            try response.end()
         }
 
         // WebSockets

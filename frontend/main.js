@@ -1,6 +1,8 @@
 // Copyright Marcin Krzyzanowski marcin@krzyzanowskim.com
 import React from "react";
 import ReactDOM from "react-dom";
+import $ from "jquery";
+
 import Clipboard from "clipboard";
 
 import Protocol from "./protocol.js";
@@ -48,8 +50,33 @@ $("#run-button").click(function(e) {
   });
 });
 
-$("#download-link").click(function(e) {
+$("#download-file-button").click(function(e) {
   let text = editorComponent.getValue();
-  $(this).href =
-    "data:application/octet-stream;charset=UTF-8," + encodeURIComponent(text);
+  $(this).attr(
+    "href",
+    "data:application/octet-stream;charset=UTF-8," + encodeURIComponent(text)
+  );
+});
+
+$("#download-playground-button").click(function(e) {
+  e.preventDefault();
+
+  let text = editorComponent.getValue();
+
+  // Build a form
+  var form = $("<form></form>")
+    .attr("action", "/download")
+    .attr("method", "post");
+  // Add the one key/value
+  form.append(
+    $("<input></input>")
+      .attr("type", "hidden")
+      .attr("name", "code")
+      .attr("value", text)
+  );
+  //send request
+  form
+    .appendTo("body")
+    .submit()
+    .remove();
 });

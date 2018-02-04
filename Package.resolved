@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "CZlib",
+        "repositoryURL": "https://github.com/IBM-Swift/CZlib.git",
+        "state": {
+          "branch": null,
+          "revision": "a781e6ef055fb8f0d608fe30a28e6a0f62ae498b",
+          "version": "0.1.2"
+        }
+      },
+      {
         "package": "CloudEnvironment",
         "repositoryURL": "https://github.com/IBM-Swift/CloudEnvironment.git",
         "state": {
@@ -71,6 +80,15 @@
           "branch": null,
           "revision": "319016dbf4b3ce04589265c23c9cac0016fe8096",
           "version": "0.0.1"
+        }
+      },
+      {
+        "package": "Files",
+        "repositoryURL": "https://github.com/JohnSundell/Files.git",
+        "state": {
+          "branch": null,
+          "revision": "6171f9e9d8619678da22355560f3dbed6368058d",
+          "version": "2.0.1"
         }
       },
       {
@@ -191,6 +209,15 @@
         }
       },
       {
+        "package": "ShellOut",
+        "repositoryURL": "https://github.com/JohnSundell/ShellOut.git",
+        "state": {
+          "branch": null,
+          "revision": "f1c253a34a40df4bfd268b09fdb101b059f6d52d",
+          "version": "2.1.0"
+        }
+      },
+      {
         "package": "Socket",
         "repositoryURL": "https://github.com/IBM-Swift/BlueSocket.git",
         "state": {
@@ -224,6 +251,24 @@
           "branch": null,
           "revision": "90abb3c4c9415afee34291e66e655c58a1902784",
           "version": "0.1.0"
+        }
+      },
+      {
+        "package": "Xgen",
+        "repositoryURL": "https://github.com/johnsundell/xgen",
+        "state": {
+          "branch": null,
+          "revision": "bc7ec3bf76e63c317d1523c865d65023f450eb0b",
+          "version": "2.0.1"
+        }
+      },
+      {
+        "package": "ZIPFoundation",
+        "repositoryURL": "https://github.com/krzyzanowskim/ZIPFoundation.git",
+        "state": {
+          "branch": "CZlib",
+          "revision": "fc1df352b1e205e108326ea6330a70341db02775",
+          "version": null
         }
       }
     ]

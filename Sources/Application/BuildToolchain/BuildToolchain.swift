@@ -44,7 +44,7 @@ class BuildToolchain {
         cmd += ["-L",projectDirectoryPath.appending(components: ".build","release").asString]
         cmd += ["-lOnlinePlayground"]
         #if os(macOS)
-            cmd += ["-target", "x86_64-apple-macosx10.10"]
+            cmd += ["-target", "x86_64-apple-macosx10.11"]
             cmd += ["-F",frameworksDirectory.asString]
             cmd += ["-Xlinker","-rpath","-Xlinker",frameworksDirectory.asString]
             cmd += ["-sanitize=address"]

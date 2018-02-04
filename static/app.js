@@ -11435,17 +11435,21 @@ if (process.env.NODE_ENV !== 'production') {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_clipboard__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_clipboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_clipboard__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__protocol_js__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__editor_js__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__output_js__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__playground_js__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_clipboard__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_clipboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_clipboard__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__protocol_js__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__editor_js__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__output_js__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__playground_js__ = __webpack_require__(48);
 // Copyright Marcin Krzyzanowski marcin@krzyzanowskim.com
+
+
 
 
 
@@ -11457,26 +11461,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // Render components
 
-let startValue = __WEBPACK_IMPORTED_MODULE_6__playground_js__["a" /* default */].restoreCode() !== null ? __WEBPACK_IMPORTED_MODULE_6__playground_js__["a" /* default */].restoreCode() : document.getElementById("editor").innerText;
+let startValue = __WEBPACK_IMPORTED_MODULE_7__playground_js__["a" /* default */].restoreCode() !== null ? __WEBPACK_IMPORTED_MODULE_7__playground_js__["a" /* default */].restoreCode() : document.getElementById("editor").innerText;
 
-var editorComponent = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__editor_js__["a" /* default */], { code: startValue }), document.getElementById("editor"));
+var editorComponent = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__editor_js__["a" /* default */], { code: startValue }), document.getElementById("editor"));
 
-var terminalComponent = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__output_js__["a" /* default */], {
+var terminalComponent = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__output_js__["a" /* default */], {
   readOnly: true,
   code: document.getElementById("terminal").textContent
 }), document.getElementById("terminal"));
 
 // Main
 
-new __WEBPACK_IMPORTED_MODULE_2_clipboard___default.a(".btn");
+new __WEBPACK_IMPORTED_MODULE_3_clipboard___default.a(".btn");
 
-let protocol = __WEBPACK_IMPORTED_MODULE_3__protocol_js__["a" /* default */].start();
-let playground = new __WEBPACK_IMPORTED_MODULE_6__playground_js__["a" /* default */](protocol, editorComponent.editor);
+let protocol = __WEBPACK_IMPORTED_MODULE_4__protocol_js__["a" /* default */].start();
+let playground = new __WEBPACK_IMPORTED_MODULE_7__playground_js__["a" /* default */](protocol, editorComponent.editor);
 
 // Install events
-$("#run-button").click(function (e) {
+__WEBPACK_IMPORTED_MODULE_2_jquery___default()("#run-button").click(function (e) {
   e.preventDefault();
-  let sender = $(this);
+  let sender = __WEBPACK_IMPORTED_MODULE_2_jquery___default()(this);
   sender.prop("disabled", true);
 
   playground.run(editorComponent.getValue(), function (value, annotations) {
@@ -11486,11 +11490,23 @@ $("#run-button").click(function (e) {
   });
 });
 
-$("#download-link").click(function (e) {
+__WEBPACK_IMPORTED_MODULE_2_jquery___default()("#download-file-button").click(function (e) {
   let text = editorComponent.getValue();
-  $(this).href = "data:application/octet-stream;charset=UTF-8," + encodeURIComponent(text);
+  __WEBPACK_IMPORTED_MODULE_2_jquery___default()(this).attr("href", "data:application/octet-stream;charset=UTF-8," + encodeURIComponent(text));
 });
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(7)))
+
+__WEBPACK_IMPORTED_MODULE_2_jquery___default()("#download-playground-button").click(function (e) {
+  e.preventDefault();
+
+  let text = editorComponent.getValue();
+
+  // Build a form
+  var form = __WEBPACK_IMPORTED_MODULE_2_jquery___default()("<form></form>").attr("action", "/download").attr("method", "post");
+  // Add the one key/value
+  form.append(__WEBPACK_IMPORTED_MODULE_2_jquery___default()("<input></input>").attr("type", "hidden").attr("name", "code").attr("value", text));
+  //send request
+  form.appendTo("body").submit().remove();
+});
 
 /***/ }),
 /* 20 */
