@@ -32,29 +32,17 @@ public class App {
     }
 
     func postInit() throws {
-        let authEnabled = try setupCredentials(router: router)
-        if !authEnabled {
-            // No-auth flow provides a "fake" url's. Not Sign-in is performed.
-            router.get("/login/github", handler: { (request, response, next) in
-                try response.redirect("/playground")
-                next()
-            })
-            router.get("/playground") { request, response, next in
+        router.get("/") { request, response, next in
+            if let session = request.session, session["playground"] == true {
                 try response.render("playground.html", context: App.defaultContext).end()
-            }
-            router.get("/") { request, response, next in
+            } else {
                 try response.render("index.html", context: App.defaultContext).end()
             }
-        } else {
-            router.get("/") { request, response, next in
-                if let userProfile = request.userProfile {
-                    var context = App.defaultContext
-                    context["userProfile"] = userProfile
-                    try response.render("playground.html", context: context).end()
-                } else {
-                    try response.render("index.html", context: App.defaultContext).end()
-                }
-            }
+        }
+
+        router.all("/letsplay") { request, response, next in
+            request.session?["playground"] = true
+            try response.redirect("/")
         }
 
         router.add(templateEngine: StencilTemplateEngine(), forFileExtensions: ["html"])
@@ -63,6 +51,11 @@ public class App {
         router.all("/static", middleware: StaticFileServer(path: "./static", options: StaticFileServer.Options(serveIndexForDirectory: false)))
 
         router.get("/logout") { request, response, next in
+            request.session?.destroy { (error) in
+                if let error = error {
+                    Log.error(error.localizedDescription)
+                }
+            }
             try response.render("logout.html", context: App.defaultContext).end()
         }
 
