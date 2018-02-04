@@ -25,4 +25,5 @@ RUN if [ $bx_dev_user != "root" ]; then useradd -ms /bin/bash -u $bx_dev_userid 
 COPY . /swiftplayground
 
 # Command to start Swift application
+CMD apt-get update && apt-get install -y libz-dev
 CMD swift build -c release && swift run -c release
