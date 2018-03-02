@@ -39,7 +39,6 @@ class BuildToolchain {
         cmd += ["-gnone"]
         cmd += ["-suppress-warnings"]
         cmd += ["-module-name","SwiftPlayground"]
-        // cmd += ["-O"]
         cmd += ["-I",projectDirectoryPath.appending(components: ".build","release").asString]
         cmd += ["-L",projectDirectoryPath.appending(components: ".build","release").asString]
         cmd += ["-lOnlinePlayground"]
@@ -47,10 +46,16 @@ class BuildToolchain {
             cmd += ["-target", "x86_64-apple-macosx10.11"]
             cmd += ["-F",frameworksDirectory.asString]
             cmd += ["-Xlinker","-rpath","-Xlinker",frameworksDirectory.asString]
-            cmd += ["-sanitize=address"]
         #endif
         #if os(Linux)
             cmd += ["-target", "x86_64-unknown-linux-gnu"]
+        #endif
+
+        // Optimization or not
+        #if os(macOS)
+            cmd += ["-sanitize=address"]
+        #else
+            cmd += ["-O"]
         #endif
         // Enable JSON-based output at some point.
         // cmd += ["-parseable-output"]
