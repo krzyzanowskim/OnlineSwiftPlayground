@@ -1,0 +1,67 @@
+# IBM Cloud deployment
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: onlineswiftplayground-ingress
+spec:
+  rules:
+  - host: swiftplayground.uk-south.containers.mybluemix.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: onlineswiftplayground-service
+          servicePort: 8080
+  - host: online.swiftplayground.run
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: onlineswiftplayground-service
+          servicePort: 8080
+  - host: swiftplayground.run
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: onlineswiftplayground-service
+          servicePort: 8080
+---
+apiVersion: apps/v1beta1
+kind: Service
+apiVersion: v1
+metadata:
+  name: onlineswiftplayground-service
+  labels:
+    app: onlineswiftplayground
+spec:
+  type: ClusterIP
+  selector:
+    app: onlineswiftplayground
+  ports:
+  - protocol: TCP
+    port: 8080
+    name: http
+  - protocol: TCP
+    port: 443
+    name: https
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: onlineswiftplayground-deployment
+spec:
+  selector:
+    matchLabels:
+      app: onlineswiftplayground
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: onlineswiftplayground
+    spec:
+      containers:
+      - name: onlineswiftplayground
+        image: krzyzanowskim/onlineswiftplayground:latest
+        ports:
+        - containerPort: 8080
