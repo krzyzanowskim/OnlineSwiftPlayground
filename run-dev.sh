@@ -10,12 +10,16 @@ function program_is_installed {
 }
 
 if [ $(program_is_installed xcrun) == 1 ]; then
-    xcrun swift build -c debug && xcrun swift run -c debug
+    xcrun swift build -c debug
+    xcrun swift run -c debug &
 else
-    swift build -c debug && swift run -c debug    
+    swift build -c debug
+    swift run -c debug &
 fi
 
 if [ $(program_is_installed npm) == 1 ]; then
     $(npm bin)/webpack -w
 fi
+
+killall -9 PlaygroundServer
 
