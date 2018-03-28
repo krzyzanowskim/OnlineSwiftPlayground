@@ -63,5 +63,6 @@ spec:
       containers:
       - name: onlineswiftplayground
         image: krzyzanowskim/onlineswiftplayground:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
