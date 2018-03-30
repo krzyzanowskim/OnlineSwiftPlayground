@@ -26,4 +26,4 @@ COPY . /swiftplayground
 
 # Command to start Swift application
 CMD apt-get update && apt-get install -y libz-dev
-CMD rm -rf .build && swift build -c release && swift run -c release
+CMD rm -rf .build && swift package reset && swift build -c release && swift run -c release
