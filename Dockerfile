@@ -1,4 +1,4 @@
-FROM ibmcom/swift-ubuntu:latest
+FROM ibmcom/swift-ubuntu:4.0.3
 LABEL maintainer="marcin@krzyzanowskim.com"
 LABEL Description="SwiftPlayground.run docker image"
 WORKDIR /swiftplayground
