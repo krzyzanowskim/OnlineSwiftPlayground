@@ -2,7 +2,7 @@
 import PackageDescription
 
 let dependencies:[Package.Dependency] = [
-    .package(url: "https://github.com/IBM-Swift/Kitura.git", from: "2.1.0"),
+    .package(url: "https://github.com/IBM-Swift/Kitura.git", from: "2.2.0"),
     .package(url: "https://github.com/IBM-Swift/Kitura-WebSocket.git", from: "1.0.0"),
     .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", from: "1.7.1"),
     .package(url: "https://github.com/IBM-Swift/CloudEnvironment.git", from: "6.0.0"),
