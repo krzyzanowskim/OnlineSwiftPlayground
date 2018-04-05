@@ -39,8 +39,13 @@ class BuildToolchain {
         cmd += ["-gnone"]
         cmd += ["-suppress-warnings"]
         cmd += ["-module-name","SwiftPlayground"]
-        cmd += ["-I",projectDirectoryPath.appending(components: ".build","release").asString]
+        #if DEBUG
+        cmd += ["-I",projectDirectoryPath.appending(components: ".build", "debug").asString]
+        cmd += ["-L",projectDirectoryPath.appending(components: ".build","debug").asString]
+        #else
+        cmd += ["-I",projectDirectoryPath.appending(components: ".build", "release").asString]
         cmd += ["-L",projectDirectoryPath.appending(components: ".build","release").asString]
+        #endif
         cmd += ["-lOnlinePlayground"]
         #if os(macOS)
             cmd += ["-target", "x86_64-apple-macosx10.11"]

@@ -10,11 +10,11 @@ function program_is_installed {
 }
 
 if [ $(program_is_installed xcrun) == 1 ]; then
-    xcrun swift build -c debug
-    xcrun swift run -c debug &
+    xcrun swift build -c debug -Xswiftc -DDEBUG
+    xcrun swift run -c debug -Xswiftc -DDEBUG &
 else
-    swift build -c debug
-    swift run -c debug &
+    swift build -c debug -Xswiftc -DDEBUG
+    swift run -c debug -Xswiftc -DDEBUG &
 fi
 
 if [ $(program_is_installed npm) == 1 ]; then
