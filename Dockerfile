@@ -31,8 +31,4 @@ RUN apt-get -qq -y install libz-dev curl
 RUN ./bootstrap.sh
 
 # Command to start Swift application
-RUN Toolchains/swift-4.0.3-RELEASE.xctoolchain/usr/bin/swift package reset
-RUN Toolchains/swift-4.0.3-RELEASE.xctoolchain/usr/bin/swift package clean
-RUN Toolchains/swift-4.1-RELEASE.xctoolchain/usr/bin/swift build --target OnlinePlayground -c release
-
 CMD Toolchains/swift-4.0.3-RELEASE.xctoolchain/usr/bin/swift run -c release
