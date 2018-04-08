@@ -75,11 +75,11 @@
       },
       {
         "package": "Files",
-        "repositoryURL": "https://github.com/JohnSundell/Files.git",
+        "repositoryURL": "https://github.com/krzyzanowskim/Files.git",
         "state": {
-          "branch": null,
-          "revision": "435965437ff7f149b9682aeb6553b5aa14b00402",
-          "version": "2.2.0"
+          "branch": "master",
+          "revision": "f1b56a49bf6fbd6432eddbc7431b4a78ba31fa27",
+          "version": null
         }
       },
       {
@@ -203,9 +203,9 @@
         "package": "ShellOut",
         "repositoryURL": "https://github.com/JohnSundell/ShellOut.git",
         "state": {
-          "branch": null,
-          "revision": "f1c253a34a40df4bfd268b09fdb101b059f6d52d",
-          "version": "2.1.0"
+          "branch": "master",
+          "revision": "f53d4df25ec34393e1f2d33aa8a0281808b4a6ce",
+          "version": null
         }
       },
       {
@@ -246,11 +246,11 @@
       },
       {
         "package": "Xgen",
-        "repositoryURL": "https://github.com/johnsundell/xgen",
+        "repositoryURL": "https://github.com/krzyzanowskim/Xgen",
         "state": {
-          "branch": null,
-          "revision": "bc7ec3bf76e63c317d1523c865d65023f450eb0b",
-          "version": "2.0.1"
+          "branch": "master",
+          "revision": "740dd4cfe161415614f5c4cde01da03a6c03c429",
+          "version": null
         }
       },
       {

@@ -11,7 +11,7 @@ let dependencies:[Package.Dependency] = [
     .package(url: "https://github.com/apple/swift-package-manager.git", from: "0.1.0"),
     .package(url: "https://github.com/IBM-Swift/Kitura-CredentialsGitHub.git", from: "2.1.0"),
     .package(url: "https://github.com/krzyzanowskim/ZIPFoundation.git", .branch("CZlib")),
-    .package(url: "https://github.com/johnsundell/xgen", from: "2.0.1"),
+    .package(url: "https://github.com/krzyzanowskim/Xgen", .branch("master")),
 ]
 
 var targets:[Target] = [

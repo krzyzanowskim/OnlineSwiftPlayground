@@ -49,7 +49,9 @@ function build_onlineplayground {
     Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift build --package-path $ONLINE_PLAYGROUND_DIR --static-swift-stdlib --build-path $ONLINE_PLAYGROUND_DIR/.build -c debug -Xswiftc -DDEBUG
 }
 
-npm install
+if [ $(program_is_installed npm) == 1 ]; then
+    npm install
+fi
 
 if [ $(program_is_installed xcrun) == 1 ]; then
     # Install Toolchains
