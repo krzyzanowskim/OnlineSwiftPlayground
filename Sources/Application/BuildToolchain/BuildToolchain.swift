@@ -1,11 +1,11 @@
 // Copyright Marcin Krzyżanowski <marcin@krzyzanowskim.com>
 
 import Basic
-import Utility
-import FileKit
-import LoggerAPI
-import Foundation
 import Dispatch
+import FileKit
+import Foundation
+import LoggerAPI
+import Utility
 
 #if os(Linux)
     import Glibc
@@ -13,15 +13,31 @@ import Dispatch
     import Darwin
 #endif
 
-
 class BuildToolchain {
     enum Error: Swift.Error {
         case failed(String)
     }
 
+    enum SwiftToolchain: String {
+        case swift4_0_3 = "4.0.3-RELEASE"
+        case swift4_1 = "4.1-RELEASE"
+
+        // Path to toolchain, relative to current process PWD
+        var path: AbsolutePath {
+            let pwdPath = AbsolutePath(Process.env["PWD"]!)
+
+            switch self {
+            case .swift4_0_3:
+                return pwdPath.appending(components: "Toolchains", "swift-4.0.3-RELEASE.xctoolchain", "usr", "bin")
+            case .swift4_1:
+                return pwdPath.appending(components: "Toolchains", "swift-4.1-RELEASE.xctoolchain", "usr", "bin")
+            }
+        }
+    }
+
     private let processSet = ProcessSet()
 
-    func build(code: String) throws -> Result<AbsolutePath, Error> {
+    func build(code: String, toolchain: SwiftToolchain = .swift4_1) throws -> Result<AbsolutePath, Error> {
         let fileSystem = Basic.localFileSystem
         let projectDirectoryPath = AbsolutePath(FileKit.projectFolder)
 
@@ -32,28 +48,34 @@ class BuildToolchain {
 
         try fileSystem.writeFileContents(mainFilePath, bytes: ByteString(encodingAsUTF8: injectCodeText + code))
 
+        let target: String
+        #if os(macOS)
+            target = "x86_64-apple-macosx10.11"
+        #endif
+        #if os(Linux)
+            target = "x86_64-unknown-linux-gnu"
+        #endif
+
         var cmd = [String]()
-        cmd += ["swift"]
+        cmd += ["\(toolchain.path.asString)/swift"]
         cmd += ["--driver-mode=swiftc"]
+        cmd += ["-swift-version", "4"]
         cmd += ["-v"]
         cmd += ["-gnone"]
         cmd += ["-suppress-warnings"]
-        cmd += ["-module-name","SwiftPlayground"]
+        cmd += ["-module-name", "SwiftPlayground"]
         #if DEBUG
-        cmd += ["-I",projectDirectoryPath.appending(components: ".build", "debug").asString]
-        cmd += ["-L",projectDirectoryPath.appending(components: ".build","debug").asString]
+            cmd += ["-I", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "debug").asString]
+            cmd += ["-L", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "debug").asString]
         #else
-        cmd += ["-I",projectDirectoryPath.appending(components: ".build", "release").asString]
-        cmd += ["-L",projectDirectoryPath.appending(components: ".build","release").asString]
+            cmd += ["-I", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "release").asString]
+            cmd += ["-L", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "release").asString]
         #endif
         cmd += ["-lOnlinePlayground"]
+        cmd += ["-target", target]
         #if os(macOS)
-            cmd += ["-target", "x86_64-apple-macosx10.11"]
-            cmd += ["-F",frameworksDirectory.asString]
-            cmd += ["-Xlinker","-rpath","-Xlinker",frameworksDirectory.asString]
-        #endif
-        #if os(Linux)
-            cmd += ["-target", "x86_64-unknown-linux-gnu"]
+            cmd += ["-F", frameworksDirectory.asString]
+            cmd += ["-Xlinker", "-rpath", "-Xlinker", frameworksDirectory.asString]
         #endif
 
         // Optimization or not
@@ -62,14 +84,13 @@ class BuildToolchain {
         #else
             cmd += ["-O"]
         #endif
+        // cmd += ["-enforce-exclusivity=checked"] // needs -Onone
         // Enable JSON-based output at some point.
         // cmd += ["-parseable-output"]
-        cmd += ["-enforce-exclusivity=checked"]
-        cmd += ["-swift-version","4"]
         if let sdkRoot = sdkRoot() {
             cmd += ["-sdk", sdkRoot.asString]
         }
-        cmd += ["-o",binaryFilePath.asString]
+        cmd += ["-o", binaryFilePath.asString]
         cmd += [mainFilePath.asString]
 
         let process = Basic.Process(arguments: cmd, redirectOutput: true, verbose: false)
@@ -113,7 +134,7 @@ class BuildToolchain {
         }
     }
 
-    private var _sdkRoot: AbsolutePath? = nil
+    private var _sdkRoot: AbsolutePath?
     private func sdkRoot() -> AbsolutePath? {
         if let sdkRoot = _sdkRoot {
             return sdkRoot
@@ -152,8 +173,7 @@ private func sandboxProfile() -> String {
 }
 
 let injectCodeText = """
-    import OnlinePlayground;
-    OnlinePlayground.setup;
+import OnlinePlayground;
+OnlinePlayground.setup;
 
-    """
-
+"""

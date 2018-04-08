@@ -1,0 +1,61 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CZlib",
+        "repositoryURL": "https://github.com/IBM-Swift/CZlib.git",
+        "state": {
+          "branch": null,
+          "revision": "a781e6ef055fb8f0d608fe30a28e6a0f62ae498b",
+          "version": "0.1.2"
+        }
+      },
+      {
+        "package": "CryptoSwift",
+        "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "d0084e4a6fe9490b3baab3d3c2aad58d3a852daf",
+          "version": "0.8.0"
+        }
+      },
+      {
+        "package": "Files",
+        "repositoryURL": "https://github.com/JohnSundell/Files.git",
+        "state": {
+          "branch": null,
+          "revision": "435965437ff7f149b9682aeb6553b5aa14b00402",
+          "version": "2.2.0"
+        }
+      },
+      {
+        "package": "ShellOut",
+        "repositoryURL": "https://github.com/JohnSundell/ShellOut.git",
+        "state": {
+          "branch": null,
+          "revision": "f1c253a34a40df4bfd268b09fdb101b059f6d52d",
+          "version": "2.1.0"
+        }
+      },
+      {
+        "package": "Xgen",
+        "repositoryURL": "https://github.com/johnsundell/xgen",
+        "state": {
+          "branch": null,
+          "revision": "bc7ec3bf76e63c317d1523c865d65023f450eb0b",
+          "version": "2.0.1"
+        }
+      },
+      {
+        "package": "ZIPFoundation",
+        "repositoryURL": "https://github.com/krzyzanowskim/ZIPFoundation.git",
+        "state": {
+          "branch": "CZlib",
+          "revision": "0b243ff82a3db7edb390b9523ffa2507607109df",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

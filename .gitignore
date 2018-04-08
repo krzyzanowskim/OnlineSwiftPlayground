@@ -1,9 +1,10 @@
 .DS_Store
-.build/*
-.build-ubuntu/*
-Packages
+.build/
+.build-ubuntu
+Toolchains/
 config/github.json
-PlaygroundServer.xcodeproj
+*.xcodeproj
+# Packages
 
 ## Build generated
 build/
