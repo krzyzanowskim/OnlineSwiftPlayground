@@ -60,7 +60,9 @@ class BuildToolchain {
         cmd += ["\(toolchain.path.asString)/swift"]
         cmd += ["--driver-mode=swiftc"]
         cmd += ["-swift-version", "4"]
+        #if DEBUG
         cmd += ["-v"]
+        #endif
         cmd += ["-gnone"]
         cmd += ["-suppress-warnings"]
         cmd += ["-module-name", "SwiftPlayground"]
