@@ -64,6 +64,10 @@ class BuildToolchain {
         cmd += ["-gnone"]
         cmd += ["-suppress-warnings"]
         cmd += ["-module-name", "SwiftPlayground"]
+        // Darwin is implicitly imported with Foundation, but Glibc is not. Glibc is not on Linux.
+        #if os(Linux)
+            cmd += ["-module-link-name","Glibc"]
+        #endif
         #if DEBUG
             cmd += ["-I", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "debug").asString]
             cmd += ["-L", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "debug").asString]
