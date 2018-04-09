@@ -9,15 +9,19 @@ TBA. Checkout http://SwiftPlayground.run
 
 ![SwiftPlayground.run](https://user-images.githubusercontent.com/758033/35674872-55a53386-0746-11e8-8bc1-ae5aee13fcfd.gif)
 
-## Installation
+## Installation & Run
 
-```
+```shell
 $ git clone https://github.com/krzyzanowskim/OnlineSwiftPlayground.git
 $ cd swiftplayground
-$ npm install
-$ swift build --product OnlinePlayground -c release
-$ swift run -c release
+$ ./run.sh
 ```
+
+The `run.sh` script will generate Xcode project (on macOS) and bootstrap the environment.
+Bootstraping involves
+1. Download Swift Toochains supported by the playground
+2. Pre-build support module using the toolchains
+3. Install dependencies
 
 ## Development
 
@@ -51,8 +55,8 @@ or build docker image by yourself:
 
 ```
 $ git clone https://github.com/krzyzanowskim/OnlineSwiftPlayground.git
-$ cd swiftplayground
-$ docker build -t krzyzanowskim/onlineswiftplayground .
+$ cd OnlineSwiftPlayground
+$ docker build . -t krzyzanowskim/onlineswiftplayground .
 ```
 
 then run container:
