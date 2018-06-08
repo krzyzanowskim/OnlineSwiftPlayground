@@ -2,7 +2,7 @@
 import PackageDescription
 
 let dependencies:[Package.Dependency] = [
-    .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .exact("0.8.0"))
+    .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .exact("0.10.0"))
 ]
 
 var targets:[Target] = [

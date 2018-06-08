@@ -55,14 +55,14 @@ fi
 
 if [ $(program_is_installed xcrun) == 1 ]; then
     # Install Toolchains
-    install_toolchain "4.1" "osx"
+    install_toolchain "4.1.2" "osx"
     install_toolchain "4.0.3" "osx"
 else
     # Install Toolchains
-    install_toolchain "4.1" "ubuntu14.04"
+    install_toolchain "4.1.2" "ubuntu14.04"
     install_toolchain "4.0.3" "ubuntu14.04"
 fi
 
 # Build OnlinePlayground
 build_onlineplayground "4.0.3"
-build_onlineplayground "4.1"
+build_onlineplayground "4.1.2"

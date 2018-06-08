@@ -12,6 +12,20 @@ spec:
         backend:
           serviceName: onlineswiftplayground-service
           servicePort: 8080
+  - host: onlineswiftplayground.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: onlineswiftplayground-service
+          servicePort: 8080
+  - host: onlineswiftplayground.run
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: onlineswiftplayground-service
+          servicePort: 8080
   - host: online.swiftplayground.run
     http:
       paths:

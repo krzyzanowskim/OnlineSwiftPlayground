@@ -20,17 +20,17 @@ class BuildToolchain {
 
     enum SwiftToolchain: String {
         case swift4_0_3 = "4.0.3-RELEASE"
-        case swift4_1 = "4.1-RELEASE"
+        case swift4_1 = "4.1.2-RELEASE"
 
         // Path to toolchain, relative to current process PWD
         var path: AbsolutePath {
-            let pwdPath = AbsolutePath(Process.env["PWD"]!)
+            let projectDirectoryPath = AbsolutePath(FileKit.projectFolder)
 
             switch self {
             case .swift4_0_3:
-                return pwdPath.appending(components: "Toolchains", "swift-4.0.3-RELEASE.xctoolchain", "usr", "bin")
+                return projectDirectoryPath.appending(components: "Toolchains", "swift-\(self.rawValue).xctoolchain", "usr", "bin")
             case .swift4_1:
-                return pwdPath.appending(components: "Toolchains", "swift-4.1-RELEASE.xctoolchain", "usr", "bin")
+                return projectDirectoryPath.appending(components: "Toolchains", "swift-\(self.rawValue).xctoolchain", "usr", "bin")
             }
         }
     }
