@@ -27,8 +27,7 @@ public class App {
 
         server = Server(router: router)
 
-        // UUID secret for the session. Session is not persistent
-        router.all(middleware: Session(secret: UUID().uuidString))
+        router.all(middleware: Session(secret: "C1635793-40FA-47DE-AF68-25FB94829CEF"))
     }
 
     func postInit() throws {
