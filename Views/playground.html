@@ -6,28 +6,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="keywords" content="swift, swift playground, swift on server">
-    <meta name="description" content="Swift Playground - online, hosted swift playgrounds.">
-    <meta name="author" content="Marcin Krzyzanowski">
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@krzyzanowskim" />
-    <meta name="twitter:creator" content="@krzyzanowskim" />
-    <meta property="og:url" content="https://swiftplayground.run" />
-    <meta property="og:title" content="Online Swift Playground" />
-    <meta property="og:description" content="Self hosted and embeddable Swift Playground solution with a third-party module support baked in." />
-    <meta property="og:image" content="https://swiftplayground.run/assets/og.png" />
 
     <title>Online Swift Playground</title>
-    <link rel="shortcut icon" type="image/x-icon" href="static/assets/favicon.png" />
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    {% include "./favicon-fragment.html" %}
+    {% include "./meta-fragment.html" %}
+    {% include "./bootstrap-fragment.html" %}
+    {% include "./fontawesome-fragment.html" %}
+    {% include "./fonts-fragment.html" %}
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
 
@@ -51,12 +39,10 @@
         <div class="row">
           <div class="col">
             <nav class="navbar navbar-dark bg-dark justify-content-between pl-2 pr-2">
-              <div>
-                <button id="run-button" type="button" class="btn btn-primary btn-sm rounded-0">
-                  <i class="fa fa-play fa-lg"></i>
-                  <span>Run</span>
-                </button>
-              </div>
+              <button id="run-button" type="button" class="btn btn-primary btn-sm rounded-0">
+                <i class="fa fa-play fa-lg"></i>
+                <span>Run</span>
+              </button>
               <div class="dropdown nav-item">
                 <button type="button" class="btn btn-primary btn-sm rounded-0 dropdown-toggle" data-toggle="dropdown">
                   <i class="fas fa-download fa-lg fa-fw"></i>
