@@ -72,8 +72,8 @@ class TerminalService: WebSocketService {
         }
 
         switch command {
-        case .run(let codeText):
-            if let result = run(codeText: codeText) {
+        case .run(let sourceCode, let toolchain):
+            if let result = run(codeText: sourceCode, toolchain: toolchain) {
                 if let responseJSON = try? JSONEncoder().encode(Command.output(result.text, result.annotations ?? [])),
                    let responseString = String(data: responseJSON, encoding: .utf8)
                 {
@@ -94,9 +94,9 @@ private struct RunResult {
 }
 
 private extension TerminalService {
-    private func run(codeText: String) -> RunResult? {
+    private func run(codeText: String, toolchain: SwiftToolchain) -> RunResult? {
         do {
-            let buildResult = try buildToolchain.build(code: codeText)
+            let buildResult = try buildToolchain.build(code: codeText, toolchain: toolchain)
             let runResult = try buildToolchain.run(binaryPath: buildResult.dematerialize())
             return RunResult(text: try runResult.dematerialize(), annotations: nil)
         } catch BuildToolchain.Error.failed(let output) {

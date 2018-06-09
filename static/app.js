@@ -565,92 +565,6 @@ module.exports = warning;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(4);
-  var warning = __webpack_require__(6);
-  var ReactPropTypesSecret = __webpack_require__(8);
-  var loggedTypeFailures = {};
-}
-
-/**
- * Assert that the values match with the type specs.
- * Error messages are memorized and will only be shown once.
- *
- * @param {object} typeSpecs Map of name to a ReactPropType
- * @param {object} values Runtime values that need to be type-checked
- * @param {string} location e.g. "prop", "context", "child context"
- * @param {string} componentName Name of the component for error messages.
- * @param {?Function} getStack Returns the component stack.
- * @private
- */
-function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-  if (process.env.NODE_ENV !== 'production') {
-    for (var typeSpecName in typeSpecs) {
-      if (typeSpecs.hasOwnProperty(typeSpecName)) {
-        var error;
-        // Prop type validation may throw. In case they do, we don't want to
-        // fail the render phase where it didn't fail before. So we log it.
-        // After these have been cleaned up, we'll let them throw.
-        try {
-          // This is intentionally an invariant that gets caught. It's the same
-          // behavior as without this statement except with a better message.
-          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
-          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
-        } catch (ex) {
-          error = ex;
-        }
-        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
-        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-          // Only monitor this failure once because there tends to be a lot of the
-          // same error.
-          loggedTypeFailures[error.message] = true;
-
-          var stack = getStack ? getStack() : '';
-
-          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
-        }
-      }
-    }
-  }
-}
-
-module.exports = checkPropTypes;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-
-module.exports = ReactPropTypesSecret;
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 function checkDCE() {
@@ -693,7 +607,7 @@ if (process.env.NODE_ENV === 'production') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11064,6 +10978,92 @@ return jQuery;
 
 
 /***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+if (process.env.NODE_ENV !== 'production') {
+  var invariant = __webpack_require__(4);
+  var warning = __webpack_require__(6);
+  var ReactPropTypesSecret = __webpack_require__(10);
+  var loggedTypeFailures = {};
+}
+
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
+function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+  if (process.env.NODE_ENV !== 'production') {
+    for (var typeSpecName in typeSpecs) {
+      if (typeSpecs.hasOwnProperty(typeSpecName)) {
+        var error;
+        // Prop type validation may throw. In case they do, we don't want to
+        // fail the render phase where it didn't fail before. So we log it.
+        // After these have been cleaned up, we'll let them throw.
+        try {
+          // This is intentionally an invariant that gets caught. It's the same
+          // behavior as without this statement except with a better message.
+          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
+          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+        } catch (ex) {
+          error = ex;
+        }
+        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+          // Only monitor this failure once because there tends to be a lot of the
+          // same error.
+          loggedTypeFailures[error.message] = true;
+
+          var stack = getStack ? getStack() : '';
+
+          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+        }
+      }
+    }
+  }
+}
+
+module.exports = checkPropTypes;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+module.exports = ReactPropTypesSecret;
+
+
+/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11326,16 +11326,17 @@ if (process.env.NODE_ENV !== 'production') {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_clipboard__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_clipboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_clipboard__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__protocol_js__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__editor_js__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__output_js__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__playground_js__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__swift_versions_js__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__output_js__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__playground_js__ = __webpack_require__(48);
 // Copyright Marcin Krzyzanowski marcin@krzyzanowskim.com
 
 
@@ -11348,23 +11349,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+let startingEditorCodeValue = __WEBPACK_IMPORTED_MODULE_8__playground_js__["a" /* default */].restoreCode() !== null ? __WEBPACK_IMPORTED_MODULE_8__playground_js__["a" /* default */].restoreCode() : document.getElementById("editor").innerText;
+
+// let swiftVersionElement = (
+//   <SwiftVersion />
+// );
+
 // Render components
 
-let startValue = __WEBPACK_IMPORTED_MODULE_7__playground_js__["a" /* default */].restoreCode() !== null ? __WEBPACK_IMPORTED_MODULE_7__playground_js__["a" /* default */].restoreCode() : document.getElementById("editor").innerText;
+let swiftVersionComponent = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__swift_versions_js__["a" /* default */], null), document.getElementById("swift-versions"));
 
-var editorComponent = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__editor_js__["a" /* default */], { code: startValue }), document.getElementById("editor"));
+let editorComponent = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__editor_js__["a" /* default */], { code: startingEditorCodeValue }), document.getElementById("editor"));
 
-var terminalComponent = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__output_js__["a" /* default */], {
-  readOnly: true,
-  code: document.getElementById("terminal").textContent
-}), document.getElementById("terminal"));
+var terminalComponent = __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__output_js__["a" /* default */], { readOnly: true, code: document.getElementById("terminal").textContent }), document.getElementById("terminal"));
 
 // Main
 
 new __WEBPACK_IMPORTED_MODULE_3_clipboard___default.a(".btn");
 
 let protocol = __WEBPACK_IMPORTED_MODULE_4__protocol_js__["a" /* default */].start();
-let playground = new __WEBPACK_IMPORTED_MODULE_7__playground_js__["a" /* default */](protocol, editorComponent.editor);
+let playground = new __WEBPACK_IMPORTED_MODULE_8__playground_js__["a" /* default */](protocol, editorComponent.editor);
 
 // Install events
 __WEBPACK_IMPORTED_MODULE_2_jquery___default()("#run-button").click(function (e) {
@@ -11372,7 +11377,7 @@ __WEBPACK_IMPORTED_MODULE_2_jquery___default()("#run-button").click(function (e)
   let sender = __WEBPACK_IMPORTED_MODULE_2_jquery___default()(this);
   sender.prop("disabled", true);
 
-  playground.run(editorComponent.getValue(), function (value, annotations) {
+  playground.run(editorComponent.getValue(), swiftVersionComponent.currentVersion, function (value, annotations) {
     terminalComponent.setValue(value);
     sender.prop("disabled", false);
     editorComponent.editor.focus();
@@ -11453,7 +11458,7 @@ var emptyObject = __webpack_require__(5);
 var invariant = __webpack_require__(4);
 var warning = __webpack_require__(6);
 var emptyFunction = __webpack_require__(2);
-var checkPropTypes = __webpack_require__(7);
+var checkPropTypes = __webpack_require__(9);
 
 // TODO: this is special because it gets imported during build.
 
@@ -13179,7 +13184,7 @@ var warning = __webpack_require__(6);
 var ExecutionEnvironment = __webpack_require__(11);
 var _assign = __webpack_require__(3);
 var emptyFunction = __webpack_require__(2);
-var checkPropTypes = __webpack_require__(7);
+var checkPropTypes = __webpack_require__(9);
 var getActiveElement = __webpack_require__(12);
 var shallowEqual = __webpack_require__(13);
 var containsNode = __webpack_require__(14);
@@ -30917,11 +30922,11 @@ module.exports = {"_args":[["websocket@1.0.25","/Users/marcinkrzyzanowski/Devel/
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_monaco_editor__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_monaco_editor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_monaco_editor__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
 
 
@@ -31344,8 +31349,8 @@ var invariant = __webpack_require__(4);
 var warning = __webpack_require__(6);
 var assign = __webpack_require__(3);
 
-var ReactPropTypesSecret = __webpack_require__(8);
-var checkPropTypes = __webpack_require__(7);
+var ReactPropTypesSecret = __webpack_require__(10);
+var checkPropTypes = __webpack_require__(9);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -31891,7 +31896,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 var emptyFunction = __webpack_require__(2);
 var invariant = __webpack_require__(4);
-var ReactPropTypesSecret = __webpack_require__(8);
+var ReactPropTypesSecret = __webpack_require__(10);
 
 module.exports = function() {
   function shim(props, propName, componentName, location, propFullName, secret) {
@@ -32207,7 +32212,157 @@ exports.default = MonacoDiffEditor;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_html_id__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_html_id___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_html_id__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
+
+
+
+
+
+class SwiftVersion extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+    constructor(props) {
+        super(props);
+        __WEBPACK_IMPORTED_MODULE_2_react_html_id___default.a.enableUniqueIds(this);
+
+        this.availableVersions = ["4.0.3-RELEASE", "4.1.2-RELEASE"];
+        this.state = {
+            currentVersion: this.availableVersions.slice(-1).pop()
+        };
+    }
+
+    get currentVersion() {
+        return this.state.currentVersion;
+    }
+
+    handleVersionClick(version) {
+        this.setState(prevState => ({
+            currentVersion: version
+        }));
+    }
+
+    render() {
+        const VersionRows = () => {
+            const Divider = () => {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", { className: "dropdown-divider" });
+            };
+
+            const VersionRow = props => {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "button",
+                    { type: "button", className: "btn btn-primary btn-sm rounded-0 dropdown-item", onClick: () => this.handleVersionClick(props.name) },
+                    props.name
+                );
+            };
+
+            return this.availableVersions.map(function (name, index) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(VersionRow, { key: this.nextUniqueId(), name: name });
+            }, this);
+        };
+
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "button",
+                { type: "button", className: "btn btn-primary btn-sm rounded-0 dropdown-toggle", "data-toggle": "dropdown" },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    "span",
+                    null,
+                    this.state.currentVersion
+                )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "div",
+                { className: "dropdown-menu rounded-0" },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(VersionRows, null)
+            )
+        );
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = SwiftVersion;
+
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports) {
+
+/* Copyright (c) 2017 Hampus Joakim Nilsson
+ * Licensed via the MIT license.
+ **/
+
+// Unique counter per COMPONENT that uniqueness is added to
+var _globallyUniqueIdCounter = 0
+
+function resetUniqueIds() {
+    _globallyUniqueIdCounter = 0
+}
+
+function injectUniqueness(component) {
+
+    var instanceId;
+    if (arguments.length > 1) {
+        instanceId = arguments[1];
+        if (typeof instanceId !== 'string') {
+            console.log('Warning: Expected string as second argument passed to `injectUniqueness`')
+            instanceId = '' + instanceId
+        }
+    }
+
+    // Store all state in the closure for the member functions
+    var _willUpdate = component.componentWillUpdate
+    var _htmlIds = {}
+    var _uniqueIdCounter = 0
+    var _uniqueInstance = instanceId || ++_globallyUniqueIdCounter
+
+    // Inject the following functions into the component
+    component.componentWillUpdate = function(nextProps, nextState) {
+        _uniqueIdCounter = 0
+        if (typeof _willUpdate != 'undefined') {
+            _willUpdate.apply(component, nextProps, nextState)
+        }
+    }
+
+    component.nextUniqueId = function() {
+        ++_uniqueIdCounter
+        return 'id-' + _uniqueInstance + '-' + _uniqueIdCounter
+    }
+
+    component.lastUniqueId = function() {
+        return 'id-' + _uniqueInstance + '-' + _uniqueIdCounter
+    }
+
+    component.getUniqueId = function(identifier) {
+        if (typeof identifier !== 'string') {
+            console.log('Warning: Expected string identifer passed to `getUniqueId`')
+            identifier = '' + identifier
+        }
+
+        if (!_htmlIds[identifier]) {
+            _htmlIds[identifier] = 'id-' + _uniqueInstance + '-' + identifier
+        }
+
+        return _htmlIds[identifier]
+    }
+}
+
+module.exports = {
+    resetUniqueIds: resetUniqueIds,
+    enableUniqueIds: injectUniqueness,
+}
+
+
+/***/ }),
+/* 47 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_monaco_editor__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_monaco_editor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_monaco_editor__);
@@ -32304,11 +32459,11 @@ class Output extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 /* harmony default export */ __webpack_exports__["a"] = (Output);
 
 /***/ }),
-/* 46 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
 // Copyright Marcin Krzyzanowski marcin@krzyzanowskim.com
 
@@ -32333,9 +32488,10 @@ class Playground {
     storage.setItem("editor-text", code);
   }
 
-  run(code, onFinish) {
+  run(code, toolchainVersion, onFinish) {
     var msg = {
       run: {
+        toolchain: toolchainVersion,
         value: code
       }
     };
@@ -32358,8 +32514,8 @@ class Playground {
     };
   }
 }
+/* harmony export (immutable) */ __webpack_exports__["a"] = Playground;
 
-/* harmony default export */ __webpack_exports__["a"] = (Playground);
 
 /***/ })
 /******/ ]);

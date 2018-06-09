@@ -1,7 +1,7 @@
 // Copyright Marcin Krzyzanowski marcin@krzyzanowskim.com
 import $ from "jquery";
 
-class Playground {
+export default class Playground {
   constructor(protocol, editor) {
     this.protocol = protocol;
     this.editor = editor;
@@ -21,9 +21,10 @@ class Playground {
     storage.setItem("editor-text", code);
   }
 
-  run(code, onFinish) {
+  run(code, toolchainVersion, onFinish) {
     var msg = {
       run: {
+        toolchain: toolchainVersion,
         value: code
       }
     };
@@ -31,7 +32,7 @@ class Playground {
     Playground.storeCode(code);
 
     this.protocol.ws.send(JSON.stringify(msg));
-    this.protocol.processMessage = function(value, annotations) {
+    this.protocol.processMessage = function (value, annotations) {
       onFinish(value, annotations);
       // editor.session.setAnnotations(
       //   annotations.map(function(a) {
@@ -46,5 +47,3 @@ class Playground {
     };
   }
 }
-
-export default Playground;

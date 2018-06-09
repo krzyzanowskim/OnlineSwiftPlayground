@@ -7,26 +7,30 @@ import Clipboard from "clipboard";
 
 import Protocol from "./protocol.js";
 import Editor from "./editor.js";
+import SwiftVersion from "./swift-versions.js";
 import Output from "./output.js";
 import Playground from "./playground.js";
 
+let startingEditorCodeValue = Playground.restoreCode() !== null ? Playground.restoreCode() : document.getElementById("editor").innerText;
+
+// let swiftVersionElement = (
+//   <SwiftVersion />
+// );
+
 // Render components
 
-let startValue =
-  Playground.restoreCode() !== null
-    ? Playground.restoreCode()
-    : document.getElementById("editor").innerText;
+let swiftVersionComponent = ReactDOM.render(
+  <SwiftVersion />,
+  document.getElementById("swift-versions")
+)
 
-var editorComponent = ReactDOM.render(
-  <Editor code={startValue} />,
+let editorComponent = ReactDOM.render(
+  <Editor code={startingEditorCodeValue} />,
   document.getElementById("editor")
 );
 
 var terminalComponent = ReactDOM.render(
-  <Output
-    readOnly={true}
-    code={document.getElementById("terminal").textContent}
-  />,
+  <Output readOnly={true} code={document.getElementById("terminal").textContent}/>,
   document.getElementById("terminal")
 );
 
@@ -38,19 +42,19 @@ let protocol = Protocol.start();
 let playground = new Playground(protocol, editorComponent.editor);
 
 // Install events
-$("#run-button").click(function(e) {
+$("#run-button").click(function (e) {
   e.preventDefault();
   let sender = $(this);
   sender.prop("disabled", true);
 
-  playground.run(editorComponent.getValue(), function(value, annotations) {
+  playground.run(editorComponent.getValue(), swiftVersionComponent.currentVersion, function (value, annotations) {
     terminalComponent.setValue(value);
     sender.prop("disabled", false);
     editorComponent.editor.focus();
   });
 });
 
-$("#download-file-button").click(function(e) {
+$("#download-file-button").click(function (e) {
   let text = editorComponent.getValue();
   $(this).attr(
     "href",
@@ -58,7 +62,7 @@ $("#download-file-button").click(function(e) {
   );
 });
 
-$("#download-playground-button").click(function(e) {
+$("#download-playground-button").click(function (e) {
   e.preventDefault();
 
   let text = editorComponent.getValue();
@@ -70,9 +74,9 @@ $("#download-playground-button").click(function(e) {
   // Add the one key/value
   form.append(
     $("<input></input>")
-      .attr("type", "hidden")
-      .attr("name", "code")
-      .attr("value", text)
+    .attr("type", "hidden")
+    .attr("name", "code")
+    .attr("value", text)
   );
   //send request
   form

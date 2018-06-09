@@ -13,26 +13,27 @@ import Utility
     import Darwin
 #endif
 
+enum SwiftToolchain: String, RawRepresentable, Codable {
+    case swift4_0_3 = "4.0.3-RELEASE"
+    case swift4_1 = "4.1.2-RELEASE"
+
+    // Path to toolchain, relative to current process PWD
+    var path: AbsolutePath {
+        let projectDirectoryPath = AbsolutePath(FileKit.projectFolder)
+
+        switch self {
+        case .swift4_0_3:
+            return projectDirectoryPath.appending(components: "Toolchains", "swift-\(self.rawValue).xctoolchain", "usr", "bin")
+        case .swift4_1:
+            return projectDirectoryPath.appending(components: "Toolchains", "swift-\(self.rawValue).xctoolchain", "usr", "bin")
+        }
+    }
+}
+
+
 class BuildToolchain {
     enum Error: Swift.Error {
         case failed(String)
-    }
-
-    enum SwiftToolchain: String {
-        case swift4_0_3 = "4.0.3-RELEASE"
-        case swift4_1 = "4.1.2-RELEASE"
-
-        // Path to toolchain, relative to current process PWD
-        var path: AbsolutePath {
-            let projectDirectoryPath = AbsolutePath(FileKit.projectFolder)
-
-            switch self {
-            case .swift4_0_3:
-                return projectDirectoryPath.appending(components: "Toolchains", "swift-\(self.rawValue).xctoolchain", "usr", "bin")
-            case .swift4_1:
-                return projectDirectoryPath.appending(components: "Toolchains", "swift-\(self.rawValue).xctoolchain", "usr", "bin")
-            }
-        }
     }
 
     private let processSet = ProcessSet()

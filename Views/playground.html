@@ -39,10 +39,15 @@
         <div class="row">
           <div class="col">
             <nav class="navbar navbar-dark bg-dark justify-content-between pl-2 pr-2">
-              <button id="run-button" type="button" class="btn btn-primary btn-sm rounded-0">
-                <i class="fa fa-play fa-lg"></i>
-                <span>Run</span>
-              </button>
+              <form class="form-inline">
+                <button id="run-button" type="button" class="btn btn-primary btn-sm rounded-0">
+                  <i class="fa fa-play fa-lg"></i>
+                  <span>Run</span>
+                </button>
+                <div class="dropdown nav-item pl-2 pr-2">
+                  <div id="swift-versions"></div>
+                </div>
+              </form>
               <div class="dropdown nav-item">
                 <button type="button" class="btn btn-primary btn-sm rounded-0 dropdown-toggle" data-toggle="dropdown">
                   <i class="fas fa-download fa-lg fa-fw"></i>

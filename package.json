@@ -14,7 +14,8 @@
         "react": "^16.3.1",
         "react-dom": "^16.3.1",
         "react-monaco-editor": "^0.13.0",
-        "websocket": "^1.0.25"
+        "websocket": "^1.0.25",
+        "react-html-id": "^0.1.4"
     },
     "devDependencies": {
         "babel-cli": "^6.26.0",
