@@ -1,4 +1,4 @@
-FROM ibmcom/swift-ubuntu:4.0.3
+FROM ibmcom/swift-ubuntu:4.1.2
 LABEL maintainer="marcin@krzyzanowskim.com"
 LABEL Description="SwiftPlayground.run docker image"
 WORKDIR /swiftplayground
@@ -31,4 +31,4 @@ RUN apt-get -qq -y install libz-dev curl
 RUN ./bootstrap.sh
 
 # Command to start Swift application
-CMD Toolchains/swift-4.0.3-RELEASE.xctoolchain/usr/bin/swift run -c release
+CMD Toolchains/swift-4.1.2-RELEASE.xctoolchain/usr/bin/swift run -c release

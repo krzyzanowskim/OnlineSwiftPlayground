@@ -7,7 +7,7 @@ SWIFT="Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift"
 # Generate Xcode projects
 if [ $(program_is_installed xcrun) == 1 ]; then
     echo "Generate Xcode project..."
-    $TOOLCHAIN_SWIFT package generate-xcodeproj
+    $SWIFT package generate-xcodeproj
 fi
 
 # Run
