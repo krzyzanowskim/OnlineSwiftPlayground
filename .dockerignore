@@ -11,6 +11,7 @@
 Toolchains/
 
 config/
+static/app/
 
 *.xcodeproj
 DerivedData

@@ -25,7 +25,7 @@ RUN if [ $bx_dev_user != "root" ]; then useradd -ms /bin/bash -u $bx_dev_userid 
 COPY . /swiftplayground
 
 # Install dependencies
-RUN apt-get -qq -y install libz-dev curl
+RUN apt-get -qq -y install libz-dev curl nodejs npm
 
 # Bootstrap
 RUN ./bootstrap.sh
