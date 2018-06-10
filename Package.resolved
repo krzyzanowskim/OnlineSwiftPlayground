@@ -2,6 +2,33 @@
   "object": {
     "pins": [
       {
+        "package": "Cryptor",
+        "repositoryURL": "https://github.com/IBM-Swift/BlueCryptor.git",
+        "state": {
+          "branch": null,
+          "revision": "de20ec9af166d779a08c16f05146f4b9124478d0",
+          "version": "0.8.27"
+        }
+      },
+      {
+        "package": "Socket",
+        "repositoryURL": "https://github.com/IBM-Swift/BlueSocket.git",
+        "state": {
+          "branch": null,
+          "revision": "26c8f4e4e3000421a0c97aaf0c7b5e9aa5475222",
+          "version": "0.12.94"
+        }
+      },
+      {
+        "package": "SSLService",
+        "repositoryURL": "https://github.com/IBM-Swift/BlueSSLService.git",
+        "state": {
+          "branch": null,
+          "revision": "3a87b64a97fb8e923f52f2a68e31e7bd4fc46b42",
+          "version": "0.12.84"
+        }
+      },
+      {
         "package": "CCurl",
         "repositoryURL": "https://github.com/IBM-Swift/CCurl.git",
         "state": {
@@ -11,30 +38,12 @@
         }
       },
       {
-        "package": "CZlib",
-        "repositoryURL": "https://github.com/IBM-Swift/CZlib.git",
-        "state": {
-          "branch": null,
-          "revision": "a781e6ef055fb8f0d608fe30a28e6a0f62ae498b",
-          "version": "0.1.2"
-        }
-      },
-      {
         "package": "CloudEnvironment",
         "repositoryURL": "https://github.com/IBM-Swift/CloudEnvironment.git",
         "state": {
           "branch": null,
           "revision": "6e425ee772b505f9fcffbd265e2f382501bd1305",
           "version": "6.1.0"
-        }
-      },
-      {
-        "package": "CloudFoundryEnv",
-        "repositoryURL": "https://github.com/IBM-Swift/Swift-cfenv.git",
-        "state": {
-          "branch": null,
-          "revision": "1cd6067d1f711674d2f277814ef920f3b23ce4cb",
-          "version": "6.0.1"
         }
       },
       {
@@ -56,12 +65,12 @@
         }
       },
       {
-        "package": "Cryptor",
-        "repositoryURL": "https://github.com/IBM-Swift/BlueCryptor.git",
+        "package": "CZlib",
+        "repositoryURL": "https://github.com/IBM-Swift/CZlib.git",
         "state": {
           "branch": null,
-          "revision": "de20ec9af166d779a08c16f05146f4b9124478d0",
-          "version": "0.8.27"
+          "revision": "a781e6ef055fb8f0d608fe30a28e6a0f62ae498b",
+          "version": "0.1.2"
         }
       },
       {
@@ -119,12 +128,30 @@
         }
       },
       {
+        "package": "Kitura-net",
+        "repositoryURL": "https://github.com/IBM-Swift/Kitura-net.git",
+        "state": {
+          "branch": null,
+          "revision": "9b4221e7378f76e0c5e04acaf30cdee99594aed3",
+          "version": "2.0.4"
+        }
+      },
+      {
         "package": "Kitura-Session",
         "repositoryURL": "https://github.com/IBM-Swift/Kitura-Session.git",
         "state": {
           "branch": null,
           "revision": "cd4d26cf8846f0d2306b0eb3b257c207d624a093",
           "version": "3.0.1"
+        }
+      },
+      {
+        "package": "KituraStencil",
+        "repositoryURL": "https://github.com/IBM-Swift/Kitura-StencilTemplateEngine.git",
+        "state": {
+          "branch": null,
+          "revision": "1d990a3a79b3a5ae2f77fde025ad4d540e822128",
+          "version": "1.9.0"
         }
       },
       {
@@ -146,30 +173,12 @@
         }
       },
       {
-        "package": "Kitura-net",
-        "repositoryURL": "https://github.com/IBM-Swift/Kitura-net.git",
-        "state": {
-          "branch": null,
-          "revision": "9b4221e7378f76e0c5e04acaf30cdee99594aed3",
-          "version": "2.0.4"
-        }
-      },
-      {
         "package": "KituraContracts",
         "repositoryURL": "https://github.com/IBM-Swift/KituraContracts.git",
         "state": {
           "branch": null,
           "revision": "8821f72962c369f4941bcd006437f966972ed53d",
           "version": "0.0.20"
-        }
-      },
-      {
-        "package": "KituraStencil",
-        "repositoryURL": "https://github.com/IBM-Swift/Kitura-StencilTemplateEngine.git",
-        "state": {
-          "branch": null,
-          "revision": "1d990a3a79b3a5ae2f77fde025ad4d540e822128",
-          "version": "1.9.0"
         }
       },
       {
@@ -191,30 +200,12 @@
         }
       },
       {
-        "package": "SSLService",
-        "repositoryURL": "https://github.com/IBM-Swift/BlueSSLService.git",
-        "state": {
-          "branch": null,
-          "revision": "3a87b64a97fb8e923f52f2a68e31e7bd4fc46b42",
-          "version": "0.12.84"
-        }
-      },
-      {
         "package": "ShellOut",
         "repositoryURL": "https://github.com/JohnSundell/ShellOut.git",
         "state": {
           "branch": "master",
           "revision": "f53d4df25ec34393e1f2d33aa8a0281808b4a6ce",
           "version": null
-        }
-      },
-      {
-        "package": "Socket",
-        "repositoryURL": "https://github.com/IBM-Swift/BlueSocket.git",
-        "state": {
-          "branch": null,
-          "revision": "26c8f4e4e3000421a0c97aaf0c7b5e9aa5475222",
-          "version": "0.12.94"
         }
       },
       {
@@ -233,6 +224,15 @@
           "branch": null,
           "revision": "c2e25f25acfbe24442809c055141d8323af8f6cc",
           "version": "0.11.0"
+        }
+      },
+      {
+        "package": "CloudFoundryEnv",
+        "repositoryURL": "https://github.com/IBM-Swift/Swift-cfenv.git",
+        "state": {
+          "branch": null,
+          "revision": "1cd6067d1f711674d2f277814ef920f3b23ce4cb",
+          "version": "6.0.1"
         }
       },
       {

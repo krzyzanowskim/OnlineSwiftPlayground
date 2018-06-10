@@ -13,36 +13,39 @@ function program_is_installed {
 
 function install_toolchain {
     SWIFT_VERSION=$1
-    SWIFT_TARGET=$2
-    if [ ! -d "Toolchains/swift-$SWIFT_VERSION-RELEASE.xctoolchain" ]; then
+    BRANCH=$2
+    RELEASE=$3
+    SWIFT_TARGET=$4
+    if [ ! -d "Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain" ]; then
         case "$SWIFT_TARGET" in
         *osx)
-            mkdir -p Toolchains/swift-$SWIFT_VERSION-RELEASE.xctoolchain
+            mkdir -p Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain
             # download
-            curl -O https://swift.org/builds/swift-$SWIFT_VERSION-release/xcode/swift-$SWIFT_VERSION-RELEASE/swift-$SWIFT_VERSION-RELEASE-$SWIFT_TARGET.pkg
+            curl -O https://swift.org/builds/swift-$SWIFT_VERSION-$BRANCH/xcode/swift-$SWIFT_VERSION-$RELEASE/swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.pkg
             # extract
-            xar -xf swift-$SWIFT_VERSION-RELEASE-$SWIFT_TARGET.pkg -C Toolchains/
-            tar -xzf Toolchains/swift-$SWIFT_VERSION-RELEASE-$SWIFT_TARGET-package.pkg/Payload -C Toolchains/swift-$SWIFT_VERSION-RELEASE.xctoolchain
+            xar -xf swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.pkg -C Toolchains/
+            tar -xzf Toolchains/swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET-package.pkg/Payload -C Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain
             # cleanup
             rm Toolchains/Distribution
-            rm -r Toolchains/swift-$SWIFT_VERSION-RELEASE-$SWIFT_TARGET-package.pkg
-            rm -r swift-$SWIFT_VERSION-RELEASE-$SWIFT_TARGET.pkg
+            rm -r Toolchains/swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET-package.pkg
+            rm -r swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.pkg
             ;;
         ubuntu*)
-            mkdir -p Toolchains/swift-$SWIFT_VERSION-RELEASE.xctoolchain
+            mkdir -p Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain
             # download
-            curl -O https://swift.org/builds/swift-$SWIFT_VERSION-release/ubuntu1404/swift-$SWIFT_VERSION-RELEASE/swift-$SWIFT_VERSION-RELEASE-$SWIFT_TARGET.tar.gz
+            curl -O https://swift.org/builds/swift-$SWIFT_VERSION-$BRANCH/ubuntu1404/swift-$SWIFT_VERSION-$RELEASE/swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz
             # extract
-            tar -xvzf swift-$SWIFT_VERSION-RELEASE-$SWIFT_TARGET.tar.gz -C Toolchains/swift-$SWIFT_VERSION-RELEASE.xctoolchain --strip-components=1
+            tar -xvzf swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz -C Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain --strip-components=1
             # cleanup
-            rm -rf swift-$SWIFT_VERSION-RELEASE-$SWIFT_TARGET.tar.gz
+            rm -rf swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz
             ;;
         esac
     fi
 }
 
 function build_onlineplayground {
-    SWIFT_VERSION="$1-RELEASE"
+    RELEASE=$2
+    SWIFT_VERSION="$1-$RELEASE"
 
     ONLINE_PLAYGROUND_DIR="OnlinePlayground/OnlinePlayground-$SWIFT_VERSION"
     Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift build --package-path $ONLINE_PLAYGROUND_DIR --static-swift-stdlib --build-path $ONLINE_PLAYGROUND_DIR/.build -c release
@@ -55,14 +58,17 @@ fi
 
 if [ $(program_is_installed xcrun) == 1 ]; then
     # Install Toolchains
-    install_toolchain "4.1.2" "osx"
-    install_toolchain "4.0.3" "osx"
+    install_toolchain "4.2" "branch" "DEVELOPMENT-SNAPSHOT-2018-06-08-a" "osx"
+    install_toolchain "4.1.2" "release" "RELEASE" "osx"
+    install_toolchain "4.0.3" "release" "RELEASE" "osx"
 else
     # Install Toolchains
-    install_toolchain "4.1.2" "ubuntu14.04"
-    install_toolchain "4.0.3" "ubuntu14.04"
+    install_toolchain "4.2" "branch" "DEVELOPMENT-SNAPSHOT-2018-06-08-a" "ubuntu14.04"
+    install_toolchain "4.1.2" "release" "RELEASE" "ubuntu14.04"
+    install_toolchain "4.0.3" "release" "RELEASE" "ubuntu14.04"
 fi
 
 # Build OnlinePlayground
-build_onlineplayground "4.0.3"
-build_onlineplayground "4.1.2"
+build_onlineplayground "4.2" "DEVELOPMENT-SNAPSHOT-2018-06-08-a"
+build_onlineplayground "4.1.2" "RELEASE"
+build_onlineplayground "4.0.3" "RELEASE"

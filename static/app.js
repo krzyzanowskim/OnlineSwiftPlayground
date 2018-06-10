@@ -32228,7 +32228,7 @@ class SwiftVersion extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Compone
         super(props);
         __WEBPACK_IMPORTED_MODULE_2_react_html_id___default.a.enableUniqueIds(this);
 
-        this.availableVersions = ["4.0.3-RELEASE", "4.1.2-RELEASE"];
+        this.availableVersions = ["4.2-DEVELOPMENT-SNAPSHOT-2018-06-08-a", "4.0.3-RELEASE", "4.1.2-RELEASE"];
         this.state = {
             currentVersion: this.availableVersions.slice(-1).pop()
         };
