@@ -99,17 +99,12 @@ class Editor extends React.Component {
       contextmenu: false,
       dragAndDrop: this.state.showLines
     };
-    let requireConfig = {
-      paths: { vs: "/static/vs" },
-      url: "/static/vs/loader.js"
-    };
     return (
       <MonacoEditor
         language={this.state.language}
         theme="vs-dark"
         value={code}
         options={options}
-        requireConfig={requireConfig}
         onChange={this.onChange.bind(this)}
         editorDidMount={this.editorDidMount.bind(this)}
       />

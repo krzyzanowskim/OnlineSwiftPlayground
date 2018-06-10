@@ -11,7 +11,10 @@ if [ $(program_is_installed xcrun) == 1 ]; then
 fi
 
 # Run
-$SWIFT run --version
+if [ $(program_is_installed npm) == 1 ]; then
+    $(npm bin)/webpack
+fi
+
 $SWIFT run -c release --static-swift-stdlib --build-path .build/swift-$SWIFT_VERSION &
 
 if [ $(program_is_installed npm) == 1 ]; then

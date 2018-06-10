@@ -1,14 +1,18 @@
 let path = require("path");
 let webpack = require("webpack");
-let CopyWebpackPlugin = require("copy-webpack-plugin");
+let MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 var config = {
   target: "web",
   entry: "./frontend/main.js",
   mode: 'production',
   output: {
-    path: path.resolve(__dirname,"./static"),
-    filename: "app.js"
+    path: path.resolve(__dirname,"./static/app"),
+    filename: "app.js",
+    publicPath: "/static/app/"
+  },
+  node: {
+    fs: "empty"
   },
   module: {
     rules: [
@@ -18,20 +22,16 @@ var config = {
         use: {
           loader: "babel-loader"
         }
-      }
+      },
+      { test: /\.css$/, loader: "style-loader!css-loader" }
     ]
   },
   plugins: [
+    new MonacoWebpackPlugin(),
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery"
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: "node_modules/monaco-editor/min/vs",
-        to: "vs"
-      }
-    ])
+    })
   ]
 }
 
