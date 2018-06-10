@@ -31,4 +31,4 @@ RUN apt-get -qq -y install libz-dev curl
 RUN ./bootstrap.sh
 
 # Command to start Swift application
-CMD Toolchains/swift-4.1.2-RELEASE.xctoolchain/usr/bin/swift run -c release
+CMD Toolchains/swift-4.1.2-RELEASE.xctoolchain/usr/bin/swift run -c release --static-swift-stdlib --build-path .build/swift-4.1.2-RELEASE
