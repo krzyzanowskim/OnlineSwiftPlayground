@@ -27,6 +27,8 @@ COPY . /swiftplayground
 # Install dependencies
 RUN apt-get -qq -y install libz-dev curl nodejs npm
 
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+
 # Bootstrap
 RUN ./bootstrap.sh
 
