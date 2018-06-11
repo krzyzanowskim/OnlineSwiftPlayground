@@ -9,6 +9,7 @@
 .build-ubuntu/
 
 Toolchains/
+node_modules/
 
 config/
 static/app/

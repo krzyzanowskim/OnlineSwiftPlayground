@@ -11,15 +11,11 @@ if [ $(program_is_installed xcrun) == 1 ]; then
 fi
 
 # Run
-if [ $(program_is_installed npm) == 1 ]; then
-    $(npm bin)/webpack
-fi
+$(npm bin)/webpack
 
 $SWIFT run -c release --static-swift-stdlib --build-path .build/swift-$SWIFT_VERSION &
 
-if [ $(program_is_installed npm) == 1 ]; then
-    $(npm bin)/webpack -w
-fi
+$(npm bin)/webpack -w
 
 killall -9 PlaygroundServer
 
