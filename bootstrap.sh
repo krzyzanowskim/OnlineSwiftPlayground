@@ -57,17 +57,17 @@ $(npm bin)/webpack
 
 if [ $(program_is_installed xcrun) == 1 ]; then
     # Install Toolchains
-    install_toolchain "4.2" "branch" "DEVELOPMENT-SNAPSHOT-2018-06-08-a" "osx"
+    install_toolchain "4.2" "branch" "DEVELOPMENT-SNAPSHOT-2018-06-14-a" "osx"
     install_toolchain "4.1.2" "release" "RELEASE" "osx"
     install_toolchain "4.0.3" "release" "RELEASE" "osx"
 else
     # Install Toolchains
-    install_toolchain "4.2" "branch" "DEVELOPMENT-SNAPSHOT-2018-06-08-a" "ubuntu14.04"
+    install_toolchain "4.2" "branch" "DEVELOPMENT-SNAPSHOT-2018-06-14-a" "ubuntu14.04"
     install_toolchain "4.1.2" "release" "RELEASE" "ubuntu14.04"
     install_toolchain "4.0.3" "release" "RELEASE" "ubuntu14.04"
 fi
 
 # Build OnlinePlayground
-build_onlineplayground "4.2" "DEVELOPMENT-SNAPSHOT-2018-06-08-a"
+build_onlineplayground "4.2" "DEVELOPMENT-SNAPSHOT-2018-06-14-a"
 build_onlineplayground "4.1.2" "RELEASE"
 build_onlineplayground "4.0.3" "RELEASE"
