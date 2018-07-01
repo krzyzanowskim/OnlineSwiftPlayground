@@ -16,7 +16,7 @@ import Utility
 enum SwiftToolchain: String, RawRepresentable, Codable {
     case swift4_0_3 = "4.0.3-RELEASE"
     case swift4_1 = "4.1.2-RELEASE"
-    case swift4_2 = "4.2-DEVELOPMENT-SNAPSHOT-2018-06-14-a"
+    case swift4_2 = "4.2-DEVELOPMENT-SNAPSHOT-2018-06-30-a"
 
     // Path to toolchain, relative to current process PWD
     var path: AbsolutePath {
