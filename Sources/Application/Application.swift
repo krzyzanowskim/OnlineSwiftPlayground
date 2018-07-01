@@ -6,7 +6,6 @@ import KituraWebSocket
 import LoggerAPI
 import Configuration
 import KituraSession
-import Credentials
 import KituraStencil
 import FileKit
 import Basic

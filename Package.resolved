@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/BlueCryptor.git",
         "state": {
           "branch": null,
-          "revision": "de20ec9af166d779a08c16f05146f4b9124478d0",
-          "version": "0.8.27"
+          "revision": "7865ad2f864633eb945dc77c43213fb34688bb3e",
+          "version": "1.0.5"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/BlueSocket.git",
         "state": {
           "branch": null,
-          "revision": "26c8f4e4e3000421a0c97aaf0c7b5e9aa5475222",
-          "version": "0.12.94"
+          "revision": "e2f6aee81b9e316f61e173e8350cb69d7714ead8",
+          "version": "1.0.10"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/BlueSSLService.git",
         "state": {
           "branch": null,
-          "revision": "3a87b64a97fb8e923f52f2a68e31e7bd4fc46b42",
-          "version": "0.12.84"
+          "revision": "f4c012b783f8809d4e6597b304357c5324ff459b",
+          "version": "1.0.10"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/CloudEnvironment.git",
         "state": {
           "branch": null,
-          "revision": "6e425ee772b505f9fcffbd265e2f382501bd1305",
-          "version": "6.1.0"
+          "revision": "b37c1c69e6a0d4b191eca7c064afcedfd2a1803b",
+          "version": "8.0.0"
         }
       },
       {
@@ -52,7 +52,7 @@
         "state": {
           "branch": null,
           "revision": "9156d238dbc4c15455b77b45e721b2bb0b995e31",
-          "version": "0.1.5"
+          "version": "1.0.0"
         }
       },
       {
@@ -105,26 +105,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura.git",
         "state": {
           "branch": null,
-          "revision": "5979edd20ca19c9094aa97c9bed0ea8b68fccf30",
-          "version": "2.2.3"
-        }
-      },
-      {
-        "package": "Kitura-Credentials",
-        "repositoryURL": "https://github.com/IBM-Swift/Kitura-Credentials.git",
-        "state": {
-          "branch": null,
-          "revision": "5cf5810100fdd2fa3965407349208a442fa7f469",
-          "version": "2.1.1"
-        }
-      },
-      {
-        "package": "Kitura-CredentialsGitHub",
-        "repositoryURL": "https://github.com/IBM-Swift/Kitura-CredentialsGitHub.git",
-        "state": {
-          "branch": null,
-          "revision": "1c71fd70912d488bf9604246fce5676b331e5f0d",
-          "version": "2.1.0"
+          "revision": "daa071669590584b6d9c277a2e3c465a904cd0d7",
+          "version": "2.4.1"
         }
       },
       {
@@ -132,8 +114,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura-net.git",
         "state": {
           "branch": null,
-          "revision": "9b4221e7378f76e0c5e04acaf30cdee99594aed3",
-          "version": "2.0.4"
+          "revision": "755c39febb661d5da85e1ec9fcf98721c420af0a",
+          "version": "2.1.0"
         }
       },
       {
@@ -141,8 +123,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura-Session.git",
         "state": {
           "branch": null,
-          "revision": "cd4d26cf8846f0d2306b0eb3b257c207d624a093",
-          "version": "3.0.1"
+          "revision": "8d60bc0389540446d68a057517a5dd20b151505d",
+          "version": "3.2.0"
         }
       },
       {
@@ -150,8 +132,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura-StencilTemplateEngine.git",
         "state": {
           "branch": null,
-          "revision": "535d9e1a3def131386cca1e26cfb5ef0477d4c65",
-          "version": "1.9.1"
+          "revision": "1b66e77c7d63524c6b7717bf8cb03c289b3e4ddc",
+          "version": "1.10.0"
         }
       },
       {
@@ -159,8 +141,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura-TemplateEngine.git",
         "state": {
           "branch": null,
-          "revision": "d43155da4dadd91c1d34d76e317571dc54655594",
-          "version": "1.7.4"
+          "revision": "b030d2d176719acc6a902c40db1b87dc6a83e2fc",
+          "version": "2.0.0"
         }
       },
       {
@@ -168,8 +150,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/Kitura-WebSocket.git",
         "state": {
           "branch": null,
-          "revision": "d3a6625db93a6519f334b54a3d2e9087cd33fe36",
-          "version": "1.0.2"
+          "revision": "115278979b87dd466fa74d671521f4a9199686da",
+          "version": "2.0.0"
         }
       },
       {
@@ -177,8 +159,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/KituraContracts.git",
         "state": {
           "branch": null,
-          "revision": "9d3e5b8cb8d2cb5cd32936d094218d954beeed7d",
-          "version": "0.0.24"
+          "revision": "fca1d07d9e81cfd3d70822a6b2544bc5c9f366fd",
+          "version": "1.0.1"
         }
       },
       {
@@ -242,6 +224,15 @@
           "branch": null,
           "revision": "6983434787dec4e543e9d398a0a9acf63ccd4da1",
           "version": "0.2.1"
+        }
+      },
+      {
+        "package": "TypeDecoder",
+        "repositoryURL": "https://github.com/IBM-Swift/TypeDecoder.git",
+        "state": {
+          "branch": null,
+          "revision": "3a321fc0ccbd49a9e240b0c0df3b290f393960d2",
+          "version": "1.0.0"
         }
       },
       {
