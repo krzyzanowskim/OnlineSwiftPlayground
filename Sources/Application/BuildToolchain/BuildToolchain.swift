@@ -21,15 +21,7 @@ enum SwiftToolchain: String, RawRepresentable, Codable {
     // Path to toolchain, relative to current process PWD
     var path: AbsolutePath {
         let projectDirectoryPath = AbsolutePath(FileKit.projectFolder)
-
-        // switch self {
-        // case .swift4_0_3:
-        //     return projectDirectoryPath.appending(components: "Toolchains", "swift-\(self.rawValue).xctoolchain", "usr", "bin")
-        // case .swift4_1:
-        //     return projectDirectoryPath.appending(components: "Toolchains", "swift-\(self.rawValue).xctoolchain", "usr", "bin")
-        // case .swift4_2:
-            return projectDirectoryPath.appending(components: "Toolchains", "swift-\(self.rawValue).xctoolchain", "usr", "bin")
-        // }
+        return projectDirectoryPath.appending(components: "Toolchains", "swift-\(self.rawValue).xctoolchain", "usr", "bin")
     }
 }
 
