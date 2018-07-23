@@ -1,18 +1,13 @@
 {
   "presets": [
     "env",
-    "react"
+    "react",
+    "stage-0"
   ],
   "plugins": [
     "transform-class-properties",
     "transform-decorators",
     "transform-react-constant-elements",
-    "transform-react-inline-elements",
-    "transform-react-display-name",
-
-    "transform-exponentiation-operator",
-    "transform-es2015-classes",
-
-    "transform-es2015-modules-amd"
+    "transform-react-inline-elements"
   ]
 }
