@@ -33,7 +33,7 @@ class BuildToolchain {
 
     private let processSet = ProcessSet()
 
-    func build(code: String, toolchain: SwiftToolchain = .swift4_1) throws -> Result<AbsolutePath, Error> {
+    func build(code: String, toolchain: SwiftToolchain = .swift4_2) throws -> Result<AbsolutePath, Error> {
         let fileSystem = Basic.localFileSystem
         let projectDirectoryPath = AbsolutePath(FileKit.projectFolder)
 
