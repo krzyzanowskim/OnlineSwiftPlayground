@@ -1,4 +1,9 @@
 # IBM Cloud deployment
+#
+# Usage: 
+# kubectl delete -f kubernetes-deployment.yaml
+# kubectl create -f kubernetes-deployment.yaml
+#
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
