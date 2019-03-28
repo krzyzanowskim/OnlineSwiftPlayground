@@ -11,7 +11,6 @@ import SwiftVersion from "./swift-versions.js";
 import Output from "./output.js";
 import Playground from "./playground.js";
 
-let startingEditorCodeValue = Playground.restoreCode() !== null ? Playground.restoreCode() : document.getElementById("editor").innerText;
 
 // let swiftVersionElement = (
 //   <SwiftVersion />
@@ -25,7 +24,7 @@ let swiftVersionComponent = ReactDOM.render(
 )
 
 let editorComponent = ReactDOM.render(
-  <Editor code={startingEditorCodeValue} />,
+  <Editor />,
   document.getElementById("editor")
 );
 
@@ -84,3 +83,20 @@ $("#download-playground-button").click(function (e) {
     .submit()
     .remove();
 });
+
+let searchParams = new URLSearchParams(window.location.search);
+let sourceURL = searchParams.get("sourceURL");
+if (sourceURL !== null) {
+  fetch(sourceURL)
+    .then(response => response.text())
+    .then(body => {
+      editorComponent.setValue(body);
+    })
+} else {
+  let restoredCode = Playground.restoreCode();
+  let exampleCode = `import Foundation
+
+print("Hello World")`
+
+  editorComponent.setValue(restoredCode !== null ? restoredCode : exampleCode);
+}
