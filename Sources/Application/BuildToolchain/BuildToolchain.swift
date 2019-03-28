@@ -17,6 +17,7 @@ enum SwiftToolchain: String, RawRepresentable, Codable {
     case swift4_0_3 = "4.0.3-RELEASE"
     case swift4_1 = "4.1.2-RELEASE"
     case swift4_2 = "4.2-RELEASE"
+    case swift5_0 = "5.0-RELEASE"
 
     // Path to toolchain, relative to current process PWD
     var path: AbsolutePath {
@@ -33,7 +34,7 @@ class BuildToolchain {
 
     private let processSet = ProcessSet()
 
-    func build(code: String, toolchain: SwiftToolchain = .swift4_2) throws -> Result<AbsolutePath, Error> {
+    func build(code: String, toolchain: SwiftToolchain = .swift5_0) throws -> Result<AbsolutePath, Error> {
         let fileSystem = Basic.localFileSystem
         let projectDirectoryPath = AbsolutePath(FileKit.projectFolder)
 
