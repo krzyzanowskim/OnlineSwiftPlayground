@@ -1,4 +1,4 @@
-FROM ibmcom/swift-ubuntu:4.1.1
+FROM ibmcom/swift-ubuntu:5.0
 LABEL maintainer="marcin@krzyzanowskim.com"
 LABEL Description="SwiftPlayground.run docker image"
 WORKDIR /swiftplayground
@@ -11,7 +11,6 @@ ARG bx_dev_user=root
 ARG bx_dev_userid=1000
 
 SHELL ["/bin/bash", "-c"]
-# RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # Install system level packages
 RUN apt-get update
@@ -35,7 +34,7 @@ ENV NODE_VERSION 8.9.3
 ENV NVM_DIR /usr/local/nvm
 RUN mkdir /usr/local/nvm
 
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
 # install node and npm
 RUN source $NVM_DIR/nvm.sh \
@@ -53,4 +52,4 @@ RUN ./bootstrap.sh
 # CMD export PATH="$PATH:node_modules/.bin"
 # CMD export NVM_DIR="$HOME/.nvm"
 # CMD $NVM_DIR/nvm.sh
-CMD Toolchains/swift-4.1.2-RELEASE.xctoolchain/usr/bin/swift run -c release --static-swift-stdlib --build-path .build/swift-4.1.2-RELEASE
+CMD Toolchains/swift-5.0-RELEASE.xctoolchain/usr/bin/swift run -c release --static-swift-stdlib --build-path .build/swift-5.0-RELEASE
