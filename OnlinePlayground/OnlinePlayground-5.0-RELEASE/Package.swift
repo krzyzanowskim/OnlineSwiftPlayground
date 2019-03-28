@@ -1,8 +1,8 @@
-// swift-tools-version:4.0
+// swift-tools-version:4.2
 import PackageDescription
 
 let dependencies:[Package.Dependency] = [
-    .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .exact("0.10.0"))
+    .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .exact("1.0.0"))
 ]
 
 var targets:[Target] = [
