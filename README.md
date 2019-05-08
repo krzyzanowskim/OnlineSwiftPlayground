@@ -13,7 +13,7 @@ TBA. Checkout http://SwiftPlayground.run
 
 ```shell
 $ git clone https://github.com/krzyzanowskim/OnlineSwiftPlayground.git
-$ cd swiftplayground
+$ cd OnlineSwiftPlayground
 $ ./run.sh
 ```
 
