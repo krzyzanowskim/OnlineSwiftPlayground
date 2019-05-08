@@ -17,7 +17,7 @@ $ cd swiftplayground
 $ ./run.sh
 ```
 
-The `run.sh` script will generate Xcode project (on macOS) and bootstrap the environment.
+The `run.sh` script will generate Xcode project (on macOS) and bootstrap the environment. `run.sh` needs `npm` to be installed to work properly.
 Bootstraping involves
 1. Download Swift Toochains supported by the playground
 2. Pre-build support module using the toolchains
