@@ -22,6 +22,9 @@ Bootstraping involves
 1. Download Swift Toochains supported by the playground
 2. Pre-build support module using the toolchains
 3. Install dependencies
+4. Launches web server on localhost on port 8080
+
+Now you could access playground pointing web browser to 127.0.0.1:8080.
 
 ## Development
 
