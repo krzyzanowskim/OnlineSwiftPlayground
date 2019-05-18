@@ -18,7 +18,7 @@ public final class OnlinePlayground {
         var rfsize = rlimit(rlim_cur: 1048576, rlim_max: 1048576) // 1 MB
         var rcore = rlimit(rlim_cur: 0, rlim_max: 0)
         var rnproc = rlimit(rlim_cur: 1, rlim_max: 1)
-        var rnofile = rlimit(rlim_cur: 1, rlim_max: 1)
+        var rnofile = rlimit(rlim_cur: 4, rlim_max: 4)
 
         #if os(macOS)
             setrlimit(RLIMIT_CPU, &rcpu)
