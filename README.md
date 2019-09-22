@@ -59,7 +59,7 @@ or build docker image by yourself:
 ```
 $ git clone https://github.com/krzyzanowskim/OnlineSwiftPlayground.git
 $ cd OnlineSwiftPlayground
-$ docker build . -t krzyzanowskim/onlineswiftplayground .
+$ docker build . -t krzyzanowskim/onlineswiftplayground
 ```
 
 then run container:

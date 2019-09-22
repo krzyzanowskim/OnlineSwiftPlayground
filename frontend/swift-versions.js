@@ -8,7 +8,7 @@ export default class SwiftVersion extends React.Component {
         super(props);
         uniqueId.enableUniqueIds(this)
 
-        this.availableVersions = ["5.0-RELEASE"]
+        this.availableVersions = ["5.0-RELEASE", "5.1-RELEASE"]
         this.state = {
             currentVersion: this.availableVersions.slice(-1).pop()
         }
