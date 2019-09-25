@@ -65,7 +65,7 @@ $ docker build . -t krzyzanowskim/onlineswiftplayground
 then run container:
 
 ```
-$ docker run -d -p 8080:8080 --name onlineswiftplayground -t onlineswiftplayground
+$ docker run -d -p 8080:8080 --name onlineswiftplayground -t krzyzanowskim/onlineswiftplayground
 ```
 
 and wait until docker container is up (usually several seconds).

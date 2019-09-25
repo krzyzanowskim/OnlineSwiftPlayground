@@ -3,7 +3,7 @@
 import Foundation
 import KituraWebSocket
 import Basic
-import Utility
+import SPMUtility
 import Dispatch
 
 struct Connection {

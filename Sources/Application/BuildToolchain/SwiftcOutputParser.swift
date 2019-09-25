@@ -1,7 +1,7 @@
 // Copyright Marcin Krzyżanowski <marcin@krzyzanowskim.com>
 
 import Basic
-import Utility
+import SPMUtility
 import Foundation
 
 /*

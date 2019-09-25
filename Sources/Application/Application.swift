@@ -66,7 +66,7 @@ public class App {
             }
 
             let playgroundPath = try generataPlayground(code: code)
-            try response.send(download: playgroundPath.asString)
+            try response.send(download: playgroundPath.pathString)
             try response.end()
         }
 

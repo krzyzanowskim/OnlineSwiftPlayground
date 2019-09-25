@@ -5,7 +5,7 @@ import Dispatch
 import FileKit
 import Foundation
 import LoggerAPI
-import Utility
+import SPMUtility
 
 #if os(Linux)
     import Glibc
@@ -61,7 +61,7 @@ class BuildToolchain {
         #endif
 
         var cmd = [String]()
-        cmd += ["\(toolchain.path.asString)/swift"]
+        cmd += ["\(toolchain.path.pathString)/swift"]
         cmd += ["--driver-mode=swiftc"]
         cmd += ["-swift-version", toolchain.swift_version]
         #if DEBUG
@@ -75,17 +75,17 @@ class BuildToolchain {
             cmd += ["-module-link-name","Glibc"]
         #endif
         #if DEBUG
-            cmd += ["-I", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "debug").asString]
-            cmd += ["-L", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "debug").asString]
+            cmd += ["-I", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "debug").pathString]
+            cmd += ["-L", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "debug").pathString]
         #else
-            cmd += ["-I", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "release").asString]
-            cmd += ["-L", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "release").asString]
+            cmd += ["-I", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "release").pathString]
+            cmd += ["-L", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "release").pathString]
         #endif
         cmd += ["-lOnlinePlayground"]
         cmd += ["-target", target]
         #if os(macOS)
-            cmd += ["-F", frameworksDirectory.asString]
-            cmd += ["-Xlinker", "-rpath", "-Xlinker", frameworksDirectory.asString]
+            cmd += ["-F", frameworksDirectory.pathString]
+            cmd += ["-Xlinker", "-rpath", "-Xlinker", frameworksDirectory.pathString]
         #endif
 
         // Optimization or not
@@ -98,12 +98,12 @@ class BuildToolchain {
         // Enable JSON-based output at some point.
         // cmd += ["-parseable-output"]
         if let sdkRoot = sdkRoot() {
-            cmd += ["-sdk", sdkRoot.asString]
+            cmd += ["-sdk", sdkRoot.pathString]
         }
-        cmd += ["-o", binaryFilePath.asString]
-        cmd += [mainFilePath.asString]
+        cmd += ["-o", binaryFilePath.pathString]
+        cmd += [mainFilePath.pathString]
 
-        let process = Basic.Process(arguments: cmd, redirectOutput: true, verbose: false)
+        let process = Basic.Process(arguments: cmd, outputRedirection: .collect, verbose: false)
         try processSet.add(process)
         try process.launch()
         let result = try process.waitUntilExit()
@@ -114,7 +114,7 @@ class BuildToolchain {
         case .signalled(let signal):
             return Result.failure(Error.failed("Terminated by signal \(signal)"))
         default:
-            return Result.failure(Error.failed(try (result.utf8Output() + result.utf8stderrOutput()).chuzzle() ?? "Terminated."))
+            return Result.failure(Error.failed(try (result.utf8Output() + result.utf8stderrOutput()).spm_chuzzle() ?? "Terminated."))
         }
     }
 
@@ -124,23 +124,23 @@ class BuildToolchain {
             // Use sandbox-exec on macOS. This provides some safety against arbitrary code execution.
             cmd += ["sandbox-exec", "-p", sandboxProfile()]
         #endif
-        cmd += [binaryPath.asString]
+        cmd += [binaryPath.pathString]
 
-        let process = Basic.Process(arguments: cmd, environment: [:], redirectOutput: true, verbose: false)
+        let process = Basic.Process(arguments: cmd, environment: [:], outputRedirection: .collect, verbose: false)
         try processSet.add(process)
         try process.launch()
         let result = try process.waitUntilExit()
 
         // Remove container directory. Cleanup after run.
-        try FileManager.default.removeItem(atPath: binaryPath.parentDirectory.asString)
+        try FileManager.default.removeItem(atPath: binaryPath.parentDirectory.pathString)
 
         switch result.exitStatus {
         case .terminated(let exitCode) where exitCode == 0:
-            return Result.success(try result.utf8Output().chuzzle() ?? "Done.")
+            return Result.success(try result.utf8Output().spm_chuzzle() ?? "Done.")
         case .signalled(let signal):
             return Result.failure(Error.failed("Terminated by signal \(signal)"))
         default:
-            return Result.failure(Error.failed(try (result.utf8Output() + result.utf8stderrOutput()).chuzzle() ?? "Terminated."))
+            return Result.failure(Error.failed(try (result.utf8Output() + result.utf8stderrOutput()).spm_chuzzle() ?? "Terminated."))
         }
     }
 
@@ -154,7 +154,7 @@ class BuildToolchain {
         #if os(macOS)
             let foundPath = try? Process.checkNonZeroExit(
                 args: "xcrun", "--sdk", "macosx", "--show-sdk-path")
-            guard let sdkRoot = foundPath?.chomp(), !sdkRoot.isEmpty else {
+            guard let sdkRoot = foundPath?.spm_chomp(), !sdkRoot.isEmpty else {
                 return nil
             }
             _sdkRoot = AbsolutePath(sdkRoot)
@@ -175,8 +175,8 @@ private func sandboxProfile() -> String {
     (allow file-write*
     """
     for directory in Platform.darwinCacheDirectories() {
-        output += "    (regex #\"^\(directory.asString)/org\\.llvm\\.clang.*\")"
-        output += "    (regex #\"^\(directory.asString)/xcrun_db.*\")"
+        output += "    (regex #\"^\(directory.pathString)/org\\.llvm\\.clang.*\")"
+        output += "    (regex #\"^\(directory.pathString)/xcrun_db.*\")"
     }
     output += ")\n"
     return output

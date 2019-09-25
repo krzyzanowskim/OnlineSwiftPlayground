@@ -12,7 +12,7 @@ func generataPlayground(code: String) throws -> AbsolutePath {
     let playgroundPath = temporaryDirectory.path.appending(component: "Playground.playground")
     let archivePath = temporaryDirectory.path.appending(component: "Playground.zip")
 
-    let playground = Playground(path: playgroundPath.asString, platform: .macOS, code: code)
+    let playground = Playground(path: playgroundPath.pathString, platform: .macOS, code: code)
     try playground.generate()
 
     try fileManager.zipItem(at: playgroundPath.asURL, to: archivePath.asURL)

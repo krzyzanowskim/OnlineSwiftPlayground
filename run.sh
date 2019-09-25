@@ -1,5 +1,5 @@
 #!/bin/bash
-SWIFT_VERSION="5.0-RELEASE"
+SWIFT_VERSION="5.1-RELEASE"
 SWIFT="Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift"
 
 . bootstrap.sh

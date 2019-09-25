@@ -52,4 +52,4 @@ RUN ./bootstrap.sh
 # CMD export PATH="$PATH:node_modules/.bin"
 # CMD export NVM_DIR="$HOME/.nvm"
 # CMD $NVM_DIR/nvm.sh
-CMD Toolchains/swift-5.0-RELEASE.xctoolchain/usr/bin/swift run -c release --static-swift-stdlib --build-path .build/swift-5.0-RELEASE
+CMD Toolchains/swift-5.1-RELEASE.xctoolchain/usr/bin/swift run -c release --static-swift-stdlib --build-path .build/swift-5.1-RELEASE
