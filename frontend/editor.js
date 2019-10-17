@@ -11,7 +11,8 @@ class Editor extends React.Component {
       code: props.code,
       readOnly: props.readOnly,
       showLines: !props.readOnly,
-      language: props.readOnly == true ? "plaintext" : "swift"
+      language: props.readOnly == true ? "plaintext" : "swift",
+	  commandHandler: props.commandHandler,
     };
   }
 
@@ -21,6 +22,7 @@ class Editor extends React.Component {
 
   editorDidMount(editor, monaco) {
     this.editor = editor;
+	editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, this.state.commandHandler);
 
     $.getJSON("/static/assets/json/snippets.json", function(snippets) {
       monaco.languages.registerCompletionItemProvider("swift", {
