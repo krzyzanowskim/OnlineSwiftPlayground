@@ -24,7 +24,7 @@ let swiftVersionComponent = ReactDOM.render(
 )
 
 let editorComponent = ReactDOM.render(
-  <Editor />,
+  <Editor commandHandler = {dispatchEvaluationRequest}/>,
   document.getElementById("editor")
 );
 
@@ -43,6 +43,10 @@ let playground = new Playground(protocol, editorComponent.editor);
 // Install events
 $("#run-button").click(function (e) {
   e.preventDefault();
+  dispatchEvaluationRequest();
+});
+
+function dispatchEvaluationRequest() {
   let sender = $(this);
   sender.prop("disabled", true);
 
@@ -51,7 +55,7 @@ $("#run-button").click(function (e) {
     sender.prop("disabled", false);
     editorComponent.editor.focus();
   });
-});
+}
 
 $("#download-file-button").click(function (e) {
   let text = editorComponent.getValue();
