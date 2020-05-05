@@ -25,8 +25,9 @@
   </head>
 
   <body>
+  <main class="main-grid">
     <!-- Navigation -->
-    <header>
+    <header class="header">
       <nav class="navbar navbar-light static-top justify-content-between">
         <div class="container">
           <img class="img-fluid" src="static/assets/logo.png" style="max-height:auto">
@@ -34,7 +35,7 @@
       </nav>
     </header>
 
-    <section class="h-75">
+    <section class="editor-height">
       <div class="container h-100">
         <div class="row">
           <div class="col">
@@ -48,7 +49,7 @@
                   <div id="swift-versions"></div>
                 </div>
               </form>
-              <div class="dropdown nav-item">
+              <div class="dropdown nav-item nav-item-spacing">
                 <button type="button" class="btn btn-primary btn-sm rounded-0 dropdown-toggle" data-toggle="dropdown">
                   <i class="fas fa-download fa-lg fa-fw"></i>
                   <span>Download</span>
@@ -88,11 +89,12 @@
             <div id="terminal" class="fill"></div>
           </div>
         </div>
-        <div class="row my-3">
-          {% include "./footer-container.html" %}
-        </div>
       </div>
     </section>
+    <footer class="row footer">
+        {% include "./footer-container.html" %}
+    </footer>
+    </main>
     <script src="static/app/app.js"></script>
   </body>
 

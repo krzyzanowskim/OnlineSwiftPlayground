@@ -3,7 +3,40 @@ body {
   height: 100%;
 }
 
+.main-grid {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 100vw;
+  grid-template-rows: 85px auto min-content;
+  grid-gap: 10px;
+}
+
 .fill {
   min-height: 100%;
   height: 100%;
+}
+
+.editor-height {
+  grid-area: 2 / 1 / 2 / 1;
+  overflow: hidden;
+}
+
+.header {
+  grid-area: 1 / 1 / 1 / 1;
+}
+
+.footer {
+  height: 100%;
+  grid-area: 3 / 1 / 3 / 1;
+}
+
+.nav-item-spacing {
+  margin-top: 0;
+}
+
+
+@media only screen and (max-device-width: 467px) {
+    .nav-item-spacing {
+      margin-top: 10px;
+    }
 }
