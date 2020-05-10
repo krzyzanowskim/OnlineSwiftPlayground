@@ -13,7 +13,7 @@ fi
 # Run
 $(npm bin)/webpack
 
-$SWIFT run -c release --static-swift-stdlib --build-path .build/swift-$SWIFT_VERSION &
+$SWIFT run -c release --build-path .build/swift-$SWIFT_VERSION &
 
 $(npm bin)/webpack -w
 
