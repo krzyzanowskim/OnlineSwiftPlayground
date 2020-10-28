@@ -1,4 +1,4 @@
-FROM ibmcom/swift-ubuntu:5.0
+FROM swift:5.3-xenial
 LABEL maintainer="marcin@krzyzanowskim.com"
 LABEL Description="SwiftPlayground.run docker image"
 WORKDIR /swiftplayground
@@ -27,10 +27,16 @@ RUN if [ $bx_dev_user != "root" ]; then useradd -ms /bin/bash -u $bx_dev_userid 
 COPY . /swiftplayground
 
 # Install dependencies
-RUN apt-get -qq -y install libz-dev curl build-essential libssl-dev
+RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true && \
+    apt-get -q install -y \
+    libz-dev \
+    libcurl4-openssl-dev \
+    curl \
+    build-essential \
+    libssl-dev
 
 # NVM
-ENV NODE_VERSION 8.9.3
+ENV NODE_VERSION 14.15.0
 ENV NVM_DIR /usr/local/nvm
 RUN mkdir /usr/local/nvm
 
@@ -47,9 +53,10 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH:node_modules/.bin
 
 # Bootstrap
 RUN ./bootstrap.sh
+RUN Toolchains/swift-5.3-RELEASE.xctoolchain/usr/bin/swift build -c release --static-swift-stdlib --build-path .build/swift-5.3-RELEASE
 
 # Command to start Swift application
 # CMD export PATH="$PATH:node_modules/.bin"
 # CMD export NVM_DIR="$HOME/.nvm"
 # CMD $NVM_DIR/nvm.sh
-CMD Toolchains/swift-5.1-RELEASE.xctoolchain/usr/bin/swift run -c release --static-swift-stdlib --build-path .build/swift-5.1-RELEASE
+CMD Toolchains/swift-5.3-RELEASE.xctoolchain/usr/bin/swift run -c release --static-swift-stdlib --build-path .build/swift-5.3-RELEASE

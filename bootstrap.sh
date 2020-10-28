@@ -33,7 +33,7 @@ function install_toolchain {
         ubuntu*)
             mkdir -p Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain
             # download
-            curl -O https://swift.org/builds/swift-$SWIFT_VERSION-$BRANCH/ubuntu1404/swift-$SWIFT_VERSION-$RELEASE/swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz
+            curl -O https://swift.org/builds/swift-$SWIFT_VERSION-$BRANCH/ubuntu1604/swift-$SWIFT_VERSION-$RELEASE/swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz
             # extract
             tar -xvzf swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz -C Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain --strip-components=1
             # cleanup
@@ -52,16 +52,16 @@ function build_onlineplayground {
     Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift build --package-path $ONLINE_PLAYGROUND_DIR --static-swift-stdlib --build-path $ONLINE_PLAYGROUND_DIR/.build -c debug -Xswiftc -DDEBUG
 }
 
-npm install
-$(npm bin)/webpack
+npm install --no-fund --no-audit --no-optional
+$(npm bin)/webpack --silent
 
 if [ $(program_is_installed xcrun) == 1 ]; then
     # Install Toolchains
-    install_toolchain "5.1" "release" "RELEASE" "osx"
+    install_toolchain "5.3" "release" "RELEASE" "osx"
 else
     # Install Toolchains
-    install_toolchain "5.1" "release" "RELEASE" "ubuntu14.04"
+    install_toolchain "5.3" "release" "RELEASE" "ubuntu16.04"
 fi
 
 # Build OnlinePlayground
-build_onlineplayground "5.1" "RELEASE"
+build_onlineplayground "5.3" "RELEASE"

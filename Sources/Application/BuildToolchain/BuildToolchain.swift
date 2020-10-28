@@ -15,7 +15,7 @@ import SPMUtility
 
 enum SwiftToolchain: String, RawRepresentable, Codable {
     case swift5_0 = "5.0-RELEASE"
-    case swift5_1 = "5.1-RELEASE"
+    case swift5_3 = "5.3-RELEASE"
 
     // Path to toolchain, relative to current process PWD
     var path: AbsolutePath {
@@ -27,7 +27,7 @@ enum SwiftToolchain: String, RawRepresentable, Codable {
         switch self {
         case .swift5_0:
           return "5"
-        case .swift5_1:
+        case .swift5_3:
           return "5"
         }
     }

@@ -15,6 +15,7 @@ var products: [Product] = [
 
 let package = Package(
     name: "OnlinePlayground",
+    platforms: [.macOS(.v10_12)],
     products: products,
     dependencies: dependencies,
     targets: targets
