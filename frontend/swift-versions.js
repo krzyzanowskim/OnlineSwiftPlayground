@@ -1,14 +1,12 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import uniqueId from 'react-html-id';
-import $ from "jquery";
+import uniqueId from "react-html-id";
 
 export default class SwiftVersion extends React.Component {
     constructor(props) {
         super(props);
         uniqueId.enableUniqueIds(this)
 
-        this.availableVersions = ["5.0-RELEASE", "5.1-RELEASE"]
+        this.availableVersions = ["5.7-RELEASE"]
         this.state = {
             currentVersion: this.availableVersions.slice(-1).pop()
         }

@@ -2,18 +2,18 @@
 
 import Foundation
 
-enum AnnotationType: String, Codable {
+public enum AnnotationType: String, Codable {
     case error = "error"
     case warning = "warning"
     case notice = "notice"
 }
 
-struct AnnotationLocation: Codable {
+public struct AnnotationLocation: Codable {
     let row: Int
     let column: Int
 }
 
-struct Annotation: Codable {
+public struct Annotation: Codable {
     let type: AnnotationType
     let location: AnnotationLocation
     let description: String

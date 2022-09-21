@@ -1,6 +1,7 @@
 // Copyright Marcin Krzyżanowski <marcin@krzyzanowskim.com>
 
 import Foundation
+import BuildToolchainEngine
 
 extension TerminalService {
     enum Command {

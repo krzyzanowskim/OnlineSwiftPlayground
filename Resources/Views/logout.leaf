@@ -7,11 +7,11 @@
 
         <title>Online Swift Playground</title>
 
-        {% include "./favicon-fragment.html" %}
-        {% include "./meta-fragment.html" %}
-        {% include "./bootstrap-fragment.html" %}
-        {% include "./fontawesome-fragment.html" %}
-        {% include "./fonts-fragment.html" %}
+        #extend("favicon-fragment")
+        #extend("meta-fragment")
+        #extend("bootstrap-fragment")
+        #extend("fontawesome-fragment")
+        #extend("fonts-fragment")
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
 
@@ -55,7 +55,7 @@
 
         <!-- Footer -->
         <footer class="footer bg-light">
-            {% include "./footer-container.html" %}
+            #extend("footer-container")
         </footer>
     </body>
 </html>

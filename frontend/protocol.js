@@ -45,10 +45,7 @@ class Protocol {
   }
 
   static start() {
-    let ws = new W3CWebSocket(
-      "ws://" + location.host + "/terminal",
-      "terminal"
-    );
+    let ws = new W3CWebSocket("ws://" + location.host + "/terminal");
     return new Protocol(ws);
   }
 }

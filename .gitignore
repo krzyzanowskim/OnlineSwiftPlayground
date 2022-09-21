@@ -4,6 +4,7 @@
 Toolchains/
 config/github.json
 *.xcodeproj
+.vscode/launch.json
 # Packages
 
 ## Build generated
@@ -23,4 +24,4 @@ xcuserdata/*
 xcuserdata
 
 node_modules
-static/app/
+Public/static/app/

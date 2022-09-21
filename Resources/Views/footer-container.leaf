@@ -12,7 +12,7 @@
                 </li>
                 <li class="list-inline-item">&sdot;</li>
                 <li class="list-inline-item">
-                    <a href="/static/privacy-policy.html">Privacy Policy</a>
+                    <a href="privacy-policy">Privacy Policy</a>
                 </li>
             </ul>
             <p class="text-muted small mb-4 mb-lg-0">&copy; SwiftPlayground by Marcin Krzyzanowski. All Rights Reserved.</p>

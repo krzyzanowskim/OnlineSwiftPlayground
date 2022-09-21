@@ -16,6 +16,7 @@ function install_toolchain {
     BRANCH=$2
     RELEASE=$3
     SWIFT_TARGET=$4
+    LINUX_DISTRO=$5
     if [ ! -d "Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain" ]; then
         case "$SWIFT_TARGET" in
         *osx)
@@ -33,10 +34,10 @@ function install_toolchain {
         ubuntu*)
             mkdir -p Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain
             # download
-            curl -LO https://swift.org/builds/swift-$SWIFT_VERSION-$BRANCH/ubuntu1404/swift-$SWIFT_VERSION-$RELEASE/swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz
+            curl -LO https://download.swift.org/swift-$SWIFT_VERSION-$BRANCH/$LINUX_DISTRO/swift-$SWIFT_VERSION-$RELEASE/swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz
             # extract
             tar -xvzf swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz -C Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain --strip-components=1
-            # cleanup
+            # # cleanup
             rm -rf swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz
             ;;
         esac
@@ -48,20 +49,20 @@ function build_onlineplayground {
     SWIFT_VERSION="$1-$RELEASE"
 
     ONLINE_PLAYGROUND_DIR="OnlinePlayground/OnlinePlayground-$SWIFT_VERSION"
-    Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift build --package-path $ONLINE_PLAYGROUND_DIR --static-swift-stdlib --build-path $ONLINE_PLAYGROUND_DIR/.build -c release
-    Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift build --package-path $ONLINE_PLAYGROUND_DIR --static-swift-stdlib --build-path $ONLINE_PLAYGROUND_DIR/.build -c debug -Xswiftc -DDEBUG
+    Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift build --package-path $ONLINE_PLAYGROUND_DIR --static-swift-stdlib --scratch-path $ONLINE_PLAYGROUND_DIR/.build -c release
+    Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift build --package-path $ONLINE_PLAYGROUND_DIR --static-swift-stdlib --scratch-path $ONLINE_PLAYGROUND_DIR/.build -c debug -Xswiftc -DDEBUG
 }
 
-npm install
-$(npm bin)/webpack
+#npm install
+#$(npm bin)/webpack
 
 if [ $(program_is_installed xcrun) == 1 ]; then
     # Install Toolchains
-    install_toolchain "5.1" "release" "RELEASE" "osx"
+    install_toolchain "5.7" "release" "RELEASE" "osx"
 else
     # Install Toolchains
-    install_toolchain "5.1" "release" "RELEASE" "ubuntu14.04"
+    install_toolchain "5.7" "release" "RELEASE" "ubuntu22.04" "ubuntu2204"
 fi
 
 # Build OnlinePlayground
-build_onlineplayground "5.1" "RELEASE"
+build_onlineplayground "5.7" "RELEASE"
