@@ -7,7 +7,7 @@ var config = {
   entry: "./frontend/main.js",
   mode: 'production',
   output: {
-    path: path.resolve(__dirname,"./static/app"),
+    path: path.resolve(__dirname,"./Public/static/app"),
     filename: "app.js",
     publicPath: "/static/app/"
   },
