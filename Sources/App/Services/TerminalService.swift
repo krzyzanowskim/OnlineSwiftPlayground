@@ -5,39 +5,20 @@ import Vapor
 public final class TerminalService {
 
     private let buildToolchain: BuildToolchain = .init()
-    private var connections: [WebSocket] = []
     private let workingDirectory: AbsolutePath
-
-    private lazy var timer: DispatchSourceTimer = {
-        let t = DispatchSource.makeTimerSource()
-        t.schedule(deadline: DispatchTime.now() + 5, repeating: 30)
-        t.setEventHandler(handler: DispatchWorkItem(block: { [weak self] in
-            self?.connections.forEach { connection in
-                connection.sendPing()
-            }
-        }))
-        return t
-    }()
 
     init(workingDirectory: String) {
         self.workingDirectory = AbsolutePath(workingDirectory)
-
-        timer.resume()
     }
 
     public func connected(on webSocket: WebSocket) {
+        webSocket.pingInterval = .seconds(30)
         webSocket.onBinary(received(on:bytes:))
         webSocket.onText(received(on:text:))
-        webSocket.onClose.whenComplete { [weak webSocket] _ in
-            webSocket.map(self.disconnected(on:))
-        }
-
-        connections.append(webSocket)
     }
 
     private func received(on webSocket: WebSocket, bytes: ByteBuffer) {
         _ = webSocket.close(code: .unacceptableData)
-        close(webSocket: webSocket)
     }
 
     private func received(on webSocket: WebSocket, text: String) {
@@ -45,8 +26,7 @@ public final class TerminalService {
             let data = text.data(using: .utf8),
             let command = try? JSONDecoder().decode(Command.self, from: data)
         else {
-            _ = webSocket.close(code: .unexpectedServerError)
-            close(webSocket: webSocket)
+            _ = webSocket.close(code: .unacceptableData)
             return
         }
 
@@ -62,14 +42,6 @@ public final class TerminalService {
         default:
             break
         }
-    }
-
-    private func disconnected(on webSocket: WebSocket) {
-        close(webSocket: webSocket)
-    }
-
-    private func close(webSocket: WebSocket) {
-        connections.removeAll { $0 === webSocket }
     }
 }
 

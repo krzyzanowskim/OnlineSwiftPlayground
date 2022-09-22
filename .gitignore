@@ -8,6 +8,7 @@ config/github.json
 # Packages
 
 ## Build generated
+.swiftpm
 build/
 DerivedData/
 
