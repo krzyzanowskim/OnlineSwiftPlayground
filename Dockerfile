@@ -22,7 +22,7 @@ RUN if [ $bx_dev_user != "root" ]; then useradd -ms /bin/bash -u $bx_dev_userid 
 COPY . /swiftplayground
 
 # Install dependencies
-RUN apt-get -qq -y install libz-dev curl build-essential libssl-dev
+RUN apt-get -qq -y install libz-dev curl build-essential libssl-dev libsqlite3-dev python3
 
 # NVM
 ENV NODE_VERSION 16.17.0
@@ -47,4 +47,4 @@ RUN ./bootstrap.sh
 # CMD export PATH="$PATH:node_modules/.bin"
 # CMD export NVM_DIR="$HOME/.nvm"
 # CMD $NVM_DIR/nvm.sh
-CMD Toolchains/swift-5.7-RELEASE.xctoolchain/usr/bin/swift run -c release --static-swift-stdlib --build-path .build/swift-5.7-RELEASE
+CMD Toolchains/swift-5.7-RELEASE.xctoolchain/usr/bin/swift run -c release --scratch-path .build/swift-5.7-RELEASE PlaygroundServer serve --hostname 0.0.0.0

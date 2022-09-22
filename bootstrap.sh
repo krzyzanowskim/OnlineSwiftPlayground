@@ -32,13 +32,16 @@ function install_toolchain {
             rm -r swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.pkg
             ;;
         ubuntu*)
+            # select toolchain binary based on cpu architecture
+            if [[ $(arch) = aarch* ]]; then ARCH=-$(arch); fi
+
             mkdir -p Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain
             # download
-            curl -LO https://download.swift.org/swift-$SWIFT_VERSION-$BRANCH/$LINUX_DISTRO/swift-$SWIFT_VERSION-$RELEASE/swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz
+            curl -LO https://download.swift.org/swift-$SWIFT_VERSION-$BRANCH/$LINUX_DISTRO$ARCH/swift-$SWIFT_VERSION-$RELEASE/swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET$ARCH.tar.gz
             # extract
-            tar -xvzf swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz -C Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain --strip-components=1
+            tar -xvzf swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET$ARCH.tar.gz -C Toolchains/swift-$SWIFT_VERSION-$RELEASE.xctoolchain --strip-components=1
             # # cleanup
-            rm -rf swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET.tar.gz
+            rm -rf swift-$SWIFT_VERSION-$RELEASE-$SWIFT_TARGET$ARCH.tar.gz
             ;;
         esac
     fi
@@ -53,8 +56,8 @@ function build_onlineplayground {
     Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift build --package-path $ONLINE_PLAYGROUND_DIR --static-swift-stdlib --scratch-path $ONLINE_PLAYGROUND_DIR/.build -c debug -Xswiftc -DDEBUG
 }
 
-#npm install
-#$(npm bin)/webpack
+npm install -y
+$(npm bin)/webpack
 
 if [ $(program_is_installed xcrun) == 1 ]; then
     # Install Toolchains

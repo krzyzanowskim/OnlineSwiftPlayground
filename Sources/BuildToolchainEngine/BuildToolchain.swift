@@ -101,8 +101,6 @@ public class BuildToolchain {
             cmd += ["-o", binaryFilePath.pathString]
             cmd += [mainFilePath.pathString]
 
-            print(cmd.joined(separator: " "))
-
             let process = TSCBasic.Process(arguments: cmd, outputRedirection: .collect)
             try processSet.add(process)
             try process.launch()
