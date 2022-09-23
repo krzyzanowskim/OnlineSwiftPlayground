@@ -2,13 +2,11 @@
 import PackageDescription
 
 let dependencies:[Package.Dependency] = [
-    .package(url: "https://github.com/apple/swift-tools-support-core.git", .upToNextMinor(from: "0.2.7")),
-    .package(url: "https://github.com/JohnSundell/Xgen", .upToNextMinor(from: "2.2.0")),
-    .package(url: "https://github.com/weichsel/ZIPFoundation.git", .upToNextMinor(from: "0.9.5")),
-
-
     .package(url: "https://github.com/vapor/vapor.git", .upToNextMinor(from: "4.65.2")),
     .package(url: "https://github.com/vapor/leaf.git", .upToNextMinor(from: "4.2.1")),
+    .package(url: "https://github.com/apple/swift-tools-support-core.git", .upToNextMinor(from: "0.2.7")),
+    .package(url: "https://github.com/JohnSundell/Xgen", .upToNextMinor(from: "2.2.0")),
+    .package(url: "https://github.com/weichsel/ZIPFoundation.git", .upToNextMinor(from: "0.9.5"))
 ]
 
 var targets:[Target] = [
@@ -32,6 +30,12 @@ var targets:[Target] = [
         dependencies: [
             "App",
             .product(name: "Vapor", package: "vapor")
+        ]),
+    .testTarget(
+        name: "AppTests",
+        dependencies: [
+            "App",
+            .product(name: "XCTVapor", package: "vapor")
         ])
 ]
 

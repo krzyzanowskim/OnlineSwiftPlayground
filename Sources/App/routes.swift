@@ -14,7 +14,6 @@ extension Application {
             return try await req.view.render("privacy-policy")
         }
 
-        // router.all
         get("letsplay") { req -> Response in
             req.session.data["playground"] = "true"
             return req.redirect(to: "/")
