@@ -12,7 +12,6 @@ import TSCUtility
 #endif
 
 public enum SwiftToolchain: String, RawRepresentable, Codable {
-    // case swift5_0 = "5.0-RELEASE"
     case swift5_7 = "5.7-RELEASE"
 
     // Path to toolchain, relative to current process PWD
@@ -22,8 +21,6 @@ public enum SwiftToolchain: String, RawRepresentable, Codable {
 
     var swift_version: String {
         switch self {
-        // case .swift5_0:
-        //   return "5"
         case .swift5_7:
           return "5"
         }
@@ -80,19 +77,13 @@ public class BuildToolchain {
                 cmd += ["-L", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "release").pathString]
             #endif
             cmd += ["-lOnlinePlayground"]
-//            cmd += ["-target", target]
+            cmd += ["-target", target]
             #if os(macOS)
                 cmd += ["-F", frameworksDirectory.pathString]
                 cmd += ["-Xlinker", "-rpath", "-Xlinker", frameworksDirectory.pathString]
             #endif
 
-            // Optimization or not
-            #if os(macOS)
-                cmd += ["-sanitize=address"]
-            #else
-                cmd += ["-O"]
-            #endif
-            // cmd += ["-enforce-exclusivity=checked"] // needs -Onone
+            cmd += ["-O"]
             // Enable JSON-based output at some point.
             // cmd += ["-parseable-output"]
             if let sdkRoot = sdkRoot() {
