@@ -1,8 +1,8 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.6
 import PackageDescription
 
 let dependencies:[Package.Dependency] = [
-    .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .exact("1.3.1"))
+    .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", exact: "1.6.0")
 ]
 
 var targets:[Target] = [
@@ -15,6 +15,7 @@ var products: [Product] = [
 
 let package = Package(
     name: "OnlinePlayground",
+    platforms: [.macOS(.v10_13)],
     products: products,
     dependencies: dependencies,
     targets: targets
