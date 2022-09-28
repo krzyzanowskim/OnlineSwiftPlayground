@@ -12,7 +12,7 @@ Toolchains/
 node_modules/
 
 config/
-static/app/
+Public/static/app
 
 *.xcodeproj
 DerivedData

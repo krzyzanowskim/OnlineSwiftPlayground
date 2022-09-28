@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Online Swift Playground</title>
+
+    #extend("favicon-fragment")
+    #extend("meta-fragment")
+    #extend("bootstrap-fragment")
+    #extend("fontawesome-fragment")
+    #extend("fonts-fragment")
+    #extend("cookies-consent")
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/landing-page.css" rel="stylesheet">
+    <link href="static/css/rainbow.css" rel="stylesheet">
+  </head>
+
+  <body>
+    #extend("analytics-fragment")
+    <header class="masthead text-white text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <h1 class="mb-5 anim-text color-text-flow">Online Swift Playground</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 mx-auto">
+            <a class="btn btn-primary" href="/letsplay">Let's Play</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Icons Grid -->
+    <section class="features-icons bg-light text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-screen-desktop m-auto text-primary"></i>
+              </div>
+              <h3>Online</h3>
+              <p class="lead mb-0">Run hosted Swift or deploy own instance with
+                <a href="https://store.docker.com/community/images/krzyzanowskim/onlineswiftplayground" target="_blank">Docker</a>.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-layers m-auto text-primary"></i>
+              </div>
+              <h3>Packages</h3>
+              <p class="lead mb-0">Use 3rd party frameworks.
+                <br/>Show your code.</p>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-check m-auto text-primary"></i>
+              </div>
+              <h3>Easy to Use</h3>
+              <p class="lead mb-0">Ready to use with your own content, or customize the
+                <a href="https://github.com/krzyzanowskim/OnlineSwiftPlayground" target="_blank">sources</a>!</p>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-rocket m-auto text-primary"></i>
+              </div>
+              <h3>Swift on Server</h3>
+              <p class="lead mb-0">Build with
+                <a href="https://swift.org/package-manager/" target="_blank">Swift Package Manager</a> and run with
+                <a href="https://www.kitura.io/" target="_blank">Kitura</a>!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials text-center bg-light">
+      <div class="container">
+        <h2 class="mb-5">What people are saying...</h2>
+        <div class="row mt-5">
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="static/assets/testimonials-tranchedone.jpg" alt="">
+              <h5>Gianluca T.</h5>
+              <p class="text-left font-weight-light mb-0">"Who'd be crazy enough to build a web-based version of Swift Playgrounds? Marcin Krzyżanowski, of course! This is a testament that Swift on the server isn't a joke. "</p>
+              <p><a href="http://swiftwebweekly.com/issues/42" target="_blank">Swift Web Weekly #42</a></p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="static/assets/testimonials-torres.jpg" alt="">
+              <h5>Esteban T.</h5>
+              <p class="text-left font-weight-light mb-0">"man; this whole swiftplayground.run is out of this world!! Major kudos to you!!"</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="static/assets/testimonials-verwer.jpg" alt="">
+              <h5>Dave V.</h5>
+              <p class="text-left font-weight-light mb-0">"Support for the SPM and custom frameworks makes this quite a flexible tool already. As far as online code editors go, this site looks very well done!"</p>
+              <p><a href="https://iosdevweekly.com/issues/336#tools" target="_blank">iOS Dev Weekly #336</a></p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="static/assets/testimonials-davido.jpg" alt="">
+              <h5>David O.</h5>
+              <p class="text-left font-weight-light mb-0">"I was sad to see the IBM Swift Sandbox get deprecated. This is a welcome addition to the world."</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="static/assets/testimonials-harasim.jpg" alt="">
+              <h5>Kacper H.</h5>
+              <p class="text-center font-weight-light mb-0">"Looks nice, congrats!"</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="static/assets/testimonials-mollenbeck.jpg" alt="">
+              <h5>Martin M.</h5>
+              <p class="font-weight-light mb-0">"Very good and cool work!"</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="static/assets/testimonials-1.jpg" alt="">
+              <h5>Margaret E.</h5>
+              <p class="text-left font-weight-light mb-0">"I think it's a perfectly good idea, well let people without a mac to have some fun with swift"</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="static/assets/testimonials-loseth.jpg" alt="">
+              <h5>Tor Rafsol L.</h5>
+              <p class="text-left font-weight-light mb-0">"This is great news, especially since IBM is shutting down their sandbox."</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+              <img class="img-fluid rounded-circle mb-3" src="static/assets/testimonials-davut.jpg" alt="">
+              <h5>Davut</h5>
+              <p class="text-left font-weight-light mb-0">"Wonderful, I really wanted to teach to the people who dont have an apple computer. That would be nice to test their code online"</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+      #extend("footer-container")
+    </footer>
+
+  </body>
+
+  <!-- Rainbow -->
+  <script>
+    $('.anim-text').html(function (i, html) {
+      var chars = $.trim(html).split("");
+      return '<span>' + chars.join('</span><span>') + '</span>';
+    });
+
+  </script>
+</html>

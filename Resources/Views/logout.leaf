@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>Online Swift Playground</title>
+
+        #extend("favicon-fragment")
+        #extend("meta-fragment")
+        #extend("bootstrap-fragment")
+        #extend("fontawesome-fragment")
+        #extend("fonts-fragment")
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="static/css/landing-page.css" rel="stylesheet">
+    </head>
+
+    <body class="bg-light">
+        <header>
+            <div class="container p-2">
+                <div class="row mt-4 mb-4">
+                    <div class="col-12 text-center">
+                        <a class="btn btn-primary" href="/">Let's Play again</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/JSUIQgEVDM4?autoplay=1&rel=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="container">
+                <div class="row pt-4">
+                    <div class="col-12 text-center">
+                        <p>
+                            This is the end, beautiful friend
+                            <br/> This is the end, my only friend, the end
+                            <br/> Of our elaborate plans, the end
+                            <br/> Of everything that stands, the end
+                            <br/> No safety or surprise, the end
+                            <br/> I'll never look into your eyes, again
+                            <br/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer bg-light">
+            #extend("footer-container")
+        </footer>
+    </body>
+</html>

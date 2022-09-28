@@ -25,8 +25,8 @@ export default class Playground {
     var msg = {
       run: {
         toolchain: toolchainVersion,
-        value: code
-      }
+        value: code,
+      },
     };
 
     Playground.storeCode(code);

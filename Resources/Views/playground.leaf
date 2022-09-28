@@ -1,0 +1,101 @@
+<!-- Copyright Marcin Krzyżanowski marcin@krzyzanowskim.com -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Online Swift Playground</title>
+
+    #extend("favicon-fragment")
+    #extend("meta-fragment")
+    #extend("bootstrap-fragment")
+    #extend("fontawesome-fragment")
+    #extend("fonts-fragment")
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" rel="stylesheet">
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/playground.css" rel="stylesheet" type="text/css" />
+
+  </head>
+
+  <body>
+  <main class="main-grid">
+    <!-- Navigation -->
+    <header class="header">
+      <nav class="navbar navbar-light static-top justify-content-between">
+        <div class="container">
+          <img class="img-fluid" src="static/assets/logo.png" style="max-height:auto">
+        </div>
+      </nav>
+    </header>
+
+    <section class="editor-height">
+      <div class="container h-100">
+        <div class="row">
+          <div class="col">
+            <nav class="navbar navbar-dark bg-dark justify-content-between pl-2 pr-2">
+              <form class="form-inline">
+                <button id="run-button" type="button" class="btn btn-primary btn-sm rounded-0">
+                  <i class="fa fa-play fa-lg"></i>
+                  <span>Run</span>
+                </button>
+                <div class="dropdown nav-item pl-2 pr-2">
+                  <div id="swift-versions"></div>
+                </div>
+              </form>
+              <div class="dropdown nav-item nav-item-spacing">
+                <button type="button" class="btn btn-primary btn-sm rounded-0 dropdown-toggle" data-toggle="dropdown">
+                  <i class="fas fa-download fa-lg fa-fw"></i>
+                  <span>Download</span>
+                </button>
+                <div class="dropdown-menu rounded-0">
+                  <a id="download-file-button" href="#" role="button" download="playground.swift" class="btn btn-primary btn-sm rounded-0 dropdown-item">
+                    <i class="fas fa-file-alt fa-lg fa-2x fa-fw"></i>
+                    <span class="pl-2">Playground.swift</span>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a id="download-playground-button" href="#" role="button" download="playground.zip" class="btn btn-primary btn-sm rounded-0 dropdown-item">
+                    <i class="fas fa-archive fa-lg fa-2x fa-fw"></i>
+                    <span class="pl-2">Playground.playground</span>
+                  </a>
+                </div>
+                <a class="btn btn-primary btn-sm rounded-0" href="/logout">
+                  <i class="fas fa-sign-out-alt fa-lg fa-fw"></i>
+                  <span>Sign out</span>
+                </a>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <div class="row h-75">
+          <div class="col">
+            <div id="editor" class="fill"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="bg-dark" style="height: 6px;">
+            </div>
+          </div>
+        </div>
+        <div class="row h-25">
+          <div class="col">
+            <div id="terminal" class="fill"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="row footer">
+        #extend("footer-container")
+    </footer>
+    </main>
+    <script src="static/app/app.js"></script>
+  </body>
+
+</html>
