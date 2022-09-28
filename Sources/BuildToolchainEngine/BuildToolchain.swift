@@ -70,7 +70,11 @@ public class BuildToolchain {
             #endif
             cmd += ["-lOnlinePlayground"]
             #if os(macOS)
-            cmd += ["-target", "arm64-apple-macosx10.13"]
+                #if arch(arm64)
+                    cmd += ["-target", "arm64-apple-macosx10.13"]
+                #else
+                    cmd += ["-target", "x86_64-apple-macosx10.13"]
+                #endif
             #endif
             #if os(macOS)
                 cmd += ["-F", frameworksDirectory.pathString]
