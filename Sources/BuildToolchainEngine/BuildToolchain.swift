@@ -48,14 +48,6 @@ public class BuildToolchain {
 
             try fileSystem.writeFileContents(mainFilePath, bytes: ByteString(encodingAsUTF8: injectCodeText + code))
 
-            let target: String
-            #if os(macOS)
-                target = "arm64-apple-macosx10.13"
-            #endif
-            #if os(Linux)
-                target = "aarch64-unknown-linux-gnu"
-            #endif
-
             var cmd = [String]()
             cmd += ["\(toolchain.path.pathString)/swiftc"]
             cmd += ["-swift-version", toolchain.swift_version]
@@ -77,7 +69,9 @@ public class BuildToolchain {
                 cmd += ["-L", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "release").pathString]
             #endif
             cmd += ["-lOnlinePlayground"]
-            cmd += ["-target", target]
+            #if os(macOS)
+            cmd += ["-target", "arm64-apple-macosx10.13"]
+            #endif
             #if os(macOS)
                 cmd += ["-F", frameworksDirectory.pathString]
                 cmd += ["-Xlinker", "-rpath", "-Xlinker", frameworksDirectory.pathString]
