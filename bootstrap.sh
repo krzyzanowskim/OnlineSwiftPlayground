@@ -53,7 +53,7 @@ function build_onlineplayground {
 
     ONLINE_PLAYGROUND_DIR="OnlinePlayground/OnlinePlayground-$SWIFT_VERSION"
     Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift build --package-path $ONLINE_PLAYGROUND_DIR --static-swift-stdlib --scratch-path $ONLINE_PLAYGROUND_DIR/.build -c release
-    Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift build --package-path $ONLINE_PLAYGROUND_DIR --static-swift-stdlib --scratch-path $ONLINE_PLAYGROUND_DIR/.build -c debug -Xswiftc -DDEBUG
+    Toolchains/swift-$SWIFT_VERSION.xctoolchain/usr/bin/swift build --package-path $ONLINE_PLAYGROUND_DIR --static-swift-stdlib --scratch-path $ONLINE_PLAYGROUND_DIR/.build -c debug -Xswiftc -DDEBUG -Xswiftc -Xfrontend -Xswiftc -validate-tbd-against-ir=none
 }
 
 npm install -y

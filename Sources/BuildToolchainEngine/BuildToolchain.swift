@@ -53,10 +53,10 @@ public class BuildToolchain {
 
             let target: String
             #if os(macOS)
-                target = "x86_64-apple-macosx10.11"
+                target = "arm64-apple-macosx10.13"
             #endif
             #if os(Linux)
-                target = "x86_64-unknown-linux-gnu"
+                target = "aarch64-unknown-linux-gnu"
             #endif
 
             var cmd = [String]()
