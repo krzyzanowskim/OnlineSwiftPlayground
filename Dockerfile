@@ -1,4 +1,4 @@
-FROM swift:5.7-jammy
+FROM --platform=$BUILDPLATFORM swift:5.7-jammy
 LABEL maintainer="marcin@krzyzanowskim.com"
 LABEL Description="SwiftPlayground.run docker image"
 WORKDIR /swiftplayground
