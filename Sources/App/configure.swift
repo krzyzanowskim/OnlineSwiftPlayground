@@ -5,6 +5,9 @@ import NIOSSL
 public extension Application {
     func configure() throws {
 
+        http.server.configuration.port = 80
+        http.server.configuration.reuseAddress = true
+
         if FileManager.default.fileExists(atPath: directory.workingDirectory + "/ssl/private.key") {
             try http.server.configuration.tlsConfiguration = .makeServerConfiguration(
                 certificateChain: NIOSSLCertificate.fromPEMFile(directory.workingDirectory + "/ssl/certificate.crt").map { .certificate($0) },
