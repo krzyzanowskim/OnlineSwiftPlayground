@@ -8,6 +8,7 @@
 .build-ubuntu
 .build-ubuntu/
 OnlinePlayground/**/.build
+lib
 
 node_modules/
 

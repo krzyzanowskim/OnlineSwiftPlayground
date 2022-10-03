@@ -30,6 +30,9 @@ var targets:[Target] = [
         dependencies: [
             "App",
             .product(name: "Vapor", package: "vapor")
+        ],
+        swiftSettings: [
+            .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
         ]),
     .testTarget(
         name: "AppTests",
