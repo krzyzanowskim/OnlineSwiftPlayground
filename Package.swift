@@ -18,18 +18,21 @@ var targets:[Target] = [
             .product(name: "Leaf", package: "leaf"),
             .product(name: "Xgen", package: "xgen"),
             .product(name: "ZIPFoundation", package: "ZIPFoundation"),
-            .product(name: "SwiftToolsSupport", package: "swift-tools-support-core")
+            .product(name: "SwiftToolsSupport-auto", package: "swift-tools-support-core")
         ]),
     .target(
         name: "BuildToolchainEngine",
         dependencies: [
-            .product(name: "SwiftToolsSupport", package: "swift-tools-support-core")
+            .product(name: "SwiftToolsSupport-auto", package: "swift-tools-support-core")
         ]),
     .executableTarget(
         name: "PlaygroundServer",
         dependencies: [
             "App",
             .product(name: "Vapor", package: "vapor")
+        ],
+        swiftSettings: [
+            .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
         ]),
     .testTarget(
         name: "AppTests",

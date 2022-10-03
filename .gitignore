@@ -2,6 +2,8 @@
 .build/
 .build-ubuntu
 Toolchains/
+lib
+
 config/github.json
 *.xcodeproj
 .vscode/launch.json

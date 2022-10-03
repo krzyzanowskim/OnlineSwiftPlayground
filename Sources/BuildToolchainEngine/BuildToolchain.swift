@@ -11,7 +11,9 @@ import TSCUtility
     import Darwin
 #endif
 
+// TODO: Decode from request payload, validate that requested version is installed
 public enum SwiftToolchain: String, RawRepresentable, Codable {
+    case swift5_6_3 = "5.6.3-RELEASE"
     case swift5_7 = "5.7-RELEASE"
 
     // Path to toolchain, relative to current process PWD
@@ -21,12 +23,20 @@ public enum SwiftToolchain: String, RawRepresentable, Codable {
 
     var swift_version: String {
         switch self {
-        case .swift5_7:
+        case .swift5_6_3, .swift5_7:
           return "5"
         }
     }
-}
 
+    var versionNumber: String {
+        switch self {
+        case .swift5_6_3:
+            return "5.6.3"
+        case .swift5_7:
+            return "5.7"
+        }
+    }
+}
 
 public class BuildToolchain {
     public enum Error: Swift.Error {
@@ -49,10 +59,10 @@ public class BuildToolchain {
             try fileSystem.writeFileContents(mainFilePath, bytes: ByteString(encodingAsUTF8: injectCodeText + code))
 
             var cmd = [String]()
-            cmd += ["\(toolchain.path.pathString)/swiftc"]
-            cmd += ["-swift-version", toolchain.swift_version]
+            cmd += ["swiftc"]
+//            cmd += ["-swift-version", toolchain.swift_version]
             #if DEBUG
-            cmd += ["-v"]
+//            cmd += ["-v"]
             #endif
             cmd += ["-gnone"]
             cmd += ["-suppress-warnings"]
@@ -61,13 +71,8 @@ public class BuildToolchain {
             #if os(Linux)
                 cmd += ["-module-link-name","Glibc"]
             #endif
-            #if DEBUG
-                cmd += ["-I", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "debug").pathString]
-                cmd += ["-L", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "debug").pathString]
-            #else
-                cmd += ["-I", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "release").pathString]
-                cmd += ["-L", projectDirectoryPath.appending(components: "OnlinePlayground", "OnlinePlayground-\(toolchain.rawValue)", ".build", "release").pathString]
-            #endif
+            cmd += ["-I", projectDirectoryPath.appending(components: "lib").pathString]
+            cmd += ["-L", projectDirectoryPath.appending(components: "lib").pathString]
             cmd += ["-lOnlinePlayground"]
             #if os(macOS)
                 #if arch(arm64)
@@ -81,6 +86,8 @@ public class BuildToolchain {
                 cmd += ["-Xlinker", "-rpath", "-Xlinker", frameworksDirectory.pathString]
             #endif
 
+            cmd += ["-Xclang-linker", "-fuse-ld=lld"]
+
             cmd += ["-O"]
             // Enable JSON-based output at some point.
             // cmd += ["-parseable-output"]
@@ -90,13 +97,22 @@ public class BuildToolchain {
             cmd += ["-o", binaryFilePath.pathString]
             cmd += [mainFilePath.pathString]
 
-            let process = TSCBasic.Process(arguments: cmd, outputRedirection: .collect)
+            var e = ProcessInfo.processInfo.environment
+            e["SWIFT_VERSION"] = toolchain.versionNumber
+
+            let process = TSCBasic.Process(
+                arguments: cmd,
+                environment: e,
+                outputRedirection: .collect
+            )
             try processSet.add(process)
             try process.launch()
             let result = try process.waitUntilExit()
 
             switch result.exitStatus {
             case .terminated(let exitCode) where exitCode == 0:
+                print(binaryFilePath)
+                print(try print(result.utf8Output()))
                 return Result.success(binaryFilePath)
             case .signalled(let signal):
                 return Result.failure(Error.failed("Terminated by signal \(signal)"))

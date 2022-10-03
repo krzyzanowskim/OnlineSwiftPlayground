@@ -7,7 +7,7 @@ class Protocol {
     ws.onclose = this.onClose.bind(this);
     ws.onError = this.onClose.bind(this);
     this.ws = ws;
-    this.processMessage = function(value, annotations) {};
+    this.processMessage = function (value, annotations) {};
   }
 
   onOpen() {
@@ -33,7 +33,7 @@ class Protocol {
       "Socket is closed. Reconnect will be attempted in 20 second.",
       e.reason
     );
-    setTimeout(function() {
+    setTimeout(function () {
       connect();
     }, 20000);
   }
@@ -45,7 +45,8 @@ class Protocol {
   }
 
   static start() {
-    let ws = new W3CWebSocket("wss://" + location.host + "/terminal");
+    let protocol = window.location.protocol === 'https' ? 'wss' : 'ws';
+    let ws = new W3CWebSocket(protocol + "://" + location.host + "/api/terminal");
     return new Protocol(ws);
   }
 }
