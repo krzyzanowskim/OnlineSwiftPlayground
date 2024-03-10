@@ -57,7 +57,7 @@ function build_onlineplayground {
 }
 
 npm install -y
-$(npm bin)/webpack
+npx webpack
 
 if [ $(program_is_installed xcrun) == 1 ]; then
     # Install Toolchains
