@@ -21,14 +21,14 @@ import Playground from "./playground.js";
 let swiftVersionComponent = ReactDOM.render(
   <SwiftVersion />,
   document.getElementById("swift-versions")
-)
+);
 
 let editorComponent = ReactDOM.render(
   <Editor commandHandler = {dispatchEvaluationRequest}/>,
   document.getElementById("editor")
 );
 
-var terminalComponent = ReactDOM.render(
+let terminalComponent = ReactDOM.render(
   <Output readOnly={true} code={document.getElementById("terminal").textContent}/>,
   document.getElementById("terminal")
 );
@@ -38,7 +38,7 @@ var terminalComponent = ReactDOM.render(
 new Clipboard(".btn");
 
 let protocol = Protocol.start();
-let playground = new Playground(protocol, editorComponent.editor);
+let playground = new Playground(protocol, editorComponent.editor || null);
 
 // Install events
 $("#run-button").click(function (e) {
@@ -47,13 +47,15 @@ $("#run-button").click(function (e) {
 });
 
 function dispatchEvaluationRequest() {
-  let sender = $(this);
+  let sender = $("#run-button");
   sender.prop("disabled", true);
 
   playground.run(editorComponent.getValue(), swiftVersionComponent.currentVersion, function (value, annotations) {
     terminalComponent.setValue(value);
     sender.prop("disabled", false);
-    editorComponent.editor.focus();
+    if (editorComponent.editor) {
+      editorComponent.editor.focus();
+    }
   });
 }
 
@@ -96,6 +98,10 @@ if (sourceURL !== null) {
     .then(body => {
       editorComponent.setValue(body);
     })
+    .catch(err => {
+      console.error("Failed to load source from URL:", err);
+      editorComponent.setValue(`import Foundation\n\nprint("Hello World")`);
+    });
 } else {
   let restoredCode = Playground.restoreCode();
   let exampleCode = `import Foundation

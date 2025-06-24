@@ -14,6 +14,8 @@ class Editor extends React.Component {
       language: props.readOnly == true ? "plaintext" : "swift",
 	  commandHandler: props.commandHandler,
     };
+    
+    this.updateDimensions = this.updateDimensions.bind(this);
   }
 
   updateDimensions() {
@@ -25,6 +27,7 @@ class Editor extends React.Component {
 	editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, this.state.commandHandler);
 
     $.getJSON("/static/assets/json/snippets.json", function(snippets) {
+      if (!monaco || !monaco.languages) return;
       monaco.languages.registerCompletionItemProvider("swift", {
         provideCompletionItems: function(model, position) {
           var textUntilPosition = model.getValueInRange({
@@ -38,19 +41,24 @@ class Editor extends React.Component {
       });
     });
 
-    window.addEventListener("resize", this.updateDimensions.bind(this));
+    window.addEventListener("resize", this.updateDimensions);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
+    window.removeEventListener("resize", this.updateDimensions);
   }
 
   getValue() {
-    return this.editor.getModel().getValue();
+    if (this.editor && this.editor.getModel()) {
+      return this.editor.getModel().getValue();
+    }
+    return "";
   }
 
   setValue(value) {
-    this.editor.getModel().setValue(value);
+    if (this.editor && this.editor.getModel()) {
+      this.editor.getModel().setValue(value);
+    }
   }
 
   onChange(newValue, e) {

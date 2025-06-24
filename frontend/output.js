@@ -10,27 +10,36 @@ class Output extends React.Component {
       code: props.code,
       language: "plaintext"
     };
+    
+    this.updateDimensions = this.updateDimensions.bind(this);
   }
 
   updateDimensions() {
-    this.editor.layout();
+    if (this.editor) {
+      this.editor.layout();
+    }
   }
 
   editorDidMount(editor, monaco) {
     this.editor = editor;
-    window.addEventListener("resize", this.updateDimensions.bind(this));
+    window.addEventListener("resize", this.updateDimensions);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
+    window.removeEventListener("resize", this.updateDimensions);
   }
 
   getValue() {
-    return this.editor.getModel().getValue();
+    if (this.editor && this.editor.getModel()) {
+      return this.editor.getModel().getValue();
+    }
+    return "";
   }
 
   setValue(value) {
-    this.editor.getModel().setValue(value);
+    if (this.editor && this.editor.getModel()) {
+      this.editor.getModel().setValue(value);
+    }
   }
 
   onChange(newValue, e) {

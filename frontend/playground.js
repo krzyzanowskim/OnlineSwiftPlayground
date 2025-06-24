@@ -31,7 +31,12 @@ export default class Playground {
 
     Playground.storeCode(code);
 
-    this.protocol.ws.send(JSON.stringify(msg));
+    if (this.protocol.ws.readyState === this.protocol.ws.OPEN) {
+      this.protocol.ws.send(JSON.stringify(msg));
+    } else {
+      console.error("WebSocket is not connected");
+      onFinish("Error: WebSocket is not connected. Please refresh the page.", []);
+    }
     this.protocol.processMessage = function (value, annotations) {
       onFinish(value, annotations);
       // editor.session.setAnnotations(
